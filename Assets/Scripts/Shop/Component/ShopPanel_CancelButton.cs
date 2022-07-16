@@ -1,0 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ShopPanel_CancelButton : MonoBehaviour
+{
+    void Start()
+    {
+        var button = gameObject.GetComponent<Button>();
+        button.onClick.AddListener(CancelAfterConfirmation);
+    }
+
+    void CancelAfterConfirmation()
+    {
+        Confirmation.BeginConfirmation("•ÏX‚ğ‚·‚×‚Ä”jŠü‚µ‚Ü‚·‚©H", SV_ShopAdmin.Initialize, null);
+    }
+}
