@@ -5,6 +5,17 @@ using UnityEngine;
 
 namespace MyGame
 {
+    public enum KeyAction
+    {
+        none,
+
+        jump, autoJump, shot, reload, crouch,
+        forward, backward, right, left,
+        menu,
+
+        ak, de, m9,
+    }
+
     public class Keyconfig : MonoBehaviour
     {
         static public EventHandler<KeyAction> KeyUpdated { get; set; }
@@ -21,23 +32,10 @@ namespace MyGame
             { KeyAction.reload, new Key(KeyCode.R) },
             { KeyAction.crouch, new Key(KeyCode.LeftShift) },
             { KeyAction.menu, new Key(KeyCode.M) },
+            { KeyAction.ak, new Key(KeyCode.Alpha1) },
+            { KeyAction.de, new Key(KeyCode.E) },
+            { KeyAction.m9, new Key(KeyCode.Q) },
         };
-
-        public enum KeyAction
-        {
-            none,
-
-            jump,
-            autoJump,
-            forward,
-            backward,
-            right,
-            left,
-            shot,
-            reload,
-            crouch,
-            menu,
-        }
 
         static public Dictionary<KeyAction, Key> KeybindList { get; private set; } = new Dictionary<KeyAction, Key>(defaultKeybindList);
 

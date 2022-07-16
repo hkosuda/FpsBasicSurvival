@@ -14,7 +14,7 @@ namespace MyGame
 
         public override void Update(float dt)
         {
-            if (Keyconfig.CheckInput(Keyconfig.KeyAction.crouch, false))
+            if (Keyconfig.CheckInput(KeyAction.crouch, false))
             {
                 IsCrouching = true;
 

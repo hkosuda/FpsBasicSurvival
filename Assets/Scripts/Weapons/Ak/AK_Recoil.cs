@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MyGame
 {
-    public class DE_Recoil : WeaponControllerComponent
+    public class AK_Recoil : WeaponControllerComponent
     {
         public override void Initialize()
         {

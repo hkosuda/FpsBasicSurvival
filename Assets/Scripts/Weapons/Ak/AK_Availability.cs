@@ -1,14 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyGame
 {
-    public class DE_Availability : WeaponControllerComponent
+    public class AK_Availability : WeaponControllerComponent
     {
         static public readonly float preparingTime = 0.67f;
-        static public readonly float shootingInterval = 0.14f;
+        static public readonly float shootingInterval = 0.095f;
 
         static public bool Available { get; private set; }
 

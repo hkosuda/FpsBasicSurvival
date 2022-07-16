@@ -8,7 +8,14 @@ namespace MyGame
     {
         private void Awake()
         {
+            BulletLine.Initialize();
+            ImpactBox.Initialize();
+        }
 
+        private void OnDestroy()
+        {
+            BulletLine.Shutdown();
+            ImpactBox.Shutdown();
         }
     }
 }

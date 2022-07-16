@@ -40,11 +40,15 @@ namespace MyGame
             }
         }
 
-        void ReactToShot(object obj, GameObject _gameObject)
+        void ReactToShot(object obj, RaycastHit hit)
         {
-            if (_gameObject != gameObject) { return; }
-
-            onShotReaction?.Invoke();
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject == gameObject)
+                {
+                    onShotReaction?.Invoke();
+                }
+            }
         }
 
         void ReactToTouch(object obj, GameObject _gameObject)

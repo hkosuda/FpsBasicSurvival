@@ -116,6 +116,8 @@ namespace MyGame
             gameObject.transform.position = position ?? Vector3.zero;
             gameObject.transform.rotation = quaternion ?? Quaternion.identity;
 
+            gameObject.transform.SetParent(World.transform);
+
             return gameObject;
         }
     }

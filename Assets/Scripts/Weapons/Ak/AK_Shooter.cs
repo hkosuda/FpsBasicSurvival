@@ -1,13 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyGame
 {
-    public class DE_Shooter : WeaponControllerComponent
+    public class AK_Shooter : WeaponControllerComponent
     {
-
         public override void Initialize()
         {
             base.Initialize();
@@ -20,8 +18,8 @@ namespace MyGame
 
         public override void Update(float dt)
         {
-            if (!Keyconfig.CheckInput(KeyAction.shot, true)) { return; }
-            if (!DE_Availability.Available) { return; }
+            if (!Keyconfig.CheckInput(KeyAction.shot, false)) { return; }
+            if (!AK_Availability.Available) { return; }
 
             DeShot();
         }
@@ -40,16 +38,13 @@ namespace MyGame
             // - inner function
             static Ray GetRay()
             {
-                Debug.Log(DE_Potential.SpreadParam.potential);
-
                 return new Ray()
                 {
                     origin = Player.Camera.transform.position,
-                    direction = SpreadSolver.CalcSpread(DE_Potential.SpreadParam),
+                    direction = SpreadSolver.CalcSpread(AK_Potential.SpreadParam),
                 };
             }
         }
     }
 }
-
 

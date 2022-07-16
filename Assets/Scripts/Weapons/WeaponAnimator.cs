@@ -6,25 +6,65 @@ namespace MyGame
 {
     public class WeaponAnimator : MonoBehaviour
     {
-        Animator animator;
-        WeaponController weaponController;
+        static Animator animator;
 
         void Awake()
         {
             animator = GetComponent<Animator>();
-            weaponController = gameObject.GetComponent<WeaponController>();
+            SetEvent(1);
         }
 
-        //
-        // used in animation
-        public void WeaponActivate()
+        private void OnDestroy()
         {
-            //WeaponManager.Activate();
+            SetEvent(-1);
         }
 
-        public void WeaponDeactivate()
+        static void SetEvent(int indicator)
         {
-            //WeaponManager.Deactivate();
+            if (indicator > 0)
+            {
+                WeaponSystem.WeaponChanged += BeginTakingoutAnimation;
+                WeaponController.Shot += BeginShotAnimation;
+            }
+
+            else
+            {
+                WeaponSystem.WeaponChanged -= BeginTakingoutAnimation;
+                WeaponController.Shot -= BeginShotAnimation;
+            }
+        }
+
+        static void BeginTakingoutAnimation(object obj, Weapon weapon)
+        {
+            if (weapon == Weapon.ak)
+            {
+                animator.SetTrigger("SwitchAk");
+            }
+
+            else if (weapon == Weapon.de)
+            {
+                animator.SetTrigger("SwitchDe");
+            }
+
+            else if (weapon == Weapon.m9)
+            {
+                animator.SetTrigger("SwitchM9");
+            }
+        }
+
+        static void BeginShotAnimation(object obj, Vector3 direction)
+        {
+            var weapon = WeaponSystem.CurrentWeapon.Weapon;
+
+            if (weapon == Weapon.ak)
+            {
+                animator.SetTrigger("ShotAk");
+            }
+
+            else if (weapon == Weapon.de)
+            {
+                animator.SetTrigger("ShotDe");
+            }
         }
     }
 }

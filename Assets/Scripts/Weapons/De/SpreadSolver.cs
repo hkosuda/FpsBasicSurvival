@@ -8,8 +8,8 @@ namespace MyGame
     {
         static public Vector3 CalcSpread(SpreadParam spreadParam)
         {
-            var radRotX = Player.Camera.transform.eulerAngles.x;
-            var radRotY = Player.Camera.transform.eulerAngles.y;
+            var radRotX = -Player.Camera.transform.eulerAngles.x * Mathf.Deg2Rad;
+            var radRotY = Player.Camera.transform.eulerAngles.y * Mathf.Deg2Rad;
 
             var v = new Vector2(Player.Rb.velocity.x, Player.Rb.velocity.y).magnitude;
             var vRate = Calcf.SafetyDiv(v, Params.pm_max_speed_on_the_gound, 0.0f);
@@ -74,10 +74,6 @@ namespace MyGame
                 var q = pqr_vector[1];
                 var r = pqr_vector[2];
 
-                // running
-                var maxSpeed = Params.pm_max_speed_on_the_gound;
-                var velocity = new Vector2(Player.Rb.velocity.x, Player.Rb.velocity.z).magnitude;
-
                 if (vRate > 1.0f) { vRate = 1.0f; }
                 vRate = Mathf.Pow(vRate, spreadParam.runningExpo);
 
@@ -87,7 +83,7 @@ namespace MyGame
 
                 var rate = vRate + jRate;
 
-                var qr_spread = GetEllipseRandomSpread(spreadParam.h_jumping, spreadParam.v_jumping, 0.0f, rate);
+                var qr_spread = GetEllipseRandomSpread(spreadParam.h_running, spreadParam.v_running, 0.0f, rate);
 
                 q += qr_spread[0] * RandomDirection();
                 r += qr_spread[1];
@@ -152,8 +148,8 @@ namespace MyGame
         public readonly float lifting;
         public readonly float h_random;
         public readonly float v_random;
-        public readonly float h_jumping;
-        public readonly float v_jumping;
+        public readonly float h_running;
+        public readonly float v_running;
 
         public readonly float liftingExpo;
         public readonly float randomExpo;
@@ -162,14 +158,18 @@ namespace MyGame
         public readonly List<int> spreadPattern;
 
         public SpreadParam(float maxPotential, float potentialIncrease, float shootingInterval,
-            float lifting, float h_random, float v_random, float h_jumping, float v_jumping,
+            float lifting, float h_random, float v_random, float h_running, float v_running,
             float liftingExpo, float randomExpo, float runningExpo, List<int> spreadPattern = null)
         {
+            this.maxPotential = maxPotential;
+            this.potentialIncrease = potentialIncrease;
+            this.shootingInterval = shootingInterval;
+
             this.lifting = lifting;
             this.h_random = h_random;
             this.v_random = v_random;
-            this.h_jumping = h_jumping;
-            this.v_jumping = v_jumping;
+            this.h_running = h_running;
+            this.v_running = v_running;
 
             this.liftingExpo = liftingExpo;
             this.randomExpo = randomExpo;
