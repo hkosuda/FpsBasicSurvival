@@ -93,7 +93,7 @@ namespace MyGame
             Debug.Log(StatusList[SV_Status.hp]);
 
             var hpDamage = getDamage * GetDamageRate();
-            var armorDamage = getDamage * Floats.Get(Floats.Item.sv_armor_reduction_rate);
+            var armorDamage = getDamage * Params.sv_armor_reduction_rate;
 
             if (hpDamage < 1.0f) { hpDamage = 1.0f; }
             if (armorDamage < 1.0f) { armorDamage = 1.0f; }
@@ -113,10 +113,10 @@ namespace MyGame
             // - inner function
             static float GetDamageRate()
             {
-                var constant = Floats.Get(Floats.Item.sv_damage_reduction_const);
+                var constant = Params.damage_reduction_const;
                 var armor = StatusList[SV_Status.armor];
 
-                return Utility.SafetyDivision(constant, armor + constant, 1.0f);
+                return Calcf.SafetyDiv(constant, armor + constant, 1.0f);
             }
         }
 

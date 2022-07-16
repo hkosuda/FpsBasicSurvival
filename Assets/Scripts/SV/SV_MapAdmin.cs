@@ -53,11 +53,11 @@ namespace MyGame
             MazeRoot = new GameObject("MazeRoot");
             MazeRoot.transform.SetParent(GameHost.World.transform);
 
-            WallWidth = Floats.Get(Floats.Item.sv_wall_width);
-            WallDepth = Floats.Get(Floats.Item.sv_wall_depth);
-            WallHeight = Floats.Get(Floats.Item.sv_wall_height);
+            WallWidth = Params.sv_wall_width;
+            WallDepth = Params.sv_wall_depth;
+            WallHeight = Params.sv_wall_height;
 
-            SeedManager.SetSeed(Ints.Get(Ints.Item.seed));
+            SeedSystem.SetSeed();
             var map = Tool_MazeLikeMapGenerator.Generate(SV_RoundAdmin.MazeRow, SV_RoundAdmin.MazeCol);
             var posSizeList = GetWallPositionAndSize(map);
 
@@ -84,7 +84,7 @@ namespace MyGame
                 var row = map.GetLength(0);
                 var col = map.GetLength(1);
 
-                Share.Passable = new bool[row, col];
+                ShareSystem.Passable = new bool[row, col];
 
                 for (var x = 0; x < col; x++)
                 {
@@ -92,12 +92,12 @@ namespace MyGame
                     {
                         if (map[z, x])
                         {
-                            Share.Passable[z, x] = false;
+                            ShareSystem.Passable[z, x] = false;
                         }
 
                         else
                         {
-                            Share.Passable[z, x] = true;
+                            ShareSystem.Passable[z, x] = true;
                         }
                     }
                 }
@@ -167,7 +167,7 @@ namespace MyGame
                     var row = map.GetLength(0);
                     var col = map.GetLength(1);
 
-                    var position = Share.Point2Position(new int[2] { startRow, startCol }, 0.0f);
+                    var position = ShareSystem.Point2Position(new int[2] { startRow, startCol }, 0.0f);
                     var lateralPoints = new List<int>();
 
                     for (var c = startCol; c < col; c++)
@@ -192,7 +192,7 @@ namespace MyGame
                     var row = map.GetLength(0);
                     var col = map.GetLength(1);
 
-                    var position = Share.Point2Position(new int[2] { startRow, startCol }, 0.0f);
+                    var position = ShareSystem.Point2Position(new int[2] { startRow, startCol }, 0.0f);
                     var verticalPoints = new List<int>();
 
                     for (var r = startRow; r < row; r++)
@@ -245,8 +245,8 @@ namespace MyGame
                     for (var n = 0; n < lateralPoints.Count; n++)
                     {
                         var col = lateralPoints[n];
-                        var pos = Share.Point2Position(new int[2] { row, col });
-                        var size = Share.Position2WallSize(pos);
+                        var pos = ShareSystem.Point2Position(new int[2] { row, col });
+                        var size = ShareSystem.Position2WallSize(pos);
 
                         pos_size[1] = pos.z;
                         pos_size[3] = size.z;
@@ -276,8 +276,8 @@ namespace MyGame
                     for (var n = 0; n < verticalPoints.Count; n++)
                     {
                         var row = verticalPoints[n];
-                        var pos = Share.Point2Position(new int[2] { row, col });
-                        var size = Share.Position2WallSize(pos);
+                        var pos = ShareSystem.Point2Position(new int[2] { row, col });
+                        var size = ShareSystem.Position2WallSize(pos);
 
                         pos_size[0] = pos.x;
                         pos_size[2] = size.x;

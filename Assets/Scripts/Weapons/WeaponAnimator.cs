@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponAnimator : MonoBehaviour
+namespace MyGame
 {
-    Animator animator;
-    WeaponController weaponController;
-
-    void Awake()
+    public class WeaponAnimator : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-        weaponController = gameObject.GetComponent<WeaponController>();
-    }
+        Animator animator;
+        WeaponController weaponController;
 
-    //
-    // used in animation
-    public void WeaponActivate()
-    {
-        WeaponManager.Activate();
-    }
+        void Awake()
+        {
+            animator = GetComponent<Animator>();
+            weaponController = gameObject.GetComponent<WeaponController>();
+        }
 
-    public void WeaponDeactivate()
-    {
-        WeaponManager.Deactivate();
+        //
+        // used in animation
+        public void WeaponActivate()
+        {
+            //WeaponManager.Activate();
+        }
+
+        public void WeaponDeactivate()
+        {
+            //WeaponManager.Deactivate();
+        }
     }
 }
+

@@ -121,8 +121,8 @@ namespace MyGame
         {
             NextMaxHP = GetNextValue(ShopItem.hp_upgrade, SV_StatusAdmin.CurrentMaxHP, Params.shop_hp_upgrade_amount);
             NextMaxArmor = GetNextValue(ShopItem.armor_upgrade, SV_StatusAdmin.CurrentMaxArmor, Params.shop_armor_upgrade_amount);
-            NextMaxAmmoInMag = GetNextValue(ShopItem.mag_extension, AkController.MaxAmmoInMag, Params.shop_mag_extension_amount);
-            NextMaxAmmoInBag = GetNextValue(ShopItem.bag_extension, AkController.MaxAmmoInBag, Params.shop_bag_extension_amount);
+            //NextMaxAmmoInMag = GetNextValue(ShopItem.mag_extension, AkController.MaxAmmoInMag, Params.shop_mag_extension_amount);
+            //NextMaxAmmoInBag = GetNextValue(ShopItem.bag_extension, AkController.MaxAmmoInBag, Params.shop_bag_extension_amount);
         }
 
         static void CalcNextValues()
@@ -196,8 +196,8 @@ namespace MyGame
             SV_StatusAdmin.CurrentDamageRate = NextDamageRate;
             SV_StatusAdmin.CurrentMoneyRate = NextMoneyRate;
 
-            AkController.AmmoInMag = NextAmmoInMag;
-            AkController.AmmoInBag = NextAmmoInBag;
+            //AkController.AmmoInMag = NextAmmoInMag;
+            //AkController.AmmoInBag = NextAmmoInBag;
         }
     }
 }

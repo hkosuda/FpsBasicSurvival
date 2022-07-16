@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ShopPanel_Message : MonoBehaviour
+namespace MyGame
 {
-    static TextMeshProUGUI messageText;
-
-    private void Awake()
+    public class ShopPanel_Message : MonoBehaviour
     {
-        messageText = gameObject.GetComponent<TextMeshProUGUI>();
-        messageText.text = "";
-    }
+        static TextMeshProUGUI messageText;
 
-    static public void UpdateDiscription(ShopItem item, string discription)
-    {
-        if (messageText == null) { return; }
+        private void Awake()
+        {
+            messageText = gameObject.GetComponent<TextMeshProUGUI>();
+            messageText.text = "";
+        }
 
-        messageText.text = "Åy" + ShopItems.ItemNames[item] + "Åz\n";
-        messageText.text += discription;
+        static public void UpdateDiscription(ShopItem item, string discription)
+        {
+            if (messageText == null) { return; }
+
+            messageText.text = "Åy" + ShopItems.ItemNames[item] + "Åz\n";
+            messageText.text += discription;
+        }
     }
 }
+

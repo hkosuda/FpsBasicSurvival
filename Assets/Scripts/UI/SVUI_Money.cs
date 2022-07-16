@@ -3,51 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SVUI_Money : MonoBehaviour
+namespace MyGame
 {
-    TextMeshProUGUI moneyText;
-    int currentMoney;
-
-    private void Awake()
+    public class SVUI_Money : MonoBehaviour
     {
-        moneyText = gameObject.GetComponent<TextMeshProUGUI>();
-    }
+        TextMeshProUGUI moneyText;
+        int currentMoney;
 
-    void Start()
-    {
-        SetEvent(1);
-    }
-
-    private void OnDestroy()
-    {
-        SetEvent(-1);
-    }
-
-    void SetEvent(int indicator)
-    {
-        if (indicator > 0)
+        private void Awake()
         {
-
+            moneyText = gameObject.GetComponent<TextMeshProUGUI>();
         }
 
-        else
+        void Start()
         {
-
+            SetEvent(1);
         }
-    }
 
-    void Update()
-    {
-        if (SV_StatusAdmin.StatusList == null) { return; }
-        if (currentMoney == SV_StatusAdmin.StatusList[SV_Status.money]) { return; }
+        private void OnDestroy()
+        {
+            SetEvent(-1);
+        }
 
-        currentMoney = SV_StatusAdmin.StatusList[SV_Status.money];
+        void SetEvent(int indicator)
+        {
+            if (indicator > 0)
+            {
 
-        UpdateText();
-    }
+            }
 
-    void UpdateText()
-    {
-        moneyText.text = "$ " + Utility.GetDividedNumberText(currentMoney).ToString();
+            else
+            {
+
+            }
+        }
+
+        void Update()
+        {
+            if (SV_StatusAdmin.StatusList == null) { return; }
+            if (currentMoney == SV_StatusAdmin.StatusList[SV_Status.money]) { return; }
+
+            currentMoney = SV_StatusAdmin.StatusList[SV_Status.money];
+
+            UpdateText();
+        }
+
+        void UpdateText()
+        {
+            moneyText.text = "$ " + currentMoney.ToString("#,0");
+        }
     }
 }
+

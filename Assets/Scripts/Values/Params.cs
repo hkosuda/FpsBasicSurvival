@@ -71,10 +71,46 @@ namespace MyGame
         static public readonly float turret_tracking_duration = 5.0f;
         static public readonly float turret_detect_range = 50.0f;
 
+        static public readonly float mine_roaming_speed = 5.0f;
+        static public readonly float mine_tracking_speed = 8.0f;
+        static public readonly float turret_roaming_speed = 3.0f;
+        static public readonly float turret_tracking_speed = 3.0f;
+
+        static public readonly float turret_shell_exist_time = 3.0f;
+        static public readonly float turret_shell_speed = 100.0f;
+        static public readonly float turret_shooting_interval = 0.3f;
+
+        static public readonly float turret_shell_h_spread = 0.1f;
+        static public readonly float turret_shell_v_spread = 0.1f;
+
+        static public readonly float damage_reduction_const = 100.0f;
+        static public readonly float sv_armor_reduction_rate = 0.5f;
+
         static public readonly float enemy_active_range = 200.0f;
+
+        static public readonly int sv_clear_round = 7;
+
+        static public readonly float sv_room_space_ratio = 0.3f;
+
+
+        static public readonly float sv_min_enemies_rate = 0.3f;
+        static public readonly float sv_enemy_respawn_probability = 0.5f;
+
+        static public readonly int sv_wall_width;
+        static public readonly int sv_wall_depth;
+        static public readonly int sv_wall_height;
 
         static public float mouse_sens = 1.0f;
         static public int initial_money = 20000;
+
+        
+        // - volume
+        static public float volume_turret_engine = 0.5f;
+        static public float volume_turret_shot = 0.5f;
+
+        static public float volume_mine_engine = 0.5f;
+
+        static public float volume_detection_alert;
     }
 }
 

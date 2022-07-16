@@ -3,42 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SVUI_HP : MonoBehaviour
+namespace MyGame
 {
-    TextMeshProUGUI hpText;
-    StatusBar statusBar;
-
-    int currentHP;
-    int currentMaxHP;
-
-    void Start()
+    public class SVUI_HP : MonoBehaviour
     {
-        hpText = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        statusBar = gameObject.transform.GetChild(1).gameObject.GetComponent<StatusBar>();
-    }
+        TextMeshProUGUI hpText;
+        StatusBar statusBar;
 
-    void Update()
-    {
-        if (SV_StatusAdmin.StatusList != null)
+        int currentHP;
+        int currentMaxHP;
+
+        void Start()
         {
-            var _currentHP = SV_StatusAdmin.StatusList[SV_Status.hp];
-            var _currentMaxHP = SV_StatusAdmin.CurrentMaxHP;
+            hpText = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+            statusBar = gameObject.transform.GetChild(1).gameObject.GetComponent<StatusBar>();
+        }
 
-            if (_currentHP != currentMaxHP || _currentMaxHP != currentMaxHP)
+        void Update()
+        {
+            if (SV_StatusAdmin.StatusList != null)
             {
-                currentHP = _currentHP;
-                currentMaxHP = _currentMaxHP;
+                var _currentHP = SV_StatusAdmin.StatusList[SV_Status.hp];
+                var _currentMaxHP = SV_StatusAdmin.CurrentMaxHP;
 
-                UpdateUI();
+                if (_currentHP != currentMaxHP || _currentMaxHP != currentMaxHP)
+                {
+                    currentHP = _currentHP;
+                    currentMaxHP = _currentMaxHP;
+
+                    UpdateUI();
+                }
             }
         }
-    }
 
-    void UpdateUI()
-    {
-        hpText.text = "HP : " + currentHP.ToString() + " / " + currentMaxHP.ToString();
+        void UpdateUI()
+        {
+            hpText.text = "HP : " + currentHP.ToString() + " / " + currentMaxHP.ToString();
 
-        var value = Utility.SafetyDivision(currentHP, currentMaxHP, 0.0f);
-        statusBar.SetValue(value);
+            var value = Calcf.SafetyDiv(currentHP, currentMaxHP, 0.0f);
+            statusBar.SetValue(value);
+        }
     }
 }
+

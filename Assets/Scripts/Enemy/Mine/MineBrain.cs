@@ -171,7 +171,7 @@ namespace MyGame
             var deltaTheta = Calcf.AngleDelta(rotY, theta);
 
             if (Mathf.Abs(deltaTheta) > 90.0f) { return false; }
-            Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Utility.BounceLayer);
+            Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Const.bounceLayer);
 
             if (hit.collider == null) { return true; }
             return false;
@@ -184,7 +184,7 @@ namespace MyGame
 
             var dX = targetPosition - originPosition;
 
-            Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Utility.BounceLayer);
+            Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Const.bounceLayer);
 
             if (hit.collider == null) { return true; }
             return false;
@@ -199,28 +199,28 @@ namespace MyGame
 
                 SetSeed();
 
-                var field = Share.Passable;
+                var field = ShareSystem.Passable;
                 movingSystem.SetPath(AStar.GetPath(field, startPosition, goalPosition));
             }
 
-            var speed = Floats.Get(Floats.Item.mine_roaming_speed);
+            var speed = Params.mine_roaming_speed;
             movingSystem.MoveOn(dt, speed);
 
             // - inner function
             static Vector3 GetRandomPosition()
             {
-                if (GameSystem.CurrentHost.Name == HostName.survival)
+                if (GameSystem.CurrentHost.HostName == HostName.survival)
                 {
-                    var randomPointList = Utility.GetRandomBlankPointList(new List<int[]> { SV_GoalStartAdmin.StartPoint, SV_GoalStartAdmin.GoalPoint });
+                    var randomPointList = SvUtil.GetRandomBlankPointList(new List<int[]> { SV_GoalStartAdmin.StartPoint, SV_GoalStartAdmin.GoalPoint });
                     var point = randomPointList[0];
-                    return Share.Point2Position(point, 0.0f);
+                    return ShareSystem.Point2Position(point, 0.0f);
                 }
 
                 else
                 {
-                    var randomPointList = Utility.GetRandomBlankPointList();
+                    var randomPointList = SvUtil.GetRandomBlankPointList();
                     var point = randomPointList[0];
-                    return Share.Point2Position(point, 0.0f);
+                    return ShareSystem.Point2Position(point, 0.0f);
                 }
             }
 
@@ -230,7 +230,7 @@ namespace MyGame
                 roamingCounter++;
                 var id_value = Mathf.RoundToInt(Mathf.Pow(ID, 2)) + 10;
 
-                SeedManager.SetSeed(Ints.Get(Ints.Item.seed), id_value + roamingCounter);
+                SeedSystem.SetSeed(id_value + roamingCounter);
             }
         }
 
@@ -246,7 +246,7 @@ namespace MyGame
                 movingSystem.SetPath(path);
             }
 
-            var speed = Floats.Get(Floats.Item.mine_tracking_speed);
+            var speed = Params.mine_tracking_speed;
             movingSystem.MoveOn(dt, speed);
         }
     }

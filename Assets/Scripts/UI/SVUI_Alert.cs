@@ -88,7 +88,7 @@ namespace MyGame
             var dx = target.transform.position.x - Player.Myself.transform.position.x;
             var dz = target.transform.position.z - Player.Myself.transform.position.z;
 
-            var theta1 = PlayerViewController.DegRotY;
+            var theta1 = Player.Camera.transform.eulerAngles.y;
             var theta2 = Mathf.Atan2(dx, dz) * Mathf.Rad2Deg;
 
             var dt = theta2 - theta1;
@@ -120,15 +120,14 @@ namespace MyGame
 
             if (brain.EnemyType == EnemyType.mine)
             {
-                color = Colors.GetColor(Colors.Item.sv_mine_alert_color);
+                color = new Color(1.0f, 1.0f, 0.0f);
             }
 
             else
             {
-                color = Colors.GetColor(Colors.Item.sv_turret_alert_color);
+                color = new Color(1.0f, 0.0f, 0.0f);
             }
 
-            color.a = Floats.Get(Floats.Item.sv_ui_alert_alpha);
             img.color = color;
         }
     }

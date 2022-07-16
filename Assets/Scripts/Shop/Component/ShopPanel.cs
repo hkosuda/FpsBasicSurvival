@@ -2,33 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopPanel : MonoBehaviour
+namespace MyGame
 {
-    static GameObject myself;
-
-    private void Awake()
+    public class ShopPanel : MonoBehaviour
     {
-        myself = gameObject;
-    }
+        static GameObject myself;
 
-    void Start()
-    {
-        SV_ShopAdmin.Initialize();
-    }
+        private void Awake()
+        {
+            myself = gameObject;
+        }
 
-    private void OnDestroy()
-    {
-        SV_ShopAdmin.ReflectUpgrades();
-        TimerSystem.TimerResume();
-    }
+        void Start()
+        {
+            SV_ShopAdmin.Initialize();
+        }
 
-    void Update()
-    {
-        TimerSystem.TimerPause();
-    }
+        private void OnDestroy()
+        {
+            SV_ShopAdmin.ReflectUpgrades();
+            TimerSystem.Resume();
+        }
 
-    static public void DestroyShopPanel()
-    {
-        Destroy(myself);
+        void Update()
+        {
+            TimerSystem.Pause();
+        }
+
+        static public void DestroyShopPanel()
+        {
+            Destroy(myself);
+        }
     }
 }
+

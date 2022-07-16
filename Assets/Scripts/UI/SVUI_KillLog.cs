@@ -4,118 +4,122 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class SVUI_KillLog : MonoBehaviour
+namespace MyGame
 {
-    TextMeshProUGUI killerText;
-    TextMeshProUGUI deadText;
-    Image weaponImage;
-
-    float timeRemain;
-
-    private void Awake()
+    public class SVUI_KillLog : MonoBehaviour
     {
-        var content = gameObject.transform.GetChild(5);
+        TextMeshProUGUI killerText;
+        TextMeshProUGUI deadText;
+        Image weaponImage;
 
-        killerText = content.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        deadText = content.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
-        weaponImage = content.GetChild(1).gameObject.GetComponent<Image>();
+        float timeRemain;
 
-        timeRemain = Ints.Get(Ints.Item.sv_ui_log_duration);
-    }
-
-    private void Start()
-    {
-        SetEvent(1);
-    }
-
-    private void OnDestroy()
-    {
-        SetEvent(-1);
-    }
-
-    void SetEvent(int indicator)
-    {
-        if (indicator > 0)
+        private void Awake()
         {
-            TimerSystem.Updated += UpdateMethod;
+            var content = gameObject.transform.GetChild(5);
+
+            killerText = content.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+            deadText = content.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+            weaponImage = content.GetChild(1).gameObject.GetComponent<Image>();
+
+            timeRemain = SVUI_KillLogManager.logExistTime;
         }
 
-        else
+        private void Start()
         {
-            TimerSystem.Updated -= UpdateMethod;
+            SetEvent(1);
         }
-    }
 
-    void UpdateMethod(object obj, float dt)
-    {
-        timeRemain -= dt;
-
-        if (timeRemain < 0)
+        private void OnDestroy()
         {
-            SVUI_KillLogManager.RemoveKillLog();
+            SetEvent(-1);
         }
-    }
 
-    public void Setup(string killer, string dead, Sprite weaponSprite)
-    {
-        killerText.text = killer;
-        deadText.text = dead;
-        weaponImage.sprite = weaponSprite;
-
-        if (killer == dead)
+        void SetEvent(int indicator)
         {
-            for(var n = 1; n < 5; n++)
+            if (indicator > 0)
             {
-                gameObject.transform.GetChild(n).gameObject.SetActive(false);
+                TimerSystem.Updated += UpdateMethod;
+            }
+
+            else
+            {
+                TimerSystem.Updated -= UpdateMethod;
             }
         }
-    }
 
-    //
-    // static contents
-
-    static GameObject _killLog;
-    static Sprite akm2D;
-    static Sprite deagle2D;
-    static Sprite bayonet2D;
-    static Sprite karambit2D;
-    static Sprite explosion2D;
-
-    static public void Initialize()
-    {
-        _killLog = Load<GameObject>("UiComponent/KillLog");
-
-        var folder = "UiSprite/";
-        akm2D = Load<Sprite>(folder + "akm");
-        deagle2D = Load<Sprite>(folder + "deagle");
-        bayonet2D = Load<Sprite>(folder + "bayonet");
-        karambit2D = Load<Sprite>(folder + "karambit");
-        explosion2D = Load<Sprite>(folder + "explosion");
-
-        // - inner function
-        static T Load<T>(string path) where T : UnityEngine.Object
+        void UpdateMethod(object obj, float dt)
         {
-            return Resources.Load<T>(path);
+            timeRemain -= dt;
+
+            if (timeRemain < 0)
+            {
+                SVUI_KillLogManager.RemoveKillLog();
+            }
         }
-    }
 
-    static public GameObject InstantiateKillLog(string killer, string dead, Weapon usedWeapon)
-    {
-        var killLog = Instantiate(_killLog);
-        killLog.GetComponent<SVUI_KillLog>().Setup(killer, dead, GetSprite(killer, dead, usedWeapon));
-
-        return killLog;
-
-        // - inner function
-        static Sprite GetSprite(string killer, string dead, Weapon usedWeapon)
+        public void Setup(string killer, string dead, Sprite weaponSprite)
         {
-            if (killer == dead) { return explosion2D; }
-            if (usedWeapon == Weapon.akm) { return akm2D; }
-            if (usedWeapon == Weapon.deagle) { return deagle2D; }
-            if (usedWeapon == Weapon.bayonet) { return bayonet2D; }
-            if (usedWeapon == Weapon.karambit) { return karambit2D; }
+            killerText.text = killer;
+            deadText.text = dead;
+            weaponImage.sprite = weaponSprite;
 
-            return null;
+            if (killer == dead)
+            {
+                for (var n = 1; n < 5; n++)
+                {
+                    gameObject.transform.GetChild(n).gameObject.SetActive(false);
+                }
+            }
+        }
+
+        //
+        // static contents
+
+        static GameObject _killLog;
+        static Sprite akm2D;
+        static Sprite deagle2D;
+        static Sprite bayonet2D;
+        static Sprite karambit2D;
+        static Sprite explosion2D;
+
+        static public void Initialize()
+        {
+            _killLog = Load<GameObject>("UiComponent/KillLog");
+
+            var folder = "UiSprite/";
+            akm2D = Load<Sprite>(folder + "akm");
+            deagle2D = Load<Sprite>(folder + "deagle");
+            bayonet2D = Load<Sprite>(folder + "bayonet");
+            karambit2D = Load<Sprite>(folder + "karambit");
+            explosion2D = Load<Sprite>(folder + "explosion");
+
+            // - inner function
+            static T Load<T>(string path) where T : UnityEngine.Object
+            {
+                return Resources.Load<T>(path);
+            }
+        }
+
+        static public GameObject InstantiateKillLog(string killer, string dead)//, Weapon usedWeapon)
+        {
+            var killLog = Instantiate(_killLog);
+            //killLog.GetComponent<SVUI_KillLog>().Setup(killer, dead, GetSprite(killer, dead, usedWeapon));
+
+            return killLog;
+
+            //// - inner function
+            //static Sprite GetSprite(string killer, string dead, Weapon usedWeapon)
+            //{
+            //    if (killer == dead) { return explosion2D; }
+            //    if (usedWeapon == Weapon.akm) { return akm2D; }
+            //    if (usedWeapon == Weapon.deagle) { return deagle2D; }
+            //    if (usedWeapon == Weapon.bayonet) { return bayonet2D; }
+            //    if (usedWeapon == Weapon.karambit) { return karambit2D; }
+
+            //    return null;
+            //}
         }
     }
 }
+

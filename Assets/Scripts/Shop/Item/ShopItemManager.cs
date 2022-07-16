@@ -2,43 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopItemManager : MonoBehaviour
+namespace MyGame
 {
-    static GameObject myself;
-    static GameObject _shopItem;
-
-    private void Awake()
+    public class ShopItemManager : MonoBehaviour
     {
-        myself = gameObject;
+        static GameObject myself;
+        static GameObject _shopItem;
 
-        InstantiateShopItem<ShopItem_HpHealing>();
-        InstantiateShopItem<ShopItem_ArmorRepairing>();
-        InstantiateShopItem<ShopItem_HpUpgrade>();
-        InstantiateShopItem<ShopItem_ArmorUpgrade>();
-        InstantiateShopItem<ShopItem_DamageRateBooster>();
-        InstantiateShopItem<ShopItem_MoneyRateBooster>();
-        InstantiateShopItem<ShopItem_MagExtension>();
-        InstantiateShopItem<ShopItem_BagExtension>();
-        InstantiateShopItem<ShopItem_ReplenishAmmo>();
-
-        // - inner function 
-        static void InstantiateShopItem<T>() where T : Component
+        private void Awake()
         {
-            if (_shopItem == null) { _shopItem = Resources.Load<GameObject>("UiComponent/ShopItem"); }
+            myself = gameObject;
 
-            var shopItem = Instantiate(_shopItem);
-            shopItem.transform.SetParent(myself.transform);
-            shopItem.AddComponent<T>();
+            InstantiateShopItem<ShopItem_HpHealing>();
+            InstantiateShopItem<ShopItem_ArmorRepairing>();
+            InstantiateShopItem<ShopItem_HpUpgrade>();
+            InstantiateShopItem<ShopItem_ArmorUpgrade>();
+            InstantiateShopItem<ShopItem_DamageRateBooster>();
+            InstantiateShopItem<ShopItem_MoneyRateBooster>();
+            InstantiateShopItem<ShopItem_MagExtension>();
+            InstantiateShopItem<ShopItem_BagExtension>();
+
+            // - inner function 
+            static void InstantiateShopItem<T>() where T : Component
+            {
+                if (_shopItem == null) { _shopItem = Resources.Load<GameObject>("UiComponent/ShopItem"); }
+
+                var shopItem = Instantiate(_shopItem);
+                shopItem.transform.SetParent(myself.transform);
+                shopItem.AddComponent<T>();
+            }
+        }
+
+        void Start()
+        {
+
+        }
+
+        void Update()
+        {
+
         }
     }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }
+

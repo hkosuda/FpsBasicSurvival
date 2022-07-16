@@ -3,36 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ShopPanel_RemainMoneyText : MonoBehaviour
+namespace MyGame
 {
-    TextMeshProUGUI moneyText;
-
-    private void Awake()
+    public class ShopPanel_RemainMoneyText : MonoBehaviour
     {
-        moneyText = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        SetEvent(1);
-    }
+        TextMeshProUGUI moneyText;
 
-    private void OnDestroy()
-    {
-        SetEvent(-1);
-    }
-
-    void SetEvent(int indicator)
-    {
-        if (indicator > 0)
+        private void Awake()
         {
-            SV_ShopAdmin.CartUpdated += UpdateContent;
+            moneyText = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+            SetEvent(1);
         }
 
-        else
+        private void OnDestroy()
         {
-            SV_ShopAdmin.CartUpdated -= UpdateContent;
+            SetEvent(-1);
         }
-    }
 
-    void UpdateContent(object obj, bool mute)
-    {
-        moneyText.text = "Žc‚è : $ " + Utility.GetDividedNumberText(SV_ShopAdmin.MoneyRemain);
+        void SetEvent(int indicator)
+        {
+            if (indicator > 0)
+            {
+                SV_ShopAdmin.CartUpdated += UpdateContent;
+            }
+
+            else
+            {
+                SV_ShopAdmin.CartUpdated -= UpdateContent;
+            }
+        }
+
+        void UpdateContent(object obj, bool mute)
+        {
+            moneyText.text = "Žc‚è : $ " + SV_ShopAdmin.MoneyRemain.ToString("#,0");
+        }
     }
 }
+

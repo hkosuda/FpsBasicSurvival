@@ -54,7 +54,7 @@ namespace MyGame
             spawnCounter = 0;
 
             SeedSystem.SetSeed(SV_RoundAdmin.RoundNumber);
-            var randPoints = Utility.GetRandomBlankPointList(new List<int[]>() { SV_GoalStartAdmin.StartPoint, SV_GoalStartAdmin.GoalPoint });
+            var randPoints = SvUtil.GetRandomBlankPointList(new List<int[]>() { SV_GoalStartAdmin.StartPoint, SV_GoalStartAdmin.GoalPoint });
 
             var randomCandidatePointList = GetCandidateListFromRandomBlankList(randPoints);
             int maxEnemy = SV_RoundAdmin.NumberOfEnemies;
@@ -65,7 +65,7 @@ namespace MyGame
                 { EnemyType.turret, 1.0f - Params.mine_spawn_rate },
             };
 
-            var objectList = Utility.RandomSpawn(randomCandidatePointList, enemyPrefabList, spawnRate, EnemyType.mine, maxEnemy);
+            var objectList = SvUtil.RandomSpawn(randomCandidatePointList, enemyPrefabList, spawnRate, EnemyType.mine, maxEnemy);
 
             for (int n = 0; n < objectList.Count; n++)
             {
@@ -84,12 +84,12 @@ namespace MyGame
             {
                 var wallSize = Vecf.Magnitude(new float[2] { SV_MapAdmin.WallDepth, SV_MapAdmin.WallWidth });
 
-                var startPosition = Share.Point2Position(SV_GoalStartAdmin.StartPoint, 0.0f);
-                var goalPosition = Share.Point2Position(SV_GoalStartAdmin.GoalPoint, 0.0f);
+                var startPosition = ShareSystem.Point2Position(SV_GoalStartAdmin.StartPoint, 0.0f);
+                var goalPosition = ShareSystem.Point2Position(SV_GoalStartAdmin.GoalPoint, 0.0f);
 
                 for (int n = (randomPointList.Count - 1); n > -1; n--)
                 {
-                    var position = Share.Point2Position(randomPointList[n], 0.0f);
+                    var position = ShareSystem.Point2Position(randomPointList[n], 0.0f);
 
                     var dispFromStart = Vecf.Magnitude(new float[2] { startPosition.z - position.z, startPosition.x - position.x });
                     if (dispFromStart < wallSize * 3.0f) { randomPointList.RemoveAt(n); continue; }
@@ -109,7 +109,7 @@ namespace MyGame
             spawnCounter++;
             var randomAdd = Mathf.RoundToInt(Mathf.Pow(spawnCounter, 2)) + SV_RoundAdmin.RoundNumber;
 
-            SeedManager.SetSeed(Ints.Get(Ints.Item.seed), randomAdd);
+            SeedSystem.SetSeed(randomAdd);
             if (!ProbabilityCheck())
             {
                 if (!EnemiesCheck())
@@ -119,9 +119,9 @@ namespace MyGame
             }
 
             var playerPosition = Player.Myself.transform.position;
-            var playerPoint = Share.Position2Point(playerPosition);
+            var playerPoint = ShareSystem.Position2Point(playerPosition);
 
-            var noObject = Share.Passable;
+            var noObject = ShareSystem.Passable;
 
             var row = noObject.GetLength(0);
             var col = noObject.GetLength(1);
@@ -143,8 +143,8 @@ namespace MyGame
 
             if (candidatePoints.Count == 0) { return; }
 
-            var randomCandidatePoints = Utility.RandomSort(candidatePoints);
-            var spawnPosition = Share.Point2Position(randomCandidatePoints[0], 0.0f);
+            var randomCandidatePoints = SvUtil.RandomSort(candidatePoints);
+            var spawnPosition = ShareSystem.Point2Position(randomCandidatePoints[0], 0.0f);
 
             var _enemy = GetEnemy();
 
@@ -169,7 +169,7 @@ namespace MyGame
             static bool EnemiesCheck()
             {
                 var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                var min_enemies = Mathf.RoundToInt(SV_RoundAdmin.NumberOfEnemies * Floats.Get(Floats.Item.sv_min_enemies_rate));
+                var min_enemies = Mathf.RoundToInt(SV_RoundAdmin.NumberOfEnemies * Params.sv_min_enemies_rate);
 
                 if (enemies.Count() < min_enemies)
                 {
@@ -183,7 +183,7 @@ namespace MyGame
             static bool ProbabilityCheck()
             {
                 var value = UnityEngine.Random.Range(0.0f, 1.0f);
-                var probability = Floats.Get(Floats.Item.sv_enemy_respawn_probability);
+                var probability = Params.sv_enemy_respawn_probability;
 
                 if (probability == 0.0f)
                 {
@@ -201,7 +201,7 @@ namespace MyGame
             // function
             static EnemyType GetEnemy()
             {
-                SeedManager.SetSeed(Ints.Get(Ints.Item.seed), spawnCounter + SV_RoundAdmin.RoundNumber);
+                SeedSystem.SetSeed(spawnCounter + SV_RoundAdmin.RoundNumber);
 
                 var value = UnityEngine.Random.Range(0.0f, 1.0f);
                 var normalizedSpawnRate = GetNormalizedSpawnRatioList();

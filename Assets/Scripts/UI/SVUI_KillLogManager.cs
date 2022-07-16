@@ -2,95 +2,102 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SVUI_KillLogManager : MonoBehaviour
+namespace MyGame
 {
-    static List<GameObject> logList;
-    static GameObject myself;
-
-    private void Awake()
+    public class SVUI_KillLogManager : MonoBehaviour
     {
-        myself = gameObject;
-        logList = new List<GameObject>();
-        SVUI_KillLog.Initialize();
-    }
+        static public readonly int maxLogs = 10;
+        static public readonly float logExistTime = 4.0f;
 
-    private void Start()
-    {
-        SetEvent(1);
-    }
+        static List<GameObject> logList;
+        static GameObject myself;
 
-    private void OnDestroy()
-    {
-        SetEvent(-1);
-    }
-
-    static void SetEvent(int indicator)
-    {
-        if (indicator > 0)
+        private void Awake()
         {
-            EnemyMain.EnemyDestroyed += AddKillLog;
+            myself = gameObject;
+            logList = new List<GameObject>();
+            SVUI_KillLog.Initialize();
         }
 
-        else
+        private void Start()
         {
-            EnemyMain.EnemyDestroyed -= AddKillLog;
-        }
-    }
-
-    static void AddKillLog(object obj, EnemyMain enemyMain)
-    {
-        var log = GetLog(enemyMain);
-        log.transform.SetParent(myself.transform);
-        log.transform.SetSiblingIndex(0);
-
-        logList.Add(log);
-
-        if (logList.Count > Ints.Get(Ints.Item.sv_ui_log_max_number))
-        {
-            RemoveKillLog();
+            SetEvent(1);
         }
 
-        // - inner function 
-        static GameObject GetLog(EnemyMain enemyMain)
+        private void OnDestroy()
         {
-            string killer;
-            string dead = enemyMain.EnemyType.ToString() + "_" + Mathf.Abs(enemyMain.GetInstanceID()).ToString();
+            SetEvent(-1);
+        }
 
-            if (enemyMain.KilledBy == Killer.akm)
+        static void SetEvent(int indicator)
+        {
+            if (indicator > 0)
             {
-                killer = "AKM";
-            }
-
-            else if (enemyMain.KilledBy == Killer.deagle)
-            {
-                killer = "Deagle";
-            }
-
-            else if (enemyMain.KilledBy == Killer.myself)
-            {
-                killer = dead;
+                EnemyMain.EnemyDestroyed += AddKillLog;
             }
 
             else
             {
-                killer = "Player";
+                EnemyMain.EnemyDestroyed -= AddKillLog;
+            }
+        }
+
+        static void AddKillLog(object obj, EnemyMain enemyMain)
+        {
+            var log = GetLog(enemyMain);
+            log.transform.SetParent(myself.transform);
+            log.transform.SetSiblingIndex(0);
+
+            logList.Add(log);
+
+            if (logList.Count > maxLogs)
+            {
+                RemoveKillLog();
             }
 
-            return SVUI_KillLog.InstantiateKillLog(killer, dead, WeaponManager.ActiveWeapon);
+            // - inner function 
+            static GameObject GetLog(EnemyMain enemyMain)
+            {
+                string killer;
+                string dead = enemyMain.EnemyType.ToString() + "_" + Mathf.Abs(enemyMain.GetInstanceID()).ToString();
+
+                if (enemyMain.KilledBy == Killer.akm)
+                {
+                    killer = "AKM";
+                }
+
+                else if (enemyMain.KilledBy == Killer.deagle)
+                {
+                    killer = "Deagle";
+                }
+
+                else if (enemyMain.KilledBy == Killer.myself)
+                {
+                    killer = dead;
+                }
+
+                else
+                {
+                    killer = "Player";
+                }
+
+                return SVUI_KillLog.InstantiateKillLog(killer, dead);
+            }
         }
-    }
 
-    static public void RemoveKillLog()
-    {
-        if (logList.Count == 0) { return; }
-
-        if (logList[0] == null)
+        static public void RemoveKillLog()
         {
-            logList.RemoveAt(0);
-            return;
-        }
+            if (logList.Count == 0) { return; }
 
-        GameObject.Destroy(logList[0]);
-        logList.RemoveAt(0);
+            if (logList[0] == null)
+            {
+                logList.RemoveAt(0);
+                return;
+            }
+
+            GameObject.Destroy(logList[0]);
+            logList.RemoveAt(0);
+        }
     }
 }
+

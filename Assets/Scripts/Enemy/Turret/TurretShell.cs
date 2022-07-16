@@ -2,143 +2,147 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretShell : MonoBehaviour
+namespace MyGame
 {
-    float pastTime;
-
-    Vector3 direction;
-    Vector3 origin;
-
-    private void Awake()
+    public class TurretShell : MonoBehaviour
     {
-        pastTime = 0.0f;
-        origin = gameObject.transform.position;
-        gameObject.transform.SetParent(GameHost.World.transform);
-    }
+        float pastTime;
 
-    void Start()
-    {
-        SetEvent(1);
-    }
+        Vector3 direction;
+        Vector3 origin;
 
-    private void OnDestroy()
-    {
-        SetEvent(-1);
-    }
-
-    void SetEvent(int indicator)
-    {
-        if (indicator > 0)
+        private void Awake()
         {
-            TimerSystem.Updated += UpdateMethod;
+            pastTime = 0.0f;
+            origin = gameObject.transform.position;
+            gameObject.transform.SetParent(GameHost.World.transform);
         }
 
-        else
+        void Start()
         {
-            TimerSystem.Updated -= UpdateMethod;
-        }
-    }
-
-    // Update is called once per frame
-    void UpdateMethod(object obj, float dt)
-    {
-        pastTime += Time.deltaTime;
-        if (pastTime > Floats.Get(Floats.Item.turret_shell_existence_time)) { Destroy(gameObject); }
-
-        var speed = Floats.Get(Floats.Item.turret_shell_speed);
-        gameObject.transform.position = origin + direction.normalized * pastTime * speed;
-
-        RaycastCheck(gameObject.transform.position, direction, speed * dt);
-    }
-
-    public void SetDirection(Vector3 direction)
-    {
-        this.direction = direction;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        string tag = other.gameObject.tag;
-
-        if (tag == "Turret")
-        {
-            return;
+            SetEvent(1);
         }
 
-        if (tag == "Player")
+        private void OnDestroy()
         {
-            DamageProcessing();
+            SetEvent(-1);
         }
 
-        else
+        void SetEvent(int indicator)
         {
+            if (indicator > 0)
+            {
+                TimerSystem.Updated += UpdateMethod;
+            }
+
+            else
+            {
+                TimerSystem.Updated -= UpdateMethod;
+            }
+        }
+
+        // Update is called once per frame
+        void UpdateMethod(object obj, float dt)
+        {
+            pastTime += Time.deltaTime;
+            if (pastTime > Params.turret_shell_exist_time) { Destroy(gameObject); }
+
+            var speed = Params.turret_shell_speed;
+            gameObject.transform.position = origin + direction.normalized * pastTime * speed;
+
+            RaycastCheck(gameObject.transform.position, direction, speed * dt);
+        }
+
+        public void SetDirection(Vector3 direction)
+        {
+            this.direction = direction;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            string tag = other.gameObject.tag;
+
+            if (tag == "Turret")
+            {
+                return;
+            }
+
+            if (tag == "Player")
+            {
+                DamageProcessing();
+            }
+
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            var tag = collision.gameObject.tag;
+
+            if (tag == "Turret")
+            {
+                return;
+            }
+
             Destroy(gameObject);
         }
-    }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        var tag = collision.gameObject.tag;
-
-        if (tag == "Turret")
+        void DamageProcessing()
         {
-            return;
-        }
+            var _damage = Params.turret_damage;
+            var rate = Params.turret_damage_increase;
 
-        Destroy(gameObject);
-    }
+            var damage = _damage * (1.0f + rate * SV_RoundAdmin.RoundNumber);
 
-    void DamageProcessing()
-    {
-        var _damage = Floats.Get(Floats.Item.turret_damage_default);
-        var rate = Floats.Get(Floats.Item.turret_damage_increase_rate);
-
-        var damage = _damage * (1.0f + rate * SV_RoundAdmin.RoundNumber);
-
-        SV_StatusAdmin.DamageTaken?.Invoke(null, damage);
-        Destroy(gameObject);
-    }
-
-    void RaycastCheck(Vector3 origin, Vector3 direction, float distance)
-    {
-        Physics.SphereCast(origin: origin, radius: 0.05f, direction: direction, out RaycastHit hit, maxDistance: distance);
-
-        if (hit.collider == null)
-        {
-            return;
-        }
-
-        if (hit.collider.tag == "Player")
-        {
-            DamageProcessing();
-        }
-
-        else
-        {
+            SV_StatusAdmin.DamageTaken?.Invoke(null, damage);
             Destroy(gameObject);
         }
-    }
 
-    //
-    // static member and methods
-
-    static GameObject _shell;
-
-    static public void Shutdown()
-    {
-        _shell = null;
-    }
-
-    static public void GenerateBullet(Vector3 origin, Vector3 direction)
-    {
-        if (_shell == null)
+        void RaycastCheck(Vector3 origin, Vector3 direction, float distance)
         {
-            _shell = Resources.Load<GameObject>("Enemy/TurretShell");
+            Physics.SphereCast(origin: origin, radius: 0.05f, direction: direction, out RaycastHit hit, maxDistance: distance);
+
+            if (hit.collider == null)
+            {
+                return;
+            }
+
+            if (hit.collider.tag == "Player")
+            {
+                DamageProcessing();
+            }
+
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
-        var bullet = Object.Instantiate(_shell, origin, Quaternion.identity);
+        //
+        // static member and methods
 
-        bullet.transform.SetParent(GameHost.World.transform);
-        bullet.GetComponent<TurretShell>().SetDirection(direction.normalized);
+        static GameObject _shell;
+
+        static public void Shutdown()
+        {
+            _shell = null;
+        }
+
+        static public void GenerateBullet(Vector3 origin, Vector3 direction)
+        {
+            if (_shell == null)
+            {
+                _shell = Resources.Load<GameObject>("Enemy/TurretShell");
+            }
+
+            var bullet = Object.Instantiate(_shell, origin, Quaternion.identity);
+
+            bullet.transform.SetParent(GameHost.World.transform);
+            bullet.GetComponent<TurretShell>().SetDirection(direction.normalized);
+        }
     }
 }
+

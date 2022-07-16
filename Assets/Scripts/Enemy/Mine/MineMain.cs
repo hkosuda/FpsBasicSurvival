@@ -39,17 +39,17 @@ namespace MyGame
             // - inner function
             static float GetDamage()
             {
-                var weapon = WeaponManager.ActiveWeapon;
+                //var weapon = WeaponManager.ActiveWeapon;
 
-                if (weapon == Weapon.akm)
-                {
-                    return Params.ak_damage;
-                }
+                //if (weapon == Weapon.akm)
+                //{
+                //    return Params.ak_damage;
+                //}
 
-                if (weapon == Weapon.deagle)
-                {
-                    return Params.de_damage;
-                }
+                //if (weapon == Weapon.deagle)
+                //{
+                //    return Params.de_damage;
+                //}
 
                 return 0.0f;
             }

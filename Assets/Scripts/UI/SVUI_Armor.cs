@@ -3,42 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SVUI_Armor : MonoBehaviour
+namespace MyGame
 {
-    TextMeshProUGUI armorText;
-    StatusBar statusBar;
-
-    int currentArmor;
-    int currentMaxArmor;
-
-    void Start()
+    public class SVUI_Armor : MonoBehaviour
     {
-        armorText = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        statusBar = gameObject.transform.GetChild(1).gameObject.GetComponent<StatusBar>();
-    }
+        TextMeshProUGUI armorText;
+        StatusBar statusBar;
 
-    void Update()
-    {
-        if (SV_StatusAdmin.StatusList != null)
+        int currentArmor;
+        int currentMaxArmor;
+
+        void Start()
         {
-            var _currentArmor = SV_StatusAdmin.StatusList[SV_Status.armor];
-            var _currentMaxArmor = SV_StatusAdmin.CurrentMaxArmor;
+            armorText = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+            statusBar = gameObject.transform.GetChild(1).gameObject.GetComponent<StatusBar>();
+        }
 
-            if (_currentArmor != currentMaxArmor || _currentMaxArmor != currentMaxArmor)
+        void Update()
+        {
+            if (SV_StatusAdmin.StatusList != null)
             {
-                currentArmor = _currentArmor;
-                currentMaxArmor = _currentMaxArmor;
+                var _currentArmor = SV_StatusAdmin.StatusList[SV_Status.armor];
+                var _currentMaxArmor = SV_StatusAdmin.CurrentMaxArmor;
 
-                UpdateUI();
+                if (_currentArmor != currentMaxArmor || _currentMaxArmor != currentMaxArmor)
+                {
+                    currentArmor = _currentArmor;
+                    currentMaxArmor = _currentMaxArmor;
+
+                    UpdateUI();
+                }
             }
         }
-    }
 
-    void UpdateUI()
-    {
-        armorText.text = "Armor : " + currentArmor.ToString() + " / " + currentMaxArmor.ToString();
+        void UpdateUI()
+        {
+            armorText.text = "Armor : " + currentArmor.ToString() + " / " + currentMaxArmor.ToString();
 
-        var value = Utility.SafetyDivision(currentArmor, currentMaxArmor, 0.0f);
-        statusBar.SetValue(value);
+            var value = Calcf.SafetyDiv(currentArmor, currentMaxArmor, 0.0f);
+            statusBar.SetValue(value);
+        }
     }
 }
+

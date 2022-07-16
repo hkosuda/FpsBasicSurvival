@@ -163,18 +163,19 @@ namespace MyGame
                 var dX = targetPosition - originPosition;
 
                 // range test
-                var range = Floats.Get(Floats.Item.turret_detect_range);
+                var range = Params.turret_detect_range;
+
                 if (dX.magnitude > range) { return false; }
 
                 // angle test
                 var rotY = gameObject.transform.eulerAngles.y;
                 var theta = Mathf.Atan2(dX.x, dX.z) * Mathf.Rad2Deg;
 
-                var deltaTheta = Utility.CalcDeltaTheta(rotY, theta);
+                var deltaTheta = Calcf.AngleDelta(rotY, theta);
                 if (Mathf.Abs(deltaTheta) > 90.0f) { return false; }
 
                 // raycast test
-                Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Utility.BounceLayer);
+                Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Const.bounceLayer);
                 if (hit.collider != null) { return false; }
 
                 return true;
@@ -188,7 +189,7 @@ namespace MyGame
                 var dX = targetPosition - originPosition;
 
                 // raycast test
-                Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Utility.BounceLayer);
+                Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Const.bounceLayer);
                 if (hit.collider != null) { return false; }
 
                 return true;
@@ -213,14 +214,14 @@ namespace MyGame
 
                     roamingCounter++;
                     var id2 = Mathf.RoundToInt(Mathf.Pow(ID, 2)) + 20;
-                    SeedManager.SetSeed(Ints.Get(Ints.Item.seed), id2 + roamingCounter);
+                    SeedSystem.SetSeed(id2 + roamingCounter);
                     var goalPosition = GetRandomPosition();
-                    var field = Share.Passable;
+                    var field = ShareSystem.Passable;
 
                     movingSystem.SetPath(AStar.GetPath(field, startPosition, goalPosition));
                 }
 
-                var speed = Floats.Get(Floats.Item.turret_roaming_speed);
+                var speed = Params.turret_roaming_speed;
                 movingSystem.MoveOn(dt, speed);
 
                 // function
@@ -228,16 +229,16 @@ namespace MyGame
                 {
                     if (GameSystem.CurrentHost.HostName == HostName.survival)
                     {
-                        var randomPointList = Utility.GetRandomBlankPointList(new List<int[]> { SV_GoalStartAdmin.StartPoint, SV_GoalStartAdmin.GoalPoint });
+                        var randomPointList = SvUtil.GetRandomBlankPointList(new List<int[]> { SV_GoalStartAdmin.StartPoint, SV_GoalStartAdmin.GoalPoint });
                         var point = randomPointList[0];
-                        return Share.Point2Position(point, 0.0f);
+                        return ShareSystem.Point2Position(point, 0.0f);
                     }
 
                     else
                     {
-                        var randomPointList = Utility.GetRandomBlankPointList();
+                        var randomPointList = SvUtil.GetRandomBlankPointList();
                         var point = randomPointList[0];
-                        return Share.Point2Position(point, 0.0f);
+                        return ShareSystem.Point2Position(point, 0.0f);
                     }
                 }
             }
@@ -261,7 +262,7 @@ namespace MyGame
                     }
                 }
 
-                var speed = Floats.Get(Floats.Item.turret_tracking_speed);
+                var speed = Params.turret_tracking_speed;
                 movingSystem.MoveOn(dt, speed);
             }
 
@@ -270,7 +271,7 @@ namespace MyGame
             {
                 var distance = (Player.Myself.transform.position - gameObject.transform.position).magnitude;
 
-                if (distance > Floats.Get(Floats.Item.sv_active_range))
+                if (distance > Params.enemy_active_range)
                 {
                     return true;
                 }

@@ -21,13 +21,13 @@ namespace MyGame
 
         public void PlayShootingSound()
         {
-            audioSource.volume = Floats.Get(Floats.Item.volume_shooting);
+            audioSource.volume = Params.volume_shooting;
             audioSource.PlayOneShot(shootingSound);
         }
 
         public void PlaySliderSound()
         {
-            audioSource.volume = Floats.Get(Floats.Item.volume_shooting);
+            audioSource.volume = Params.volume_shooting;
             audioSource.PlayOneShot(sliderSound);
         }
     }

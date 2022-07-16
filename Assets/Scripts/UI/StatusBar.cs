@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatusBar : MonoBehaviour
+namespace MyGame
 {
-    RectTransform myRect;
-    List<RectTransform> rects;
-
-    float value;
-
-    void Awake()
+    public class StatusBar : MonoBehaviour
     {
-        value = 1.0f;
+        static readonly int barWidth = 170;
+        static readonly int barHeight = 25;
 
-        myRect = gameObject.GetComponent<RectTransform>();
-        myRect.sizeDelta = new Vector2(Ints.Get(Ints.Item.sv_ui_bar_width), Ints.Get(Ints.Item.sv_ui_bar_height));
+        static readonly int innerLineWidth = 2;
+        static readonly int outerLineWidth = 3;
 
-        rects = new List<RectTransform>()
+        RectTransform myRect;
+        List<RectTransform> rects;
+
+        float value;
+
+        void Awake()
+        {
+            value = 1.0f;
+
+            myRect = gameObject.GetComponent<RectTransform>();
+            myRect.sizeDelta = new Vector2(barWidth, barHeight);
+
+            rects = new List<RectTransform>()
         {
             GetRect(0), // main
             GetRect(1), // u
@@ -26,89 +34,58 @@ public class StatusBar : MonoBehaviour
             GetRect(4), // r
         };
 
-        UpdateBarSize(null, Ints.Item.sv_ui_bar_width);
-    }
-
-    private void Start()
-    {
-        SetEvent(1);
-    }
-
-    private void OnDestroy()
-    {
-        SetEvent(-1);
-    }
-
-    void SetEvent(int indicator)
-    {
-        if (indicator > 0)
-        {
-            IgSetting.Updated += UpdateBarSize;
+            UpdateBarSize();
         }
 
-        else
+        RectTransform GetRect(int n)
         {
-            IgSetting.Updated -= UpdateBarSize;
-        }
-    }
-
-    RectTransform GetRect(int n)
-    {
-        return gameObject.transform.GetChild(n).gameObject.GetComponent<RectTransform>();
-    }
-
-    public void SetColor(Color color)
-    {
-        foreach (var rect in rects)
-        {
-            rect.gameObject.GetComponent<Image>().color = color;
-        }
-    }
-
-    public void SetValue(float value)
-    {
-        this.value = value;
-
-        if (this.value < 0)
-        {
-            this.value = 0;
+            return gameObject.transform.GetChild(n).gameObject.GetComponent<RectTransform>();
         }
 
-        if (this.value > 1)
+        public void SetColor(Color color)
         {
-            this.value = 1;
+            foreach (var rect in rects)
+            {
+                rect.gameObject.GetComponent<Image>().color = color;
+            }
         }
 
-        SetMainBarSize();
-    }
+        public void SetValue(float value)
+        {
+            this.value = value;
 
-    void SetMainBarSize()
-    {
-        var width = Ints.Get(Ints.Item.sv_ui_bar_width);
-        var height = Ints.Get(Ints.Item.sv_ui_bar_height);
-        var innerLineWidth = Ints.Get(Ints.Item.sv_ui_bar_inner_line_width);
-        var outerLineWidth = Ints.Get(Ints.Item.sv_ui_bar_outer_line_width);
+            if (this.value < 0)
+            {
+                this.value = 0;
+            }
 
-        var mainBarWidth = width - 2 * (outerLineWidth + innerLineWidth);
-        var currentBarWidth = mainBarWidth * value;
-        var mainBarHeight = height - 2 * (outerLineWidth + innerLineWidth);
+            if (this.value > 1)
+            {
+                this.value = 1;
+            }
 
-        rects[0].sizeDelta = new Vector2(currentBarWidth, mainBarHeight);
-    }
+            SetMainBarSize();
+        }
 
-    void UpdateBarSize(object obj, Ints.Item item)
-    {
-        var width = Ints.Get(Ints.Item.sv_ui_bar_width);
-        var height = Ints.Get(Ints.Item.sv_ui_bar_height);
-        var outerLineWidth = Ints.Get(Ints.Item.sv_ui_bar_outer_line_width);
+        void SetMainBarSize()
+        {
+            var mainBarWidth = barWidth - 2 * (outerLineWidth + innerLineWidth);
+            var currentBarWidth = mainBarWidth * value;
+            var mainBarHeight = barHeight - 2 * (outerLineWidth + innerLineWidth);
 
-        myRect.sizeDelta = new Vector2(width, height);
+            rects[0].sizeDelta = new Vector2(currentBarWidth, mainBarHeight);
+        }
 
-        SetMainBarSize();
+        void UpdateBarSize()
+        {
+            myRect.sizeDelta = new Vector2(barWidth, barHeight);
 
-        rects[1].sizeDelta = new Vector2(0, outerLineWidth);
-        rects[2].sizeDelta = new Vector2(0, outerLineWidth);
-        rects[3].sizeDelta = new Vector2(outerLineWidth, 0);
-        rects[4].sizeDelta = new Vector2(outerLineWidth, 0);
+            SetMainBarSize();
+
+            rects[1].sizeDelta = new Vector2(0, outerLineWidth);
+            rects[2].sizeDelta = new Vector2(0, outerLineWidth);
+            rects[3].sizeDelta = new Vector2(outerLineWidth, 0);
+            rects[4].sizeDelta = new Vector2(outerLineWidth, 0);
+        }
     }
 }

@@ -2,50 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopItem_HpHealing : ShopItems
+namespace MyGame
 {
-    private void Awake()
+    public class ShopItem_HpHealing : ShopItems
     {
-        AwakeMethod(ShopItem.hp_healing, 
-            Ints.Item.shop_item_hp_healing_amount, 
-            Ints.Item.shop_item_hp_healing_cost_default,
-            Ints.Item.shop_item_hp_healing_cost_increase);
-    }
-
-    protected override bool CheckAddToCart()
-    {
-        if (SV_ShopAdmin.MoneyRemain < CurrentCost())
+        private void Awake()
         {
-            return false;
+            AwakeMethod(ShopItem.hp_healing,
+                Params.shop_hp_healing_amount,
+                Params.shop_hp_healing_cost_default,
+                Params.shop_hp_healing_cost_increase);
         }
 
-        var currentHP = SV_StatusAdmin.StatusList[SV_Status.hp];
-
-        var nextHP = currentHP + Ints.Get(amount) * SV_ShopAdmin.CartList[item];
-        var nextMaxHP = SV_ShopAdmin.NextMaxHP;
-
-        if (nextHP >= nextMaxHP)
+        protected override bool CheckAddToCart()
         {
-            return false;
+            if (SV_ShopAdmin.MoneyRemain < CurrentCost())
+            {
+                return false;
+            }
+
+            var currentHP = SV_StatusAdmin.StatusList[SV_Status.hp];
+
+            var nextHP = currentHP + amount * SV_ShopAdmin.CartList[item];
+            var nextMaxHP = SV_ShopAdmin.NextMaxHP;
+
+            if (nextHP >= nextMaxHP)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        return true;
-    }
+        protected override string GetCurrentValueString()
+        {
+            return SV_StatusAdmin.StatusList[SV_Status.hp].ToString();
+        }
 
-    protected override string GetCurrentValueString()
-    {
-        return SV_StatusAdmin.StatusList[SV_Status.hp].ToString();
-    }
+        protected override string GetNextValueString()
+        {
+            return SV_ShopAdmin.NextHP.ToString();
+        }
 
-    protected override string GetNextValueString()
-    {
-        return SV_ShopAdmin.NextHP.ToString();
-    }
+        protected override string GetDescription()
+        {
+            var discription = "　体力を回復します．";
 
-    protected override string GetDiscription()
-    {
-        var discription = "　体力を回復します．";
-
-        return discription;
+            return discription;
+        }
     }
 }
+
