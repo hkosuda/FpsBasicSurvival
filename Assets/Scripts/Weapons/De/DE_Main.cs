@@ -11,8 +11,8 @@ namespace MyGame
             controllerList = new List<WeaponControllerComponent>()
             {
                 new DE_Availability(),
-                new DE_Potential(),
                 new DE_Shooter(),
+                new DE_Potential(),
                 new DE_Recoil(),
             };
         }

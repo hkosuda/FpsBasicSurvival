@@ -6,19 +6,14 @@ namespace MyGame
 {
     static public class Params
     {
-        static public readonly float pm_max_speed_on_the_gound = 7.7f;
-        static public readonly float pm_max_speed_in_the_air = 1.5f;
-        static public readonly float pm_accel_on_the_ground = 60.0f;
-        static public readonly float pm_accel_in_air = 5000.0f;
-        static public readonly float pm_friction_accel = 45.0f;
         static public readonly float pm_jumping_velocity = 5.85f;
-        static public readonly float pm_crouching_speed = 4.8f;
+        static public readonly float pm_crouching_speed = 5.6f;
 
         static public readonly float volume_shooting = 0.5f;
         static public readonly float volume_footstep = 0.5f;
         static public readonly float volume_landing = 0.5f;
 
-        static public readonly float ak_firing_interval = 0.1f;
+        static public readonly float ak_firing_interval = 0.095f;
         static public readonly float ak_damage = 20.0f;
 
         static public readonly float de_firing_interval = 0.1f;
@@ -96,9 +91,7 @@ namespace MyGame
         static public readonly float sv_min_enemies_rate = 0.3f;
         static public readonly float sv_enemy_respawn_probability = 0.5f;
 
-        static public readonly int sv_wall_width;
-        static public readonly int sv_wall_depth;
-        static public readonly int sv_wall_height;
+        
 
         static public float mouse_sens = 1.0f;
         static public int initial_money = 20000;

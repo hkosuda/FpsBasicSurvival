@@ -8,10 +8,14 @@ namespace MyGame
     {
         // constants
         static public readonly float _maxSpeedOnTheGround = 7.7f;
-        static public readonly float _maxSpeedInTheAir = 0.7f;
-        static public readonly float _accelOnTheGround = 45.0f;
+        static public readonly float _maxSpeedInTheAir = 1.4f;
+        static public readonly float _accelOnTheGround = 65.0f;
         static public readonly float _accelInTheAir = 5000.0f;
-        static public readonly float _draggingAccel = 25.0f;
+        static public readonly float _draggingAccel = 45.0f;
+
+        static public readonly float _crouchingMaxSpeed = 3.5f;
+        static public readonly float _crouchingAccel = 60.0f;
+        static public readonly float _crouchingDraggingAccel = 55.0f;
 
         static public Vector2 AddVector { get; private set; }
         static public Vector2 NextVector { get; private set; }
@@ -25,8 +29,9 @@ namespace MyGame
 
             if (onground && crouching)
             {
-                maxSpeed *= 0.5f;
-                accel *= 0.8f;
+                maxSpeed = _crouchingMaxSpeed;
+                accel = _crouchingAccel;
+                draggingAccel = _crouchingDraggingAccel;
             }
 
             if (!onground)

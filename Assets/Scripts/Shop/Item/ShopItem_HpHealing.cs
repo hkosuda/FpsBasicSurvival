@@ -16,15 +16,15 @@ namespace MyGame
 
         protected override bool CheckAddToCart()
         {
-            if (SV_ShopAdmin.MoneyRemain < CurrentCost())
+            if (SV_Shop.MoneyRemain < CurrentCost())
             {
                 return false;
             }
 
-            var currentHP = SV_StatusAdmin.StatusList[SV_Status.hp];
+            var currentHP = SV_Status.StatusList[Status.hp];
 
-            var nextHP = currentHP + amount * SV_ShopAdmin.CartList[item];
-            var nextMaxHP = SV_ShopAdmin.NextMaxHP;
+            var nextHP = currentHP + amount * SV_Shop.CartList[item];
+            var nextMaxHP = SV_Shop.NextMaxHP;
 
             if (nextHP >= nextMaxHP)
             {
@@ -36,12 +36,12 @@ namespace MyGame
 
         protected override string GetCurrentValueString()
         {
-            return SV_StatusAdmin.StatusList[SV_Status.hp].ToString();
+            return SV_Status.StatusList[Status.hp].ToString();
         }
 
         protected override string GetNextValueString()
         {
-            return SV_ShopAdmin.NextHP.ToString();
+            return SV_Shop.NextHP.ToString();
         }
 
         protected override string GetDescription()

@@ -29,7 +29,7 @@ namespace MyGame
             void SetPhase()
             {
                 var id = gameObject.GetComponent<MineBrain>().ID;
-                SeedSystem.SetSeed(id);
+                SV_Seed.Init(id);
                 theta = UnityEngine.Random.Range(0.0f, Mathf.PI);
             }
         }

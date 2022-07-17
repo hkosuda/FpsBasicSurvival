@@ -8,12 +8,12 @@ namespace MyGame
     {
         static readonly string rootName = "root";
 
+        [SerializeField] HostName defaultHost = HostName.survival;
+
         static public Dictionary<HostName, GameHost> HostList { get; private set; } = new Dictionary<HostName, GameHost>()
         {
-            { HostName.survival, new SV_Host(HostName.survival) }
+            { HostName.survival, new SvHost(HostName.survival) }
         };
-
-        public HostName defaultHost = HostName.survival;
 
         static public GameObject Root { get; private set; }
 
@@ -22,7 +22,6 @@ namespace MyGame
         private void Awake()
         {
             Root = new GameObject(rootName);
-            
         }
 
         private void Start()

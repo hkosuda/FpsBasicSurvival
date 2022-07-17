@@ -24,18 +24,18 @@ namespace MyGame
         {
             if (indicator > 0)
             {
-                SV_ShopAdmin.CartUpdated += UpdateContent;
+                SV_Shop.CartUpdated += UpdateContent;
             }
 
             else
             {
-                SV_ShopAdmin.CartUpdated -= UpdateContent;
+                SV_Shop.CartUpdated -= UpdateContent;
             }
         }
 
         void UpdateContent(object obj, bool mute)
         {
-            moneyText.text = "Žc‚è : $ " + SV_ShopAdmin.MoneyRemain.ToString("#,0");
+            moneyText.text = "Žc‚è : $ " + SV_Shop.MoneyRemain.ToString("#,0");
         }
     }
 }

@@ -17,14 +17,15 @@ namespace MyGame
                 maxPotential: 0.8f,
                 potentialIncrease: 0.3f,
                 shootingInterval: 0.1f,
+                resetTime: 0.3f,
                 lifting: 0.8f,
-                h_random: 0.8f,
+                h_random: 0.6f,
                 v_random: 1.0f,
                 h_running: 3.0f,
                 v_running: 2.2f,
                 liftingExpo: 1.5f,
                 randomExpo: 1.5f,
-                runningExpo: 0.5f
+                runningExpo: 0.7f
                 );
 
             SetEvent(1);

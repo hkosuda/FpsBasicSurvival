@@ -22,7 +22,7 @@ namespace MyGame
 
         protected override string GetNextValueString()
         {
-            return SV_ShopAdmin.NextMaxAmmoInMag.ToString();
+            return SV_Shop.NextMaxAmmoInMag.ToString();
         }
 
         protected override string GetDescription()

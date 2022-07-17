@@ -40,8 +40,6 @@ namespace MyGame
             // - inner function
             static Ray GetRay()
             {
-                Debug.Log(DE_Potential.SpreadParam.potential);
-
                 return new Ray()
                 {
                     origin = Player.Camera.transform.position,

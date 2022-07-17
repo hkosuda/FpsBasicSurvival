@@ -95,9 +95,9 @@ namespace MyGame
             var _damage = Params.turret_damage;
             var rate = Params.turret_damage_increase;
 
-            var damage = _damage * (1.0f + rate * SV_RoundAdmin.RoundNumber);
+            var damage = _damage * (1.0f + rate * SV_Round.RoundNumber);
 
-            SV_StatusAdmin.DamageTaken?.Invoke(null, damage);
+            SV_Status.DamageTaken?.Invoke(null, damage);
             Destroy(gameObject);
         }
 

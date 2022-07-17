@@ -11,8 +11,8 @@ namespace MyGame
             controllerList = new List<WeaponControllerComponent>()
             {
                 new AK_Availability(),
-                new AK_Potential(),
                 new AK_Shooter(),
+                new AK_Potential(),
                 new AK_Recoil(),
             };
         }

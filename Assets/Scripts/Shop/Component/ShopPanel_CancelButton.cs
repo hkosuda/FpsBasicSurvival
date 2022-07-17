@@ -15,7 +15,7 @@ namespace MyGame
 
         void CancelAfterConfirmation()
         {
-            Confirmation.BeginConfirmation("変更をすべて破棄しますか？", SV_ShopAdmin.Initialize, null);
+            Confirmation.BeginConfirmation("変更をすべて破棄しますか？", SV_Shop.Initialize, null);
         }
     }
 }

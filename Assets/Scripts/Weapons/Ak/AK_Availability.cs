@@ -7,7 +7,6 @@ namespace MyGame
     public class AK_Availability : WeaponControllerComponent
     {
         static public readonly float preparingTime = 0.67f;
-        static public readonly float shootingInterval = 0.095f;
 
         static public bool Available { get; private set; }
 
@@ -50,7 +49,7 @@ namespace MyGame
 
         static void BeginCooldown(object obj, Vector3 direction)
         {
-            shootingIntervalRemain = shootingInterval;
+            shootingIntervalRemain = Params.ak_firing_interval;
         }
 
         public override void Update(float dt)

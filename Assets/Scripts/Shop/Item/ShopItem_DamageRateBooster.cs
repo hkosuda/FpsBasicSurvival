@@ -16,12 +16,12 @@ namespace MyGame
 
         protected override string GetCurrentValueString()
         {
-            return SV_StatusAdmin.CurrentDamageRate.ToString();
+            return SV_Status.CurrentDamageRate.ToString();
         }
 
         protected override string GetNextValueString()
         {
-            return SV_ShopAdmin.NextDamageRate.ToString();
+            return SV_Shop.NextDamageRate.ToString();
         }
 
         protected override string GetDescription()

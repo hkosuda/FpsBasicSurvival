@@ -14,7 +14,7 @@ namespace MyGame
             var _hp = Params.mine_hp;
             var rate = Params.mine_hp_increase;
 
-            HP = _hp * (1.0f + rate * SV_RoundAdmin.RoundNumber);
+            HP = _hp * (1.0f + rate * SV_Round.RoundNumber);
 
             var interactive = gameObject.GetComponent<InteractiveObject>();
             interactive.SetOnShotReaction(OnShot);
@@ -24,7 +24,7 @@ namespace MyGame
 
         void OnShot()
         {
-            var damageRate = Calcf.SafetyDiv((float)SV_StatusAdmin.CurrentDamageRate, (float)SV_StatusAdmin.DefaultDamageRate, 1.0f);
+            var damageRate = Calcf.SafetyDiv((float)SV_Status.CurrentDamageRate, (float)SV_Status.DefaultDamageRate, 1.0f);
             var damage = GetDamage() * damageRate;
 
             HP -= damage;
@@ -61,10 +61,10 @@ namespace MyGame
             {
                 var _damage = Params.mine_damage;
                 var rate = Params.mine_damage_increase;
-                var damage = _damage + (1.0f + rate * SV_RoundAdmin.RoundNumber);
+                var damage = _damage + (1.0f + rate * SV_Round.RoundNumber);
 
                 KilledBy = Killer.myself;
-                SV_StatusAdmin.DamageTaken?.Invoke(null, damage);
+                SV_Status.DamageTaken?.Invoke(null, damage);
                 Explosion?.Invoke(null, this);
                 EnemyDestroyed?.Invoke(null, this);
 

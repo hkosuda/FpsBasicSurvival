@@ -88,21 +88,21 @@ namespace MyGame
         {
             if (indicator > 0)
             {
-                SV_ShopAdmin.CalcTotalCostBegin += CalcTotalCost;
-                SV_ShopAdmin.CartUpdated += UpdateContent;
+                SV_Shop.CalcTotalCostBegin += CalcTotalCost;
+                SV_Shop.CartUpdated += UpdateContent;
             }
 
             else
             {
-                SV_ShopAdmin.CalcTotalCostBegin -= CalcTotalCost;
-                SV_ShopAdmin.CartUpdated -= UpdateContent;
+                SV_Shop.CalcTotalCostBegin -= CalcTotalCost;
+                SV_Shop.CartUpdated -= UpdateContent;
             }
         }
 
         protected virtual int CurrentCost()
         {
-            var level = SV_ShopAdmin.LevelList[item];
-            var n_inCart = SV_ShopAdmin.CartList[item];
+            var level = SV_Shop.LevelList[item];
+            var n_inCart = SV_Shop.CartList[item];
 
             var _cost_default = cost_default;
             var _cost_increase = cost_increase;
@@ -112,8 +112,8 @@ namespace MyGame
 
         protected virtual int TotalCost()
         {
-            var level = SV_ShopAdmin.LevelList[item];
-            var n_cart = SV_ShopAdmin.CartList[item];
+            var level = SV_Shop.LevelList[item];
+            var n_cart = SV_Shop.CartList[item];
 
             var _cost_default = cost_default;
             var _cost_increase = cost_increase;
@@ -130,7 +130,7 @@ namespace MyGame
 
         protected virtual void CalcTotalCost(object obj, bool mute)
         {
-            SV_ShopAdmin.SubMoneyRemain(TotalCost());
+            SV_Shop.SubMoneyRemain(TotalCost());
         }
 
         protected virtual void UpdateContent(object obj, bool mute)
@@ -142,7 +142,7 @@ namespace MyGame
             addText.text = "+" + amount.ToString("#,0");
             currentValueText.text = GetCurrentValueString();
             nextValueText.text = GetNextValueString();
-            numberText.text = "x " + SV_ShopAdmin.CartList[item].ToString("#,0");
+            numberText.text = "x " + SV_Shop.CartList[item].ToString("#,0");
             currentCostText.text = currentCost.ToString("#,0");
             totalCostText.text = totalCost.ToString("#,0");
 
@@ -152,7 +152,7 @@ namespace MyGame
 
         protected void UpdateSubButton()
         {
-            if (SV_ShopAdmin.CartList[item] == 0)
+            if (SV_Shop.CartList[item] == 0)
             {
                 subButton.interactable = false;
             }
@@ -178,7 +178,7 @@ namespace MyGame
 
         protected virtual bool CheckAddToCart()
         {
-            if (SV_ShopAdmin.MoneyRemain < CurrentCost())
+            if (SV_Shop.MoneyRemain < CurrentCost())
             {
                 return false;
             }
@@ -188,12 +188,12 @@ namespace MyGame
 
         protected virtual void AddToCart()
         {
-            SV_ShopAdmin.AddToCart(item);
+            SV_Shop.AddToCart(item);
         }
 
         protected virtual void SubFromCart()
         {
-            SV_ShopAdmin.SubFromCart(item);
+            SV_Shop.SubFromCart(item);
         }
 
         protected void UpdateDesctiption()

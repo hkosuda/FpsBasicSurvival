@@ -16,15 +16,15 @@ namespace MyGame
 
         protected override bool CheckAddToCart()
         {
-            if (SV_ShopAdmin.MoneyRemain < CurrentCost())
+            if (SV_Shop.MoneyRemain < CurrentCost())
             {
                 return false;
             }
 
-            var currentArmor = SV_StatusAdmin.StatusList[SV_Status.armor];
+            var currentArmor = SV_Status.StatusList[Status.armor];
 
-            var nextArmor = currentArmor + amount * SV_ShopAdmin.CartList[item];
-            var nextMaxArmor = SV_ShopAdmin.NextMaxArmor;
+            var nextArmor = currentArmor + amount * SV_Shop.CartList[item];
+            var nextMaxArmor = SV_Shop.NextMaxArmor;
 
             if (nextArmor >= nextMaxArmor)
             {
@@ -36,12 +36,12 @@ namespace MyGame
 
         protected override string GetCurrentValueString()
         {
-            return SV_StatusAdmin.StatusList[SV_Status.armor].ToString();
+            return SV_Status.StatusList[Status.armor].ToString();
         }
 
         protected override string GetNextValueString()
         {
-            return SV_ShopAdmin.NextArmor.ToString();
+            return SV_Shop.NextArmor.ToString();
         }
 
         protected override string GetDescription()

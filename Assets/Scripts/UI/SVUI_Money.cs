@@ -40,10 +40,10 @@ namespace MyGame
 
         void Update()
         {
-            if (SV_StatusAdmin.StatusList == null) { return; }
-            if (currentMoney == SV_StatusAdmin.StatusList[SV_Status.money]) { return; }
+            if (SV_Status.StatusList == null) { return; }
+            if (currentMoney == SV_Status.StatusList[Status.money]) { return; }
 
-            currentMoney = SV_StatusAdmin.StatusList[SV_Status.money];
+            currentMoney = SV_Status.StatusList[Status.money];
 
             UpdateText();
         }

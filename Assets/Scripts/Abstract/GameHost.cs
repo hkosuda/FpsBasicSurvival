@@ -17,7 +17,7 @@ namespace MyGame
 
         static public GameObject World { get; private set; }
 
-        protected List<HostComponent> managerList = new List<HostComponent>();
+        protected List<HostComponent> componentList = new List<HostComponent>();
 
         public GameHost(HostName hostName)
         {
@@ -38,7 +38,7 @@ namespace MyGame
 
             if (host == null) { return; }
 
-            foreach (var manager in host.managerList)
+            foreach (var manager in host.componentList)
             {
                 manager.Initialize();
             }
@@ -52,7 +52,7 @@ namespace MyGame
 
             if (host == null) { return; }
 
-            foreach (var manager in host.managerList)
+            foreach (var manager in host.componentList)
             {
                 manager.Shutdown();
             }
@@ -64,7 +64,7 @@ namespace MyGame
         {
             if (host == null) { return; }
 
-            foreach (var manager in host.managerList)
+            foreach (var manager in host.componentList)
             {
                 manager.Begin();
             }
@@ -76,7 +76,7 @@ namespace MyGame
         {
             if (host == null) { return; }
 
-            foreach (var manager in host.managerList)
+            foreach (var manager in host.componentList)
             {
                 manager.Stop();
             }

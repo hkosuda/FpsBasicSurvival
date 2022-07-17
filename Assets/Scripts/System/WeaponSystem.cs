@@ -68,18 +68,25 @@ namespace MyGame
             {
                 TimerSystem.Updated += UpdateController;
                 TimerSystem.Updated += AcceptInput;
+                TimerSystem.FixedUpdated += FixedUpdateController;
             }
 
             else
             {
                 TimerSystem.Updated -= UpdateController;
                 TimerSystem.Updated -= AcceptInput;
+                TimerSystem.FixedUpdated -= FixedUpdateController;
             }
         }
 
         static void UpdateController(object obj, float dt)
         {
             CurrentWeapon.Update(dt);
+        }
+
+        static void FixedUpdateController(object obj, float dt)
+        {
+            CurrentWeapon.FixedUpdate(dt);
         }
 
         static void AcceptInput(object obj, float dt)

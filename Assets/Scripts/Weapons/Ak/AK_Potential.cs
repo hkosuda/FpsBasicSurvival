@@ -16,15 +16,23 @@ namespace MyGame
             SpreadParam = new SpreadParam(
                 maxPotential: 0.6f,
                 potentialIncrease: 0.06f,
-                shootingInterval: 0.095f,
-                lifting: 0.8f,
-                h_random: 0.3f,
-                v_random: 0.1f,
-                h_running: 1.5f,
-                v_running: 1.2f,
+                shootingInterval: Params.ak_firing_interval,
+                resetTime: 0.2f,
+                lifting: 1.2f,
+                h_random: 0.35f,
+                v_random: 0.2f,
+                h_running: 2.0f,
+                v_running: 1.8f,
                 liftingExpo: 2.5f,
                 randomExpo: 2.5f,
-                runningExpo: 0.5f
+                runningExpo: 1.2f, 
+                spreadPattern: new List<float>() 
+                {
+                    1, 1, // 1 - 2
+                    -1, -1, -1, // 3 - 5
+                    1, 1, 1, 1, // 6 - 9
+                    -1, -1, -1, -1, -1, -1, // 10 - 14
+                }
                 );
 
             SetEvent(1);

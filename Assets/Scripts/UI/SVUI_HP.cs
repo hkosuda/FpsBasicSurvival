@@ -21,10 +21,10 @@ namespace MyGame
 
         void Update()
         {
-            if (SV_StatusAdmin.StatusList != null)
+            if (SV_Status.StatusList != null)
             {
-                var _currentHP = SV_StatusAdmin.StatusList[SV_Status.hp];
-                var _currentMaxHP = SV_StatusAdmin.CurrentMaxHP;
+                var _currentHP = SV_Status.StatusList[Status.hp];
+                var _currentMaxHP = SV_Status.CurrentMaxHP;
 
                 if (_currentHP != currentMaxHP || _currentMaxHP != currentMaxHP)
                 {

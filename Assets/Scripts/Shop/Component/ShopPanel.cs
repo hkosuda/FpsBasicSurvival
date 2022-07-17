@@ -15,12 +15,12 @@ namespace MyGame
 
         void Start()
         {
-            SV_ShopAdmin.Initialize();
+            SV_Shop.Initialize();
         }
 
         private void OnDestroy()
         {
-            SV_ShopAdmin.ReflectUpgrades();
+            SV_Shop.ReflectUpgrades();
             TimerSystem.Resume();
         }
 

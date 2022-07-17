@@ -26,18 +26,18 @@ namespace MyGame
 
         void Update()
         {
-            if (currentTime == SV_TimeAdmin.ActiveTime && currentRound == SV_RoundAdmin.RoundNumber) { return; }
+            if (currentTime == SV_Time.ActiveTime && currentRound == SV_Round.RoundNumber) { return; }
 
-            currentTime = SV_TimeAdmin.ActiveTime;
-            currentRound = SV_RoundAdmin.RoundNumber;
+            currentTime = SV_Time.ActiveTime;
+            currentRound = SV_Round.RoundNumber;
 
             UpdateText();
         }
 
         void UpdateText()
         {
-            roundText.text = "Round " + SV_RoundAdmin.RoundNumber.ToString() + " / " + Params.sv_clear_round.ToString();
-            timerText.text = TxtUtil.Time(SV_TimeAdmin.ActiveTime, true);
+            roundText.text = "Round " + SV_Round.RoundNumber.ToString() + " / " + Params.sv_clear_round.ToString();
+            timerText.text = TxtUtil.Time(SV_Time.ActiveTime, true);
         }
     }
 }

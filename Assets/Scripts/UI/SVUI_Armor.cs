@@ -21,10 +21,10 @@ namespace MyGame
 
         void Update()
         {
-            if (SV_StatusAdmin.StatusList != null)
+            if (SV_Status.StatusList != null)
             {
-                var _currentArmor = SV_StatusAdmin.StatusList[SV_Status.armor];
-                var _currentMaxArmor = SV_StatusAdmin.CurrentMaxArmor;
+                var _currentArmor = SV_Status.StatusList[Status.armor];
+                var _currentMaxArmor = SV_Status.CurrentMaxArmor;
 
                 if (_currentArmor != currentMaxArmor || _currentMaxArmor != currentMaxArmor)
                 {

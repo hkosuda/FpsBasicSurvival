@@ -11,7 +11,7 @@ namespace MyGame
             var _hp = Params.turret_hp;
             var rate = Params.turret_hp_increase;
 
-            HP = _hp * (1.0f + rate * SV_RoundAdmin.RoundNumber);
+            HP = _hp * (1.0f + rate * SV_Round.RoundNumber);
 
             var interactive = gameObject.GetComponent<InteractiveObject>();
             interactive.SetOnShotReaction(OnShot);
@@ -21,7 +21,7 @@ namespace MyGame
 
         void OnShot()
         {
-            var damageRate = Calcf.SafetyDiv((float)SV_StatusAdmin.CurrentDamageRate, (float)SV_StatusAdmin.DefaultDamageRate, 1.0f);
+            var damageRate = Calcf.SafetyDiv((float)SV_Status.CurrentDamageRate, (float)SV_Status.DefaultDamageRate, 1.0f);
             var damage = Params.ak_damage * damageRate;
 
             HP -= damage;

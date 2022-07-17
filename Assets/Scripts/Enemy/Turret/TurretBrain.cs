@@ -214,7 +214,7 @@ namespace MyGame
 
                     roamingCounter++;
                     var id2 = Mathf.RoundToInt(Mathf.Pow(ID, 2)) + 20;
-                    SeedSystem.SetSeed(id2 + roamingCounter);
+                    SV_Seed.Init(id2 + roamingCounter);
                     var goalPosition = GetRandomPosition();
                     var field = ShareSystem.Passable;
 
@@ -229,7 +229,7 @@ namespace MyGame
                 {
                     if (GameSystem.CurrentHost.HostName == HostName.survival)
                     {
-                        var randomPointList = SvUtil.GetRandomBlankPointList(new List<int[]> { SV_GoalStartAdmin.StartPoint, SV_GoalStartAdmin.GoalPoint });
+                        var randomPointList = SvUtil.GetRandomBlankPointList(new List<int[]> { SV_GoalStart.StartPoint, SV_GoalStart.GoalPoint });
                         var point = randomPointList[0];
                         return ShareSystem.Point2Position(point, 0.0f);
                     }

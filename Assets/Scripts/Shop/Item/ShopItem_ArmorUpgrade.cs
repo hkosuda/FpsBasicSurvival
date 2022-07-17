@@ -16,12 +16,12 @@ namespace MyGame
 
         protected override string GetCurrentValueString()
         {
-            return SV_StatusAdmin.CurrentMaxArmor.ToString();
+            return SV_Status.CurrentMaxArmor.ToString();
         }
 
         protected override string GetNextValueString()
         {
-            return SV_ShopAdmin.NextMaxArmor.ToString();
+            return SV_Shop.NextMaxArmor.ToString();
         }
 
         protected override string GetDescription()
