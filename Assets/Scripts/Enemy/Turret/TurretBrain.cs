@@ -67,8 +67,6 @@ namespace MyGame
             if (Player.Myself == null) { Debug.Log("Player not found"); return; }
             if (OutOfRange()) { Debug.Log("Out Of Range"); return; }
 
-            Debug.Log(mode);
-
             CounterIncrement();
 
             if (mode == Mode.roaming)

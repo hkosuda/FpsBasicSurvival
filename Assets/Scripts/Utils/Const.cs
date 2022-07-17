@@ -6,7 +6,9 @@ namespace MyGame
 {
     public class Const : MonoBehaviour
     {
-        static public readonly int bounceLayer = 1 << 6;
+        static public readonly int bounceLayer = 6;
+        static public readonly int enemyLayer = 7;
+        static public readonly int itemLayer = 8;
     }
 }
 

@@ -26,7 +26,7 @@ namespace MyGame
             SetEvent(1);
 
             source = gameObject.GetComponent<AudioSource>();
-            engineSource = gameObject.transform.GetChild(0).gameObject.GetComponent<AudioSource>();
+            engineSource = gameObject.GetComponent<AudioSource>();
         }
 
         private void OnDestroy()

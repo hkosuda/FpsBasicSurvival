@@ -22,7 +22,7 @@ namespace MyGame
 
         static readonly Dictionary<KeyAction, Key> defaultKeybindList = new Dictionary<KeyAction, Key>()
         {
-            { KeyAction.jump, new Key(KeyCode.None, 1) },
+            { KeyAction.jump, new Key(KeyCode.Space) },
             { KeyAction.autoJump, new Key(KeyCode.Mouse1) },
             { KeyAction.forward, new Key(KeyCode.W) },
             { KeyAction.backward, new Key(KeyCode.S) },
@@ -32,8 +32,8 @@ namespace MyGame
             { KeyAction.reload, new Key(KeyCode.R) },
             { KeyAction.crouch, new Key(KeyCode.LeftShift) },
             { KeyAction.menu, new Key(KeyCode.M) },
-            { KeyAction.ak, new Key(KeyCode.Alpha1) },
-            { KeyAction.de, new Key(KeyCode.E) },
+            { KeyAction.ak, new Key(KeyCode.None, 1) },
+            { KeyAction.de, new Key(KeyCode.None, -1) },
             { KeyAction.m9, new Key(KeyCode.Q) },
         };
 

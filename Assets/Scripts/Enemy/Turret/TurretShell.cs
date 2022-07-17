@@ -135,7 +135,7 @@ namespace MyGame
         {
             if (_shell == null)
             {
-                _shell = Resources.Load<GameObject>("Enemy/TurretShell");
+                _shell = Resources.Load<GameObject>("SV/TurretShell");
             }
 
             var bullet = Object.Instantiate(_shell, origin, Quaternion.identity);

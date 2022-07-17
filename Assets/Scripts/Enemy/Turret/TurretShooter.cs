@@ -17,7 +17,7 @@ namespace MyGame
         private void Awake()
         {
             cooldownRemain = 0.0f;
-            cannon = gameObject.transform.GetChild(0).GetChild(0).gameObject;
+            cannon = gameObject.transform.GetChild(0).gameObject;
         }
 
         void Start()

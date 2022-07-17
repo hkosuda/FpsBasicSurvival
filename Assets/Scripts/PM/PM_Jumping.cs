@@ -44,7 +44,7 @@ namespace MyGame
             if (JumpingFrameBufferRemain <= 0)
             {
                 //if (Keyconfig.CheckInput(Keyconfig.KeyAction.jump, true) || AutoJump)
-                if (Input.mouseScrollDelta.y > 0.0f || Input.GetMouseButton(1))
+                if (Keyconfig.CheckInput(KeyAction.jump, true) || Keyconfig.CheckInput(KeyAction.autoJump, false))
                 {
                     JumpingFrameBufferRemain = jumpingFrameBuffer;
                     //JumpingBegin = true;
@@ -68,7 +68,7 @@ namespace MyGame
             if (JumpingFrameBufferRemain <= 0)
             {
                 //if (Keyconfig.CheckInput(Keyconfig.KeyAction.jump, true) || AutoJump)
-                if (Input.mouseScrollDelta.y > 0.0f || Input.GetMouseButton(1))
+                if (Keyconfig.CheckInput(KeyAction.jump, true) || Keyconfig.CheckInput(KeyAction.autoJump, false))
                 {
                     JumpingFrameBufferRemain = jumpingFrameBuffer;
                     //JumpingBegin = true;

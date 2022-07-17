@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5865689345169606782}
   - component: {fileID: 3684820191393371653}
   - component: {fileID: 3653319896794730951}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Radome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3684820191393371653
 MeshFilter:
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5514921152616572584}
   - component: {fileID: 1116372213316865208}
   - component: {fileID: 5762224634375862134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 7271749233124668195}
   - component: {fileID: 3492567044784061710}
   - component: {fileID: 8623161015505667158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 8210263442622698409}
   - component: {fileID: 1956484850382725143}
   - component: {fileID: 7244835978845534507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CannonBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 3228756813807632173}
   - component: {fileID: 414159798430194089}
   - component: {fileID: 3284991547100771762}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: R_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &414159798430194089
 MeshFilter:
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 4775545201859670868}
   - component: {fileID: 8269759111312466584}
   - component: {fileID: 9081052373018080777}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 2801552226247586144}
   - component: {fileID: 6583863885528453220}
   - component: {fileID: 1000323514342435923}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6583863885528453220
 MeshFilter:
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 4258784611030779315}
   - component: {fileID: 8285390966014963976}
   - component: {fileID: 8842047709390630505}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RadomeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8285390966014963976
 MeshFilter:
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 48387654298339252}
   - component: {fileID: 683416233025691935}
   - component: {fileID: 5990495875044666591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &683416233025691935
 MeshFilter:
@@ -738,7 +738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3626455419920666645}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CannonBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -752,7 +752,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4826041790885052738}
-  m_LocalRotation: {x: -0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0.88, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -763,8 +763,8 @@ Transform:
   - {fileID: 5514921152616572584}
   - {fileID: 4775545201859670868}
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: -5, y: 0, z: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!1 &4863243410832748640
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 8248759324904857138}
   - component: {fileID: 1968223989650455530}
   - component: {fileID: 7494157196130607918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +795,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1968223989650455530
 MeshFilter:
@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 9008758219408383878}
   - component: {fileID: 6751023608528686838}
   - component: {fileID: 4606604977183917578}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: L_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -876,7 +876,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6751023608528686838
 MeshFilter:
@@ -937,7 +937,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5487324272492278755}
   - component: {fileID: 1561617475181309303}
-  m_Layer: 0
+  - component: {fileID: 2800449816516332437}
+  - component: {fileID: 2613862540090034630}
+  - component: {fileID: 5295766341253011260}
+  - component: {fileID: 621727210486700335}
+  - component: {fileID: 5246852369140140846}
+  - component: {fileID: 3655186228975968256}
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,6 +961,7 @@ Transform:
   m_LocalPosition: {x: 3, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3626455419920666645}
   - {fileID: 8248759324904857138}
   - {fileID: 2165418857649994735}
   - {fileID: 2801552226247586144}
@@ -964,7 +971,6 @@ Transform:
   - {fileID: 4258784611030779315}
   - {fileID: 48387654298339252}
   - {fileID: 3748759269429130961}
-  - {fileID: 3626455419920666645}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -976,11 +982,167 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5146828183944276313}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.2, z: 1.2}
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &2800449816516332437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146828183944276313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2149cccec0e6242a39cdda0b974fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2613862540090034630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146828183944276313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65432b76649a8d34eae62c20bfb3b4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5295766341253011260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146828183944276313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe3d8a26dc206848a8ae2c7eba3b4c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &621727210486700335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146828183944276313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f79036258a0f1b408d8f65d945275b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5246852369140140846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146828183944276313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f10b451d7b291a448e39147dec3b780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &3655186228975968256
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146828183944276313}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5546152140266739080
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,7 +1154,7 @@ GameObject:
   - component: {fileID: 3672881272980117360}
   - component: {fileID: 53594683260439477}
   - component: {fileID: 5417476706953762161}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1073,7 +1235,7 @@ GameObject:
   - component: {fileID: 2165418857649994735}
   - component: {fileID: 6530796738596858768}
   - component: {fileID: 4496032398426286537}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FrontPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1092,7 +1254,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6530796738596858768
 MeshFilter:
@@ -1154,7 +1316,7 @@ GameObject:
   - component: {fileID: 8719761219933074362}
   - component: {fileID: 4077727673902715441}
   - component: {fileID: 8949731442244435020}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1235,7 +1397,7 @@ GameObject:
   - component: {fileID: 3748759269429130961}
   - component: {fileID: 1868540463424460227}
   - component: {fileID: 7388801872104429016}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1254,7 +1416,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5487324272492278755}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1868540463424460227
 MeshFilter:

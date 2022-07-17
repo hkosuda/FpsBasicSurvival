@@ -79,6 +79,11 @@ namespace MyGame
 
             if (hitInfo.collider != null)
             {
+                var layer = hitInfo.collider.gameObject.layer;
+
+                if (layer == Const.enemyLayer) { return false; }
+                if (layer == Const.itemLayer) { return false; }
+
                 DeltaY = rbPosition.y - hitInfo.point.y;
 
                 if (DeltaY <= Player.PlayerHeight() + landingHeightEpsilon)
