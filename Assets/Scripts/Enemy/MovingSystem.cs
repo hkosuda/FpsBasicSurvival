@@ -2,86 +2,90 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSystem : MonoBehaviour
+namespace MyGame
 {
-    List<Vector3> path = new List<Vector3>();
-
-    // Update is called once per frame
-    public void MoveOn(float dt, float speed)
+    public class MovingSystem : MonoBehaviour
     {
-        if (path == null || path.Count == 0) { return; }
+        List<Vector3> path = new List<Vector3>();
 
-        var currentPosition = gameObject.transform.position;
-        var nextPosition = currentPosition;
-
-        var movingDistance = dt * speed;
-        var movingDistanceRemain = movingDistance;
-
-        var removingPathIndexes = new List<int>();
-
-        for (int n = 0; n < path.Count; n++)
+        // Update is called once per frame
+        public void MoveOn(float dt, float speed)
         {
-            float disp2Next = (path[n] - currentPosition).magnitude;
+            if (path == null || path.Count == 0) { return; }
 
-            if (movingDistanceRemain < disp2Next)
-            {
-                nextPosition = gameObject.transform.position + (path[n] - currentPosition).normalized * movingDistanceRemain;
-                break;
-            }
+            var currentPosition = gameObject.transform.position;
+            var nextPosition = currentPosition;
 
-            else
-            {
-                movingDistanceRemain -= disp2Next;
-                removingPathIndexes.Add(n);
-                currentPosition = path[n];
-                nextPosition = path[n];
-            }
-        }
+            var movingDistance = dt * speed;
+            var movingDistanceRemain = movingDistance;
 
-        if (removingPathIndexes.Count > 0)
-        {
-            if (path.Count == 1)
-            {
-                path.Clear();
-            }
+            var removingPathIndexes = new List<int>();
 
-            else
+            for (int n = 0; n < path.Count; n++)
             {
-                for (int n = removingPathIndexes.Count - 1; n > -1; n--)
+                float disp2Next = (path[n] - currentPosition).magnitude;
+
+                if (movingDistanceRemain < disp2Next)
                 {
-                    path.RemoveAt(removingPathIndexes[n]);
+                    nextPosition = gameObject.transform.position + (path[n] - currentPosition).normalized * movingDistanceRemain;
+                    break;
+                }
+
+                else
+                {
+                    movingDistanceRemain -= disp2Next;
+                    removingPathIndexes.Add(n);
+                    currentPosition = path[n];
+                    nextPosition = path[n];
                 }
             }
 
-            removingPathIndexes.Clear();
+            if (removingPathIndexes.Count > 0)
+            {
+                if (path.Count == 1)
+                {
+                    path.Clear();
+                }
+
+                else
+                {
+                    for (int n = removingPathIndexes.Count - 1; n > -1; n--)
+                    {
+                        path.RemoveAt(removingPathIndexes[n]);
+                    }
+                }
+
+                removingPathIndexes.Clear();
+            }
+
+            Face2MovingDirection(currentPosition, nextPosition);
+
+            gameObject.transform.position = nextPosition;
         }
 
-        Face2MovingDirection(currentPosition, nextPosition);
+        void Face2MovingDirection(Vector3 originalPosition, Vector3 nextPosition)
+        {
+            var direction = (nextPosition - originalPosition).normalized;
 
-        gameObject.transform.position = nextPosition;
-    }
+            var theta = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
-    void Face2MovingDirection(Vector3 originalPosition, Vector3 nextPosition)
-    {
-        var direction = (nextPosition - originalPosition).normalized;
+            gameObject.transform.rotation = Quaternion.Euler(0.0f, theta, 0.0f);
+        }
 
-        var theta = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        public void SetPath(List<Vector3> path)
+        {
+            this.path = path;
+        }
 
-        gameObject.transform.rotation = Quaternion.Euler(0.0f, theta, 0.0f);
-    }
+        public List<Vector3> GetPath()
+        {
+            return new List<Vector3>(path);
+        }
 
-    public void SetPath(List<Vector3> path)
-    {
-        this.path = path;
-    }
-
-    public List<Vector3> GetPath()
-    {
-        return new List<Vector3>(path);
-    }
-
-    public int PathLength()
-    {
-        return path.Count;
+        public int PathLength()
+        {
+            return path.Count;
+        }
     }
 }
+

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6055654556462180025}
   - component: {fileID: 5243782842655783372}
   - component: {fileID: 2212955405370560432}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0be710d4ff2b07241b0488174acd003b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5725986326279701492}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GoalObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

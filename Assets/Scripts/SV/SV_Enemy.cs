@@ -15,8 +15,8 @@ namespace MyGame
         {
             enemyPrefabList = new Dictionary<EnemyType, GameObject>
             {
-                { EnemyType.mine, Resources.Load<GameObject>("Enemy/Mine") },
-                { EnemyType.turret, Resources.Load<GameObject>("Enemy/Turret") }
+                { EnemyType.mine, Resources.Load<GameObject>("SV/Mine") },
+                { EnemyType.turret, Resources.Load<GameObject>("SV/Turret") }
             };
 
             spawnCounter = 0;

@@ -6,6 +6,8 @@ namespace MyGame
 {
     public class SV_GoalStart : HostComponent
     {
+        static readonly Vector3 offset = new Vector3(0.1f, 0.0f, 0.1f);
+
         static public int[] StartPoint { get; private set; }
         static public int[] GoalPoint { get; private set; }
 
@@ -17,7 +19,6 @@ namespace MyGame
             if (_startObject == null) { _startObject = Resources.Load<GameObject>("SV/StartObject"); }
             if (_goalObject == null) { _goalObject = Resources.Load<GameObject>("SV/GoalObject"); }
         }
-
 
         public override void Shutdown()
         {
@@ -32,11 +33,17 @@ namespace MyGame
             GoalPoint = goalStart[0];
             StartPoint = goalStart[1];
 
-            var _start = Object.Instantiate(_startObject, ShareSystem.Point2Position(StartPoint), Quaternion.identity);
-            var _goal = Object.Instantiate(_goalObject, ShareSystem.Point2Position(GoalPoint), Quaternion.identity);
+            var start = Object.Instantiate(_startObject, ShareSystem.Point2Position(StartPoint), Quaternion.identity);
+            var goal = Object.Instantiate(_goalObject, ShareSystem.Point2Position(GoalPoint), Quaternion.identity);
 
-            _start.transform.SetParent(GameHost.World.transform);
-            _goal.transform.SetParent(GameHost.World.transform);
+            start.transform.SetParent(GameHost.World.transform);
+            goal.transform.SetParent(GameHost.World.transform);
+
+            var startObjectSize = ShareSystem.Position2WallSize(start.transform.position);
+            var goalObjectSize = ShareSystem.Position2WallSize(goal.transform.position);
+
+            start.transform.localScale = startObjectSize - offset;
+            goal.transform.localScale = goalObjectSize - offset;
         }
 
         public override void Stop()
