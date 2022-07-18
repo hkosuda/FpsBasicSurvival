@@ -13,6 +13,12 @@ namespace MyGame
         static float shootingIntervalRemain;
         static float preparingTimeRemain;
 
+        static public int AmmoInMag { get; set; } = 30;
+        static public int AmmoInBag { get; set; } = 150;
+
+        static public int MaxAmmoInMag { get; set; } = 30;
+        static public int MaxAmmoInBag { get; set; } = 150;
+
         public override void Initialize()
         {
             SetEvent(1);

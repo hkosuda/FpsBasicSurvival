@@ -7,6 +7,7 @@ namespace MyGame
     public class SV_Time : HostComponent
     {
         static public float ActiveTime { get; private set; }
+        static public float TimeRemain { get; private set; }
 
         public override void Initialize()
         {
@@ -45,6 +46,11 @@ namespace MyGame
         void UpdateMethod(object obj, float dt)
         {
             ActiveTime += dt;
+        }
+
+        static public void SetTimeRemain(float timeRemain)
+        {
+            TimeRemain = timeRemain;
         }
     }
 }

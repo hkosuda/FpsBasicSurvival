@@ -16,19 +16,19 @@ namespace MyGame
 
         private void Start()
         {
-            var innerPanel = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
+            var body = gameObject.transform.GetChild(0).GetChild(0).GetChild(0);
 
             // confirm panel message.
-            var messageText = innerPanel.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+            var messageText = body.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
             messageText.text = message;
 
-            // confirm panel agree.
-            var agreeButton = innerPanel.GetChild(1).gameObject.GetComponent<Button>();
-            agreeButton.onClick.AddListener(AgreeButtonProcessing);
-
             // confirm panel disagree
-            var disagreeButton = innerPanel.GetChild(2).gameObject.GetComponent<Button>();
+            var disagreeButton = body.GetChild(1).gameObject.GetComponent<Button>();
             disagreeButton.onClick.AddListener(DisagreeButtonProcessing);
+
+            // confirm panel agree.
+            var agreeButton = body.GetChild(2).gameObject.GetComponent<Button>();
+            agreeButton.onClick.AddListener(AgreeButtonProcessing);
         }
 
         protected void SetConfirmationAction(string message, Action agree, Action disagree)
@@ -57,15 +57,10 @@ namespace MyGame
             if (_confirmation == null) { _confirmation = Resources.Load<GameObject>("UI/Confirmation"); }
             if (GameObject.FindWithTag("Confirmation") != null) { return; }
 
-            var confirmation = GameObject.Instantiate(_confirmation);
+            var confirmation = GameHost.Instantiate(_confirmation);
 
-            var panel_confirmation = confirmation.GetComponent<Confirmation>();
-            panel_confirmation.SetConfirmationAction(message, action_yes, action_no);
-
-            if (GameHost.World != null)
-            {
-                panel_confirmation.transform.SetParent(GameHost.World.transform);
-            }
+            var confirmationClass = confirmation.GetComponent<Confirmation>();
+            confirmationClass.SetConfirmationAction(message, action_yes, action_no);
         }
     }
 }

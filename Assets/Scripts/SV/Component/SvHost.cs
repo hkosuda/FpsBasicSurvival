@@ -15,12 +15,17 @@ namespace MyGame
                 new SV_Map(),
                 new SV_GoalStart(),
                 new SV_Player(),
-                new SV_Enemy(),
+                //new SV_Enemy(),
                 new SV_Items(),
                 new SV_Status(),
                 new SV_Time(),
-                //new SV_Shop(),
+                new SV_ShopItem(),
             };
+        }
+
+        static public void BeginNext()
+        {
+            BeginHost(GameSystem.HostList[HostName.survival]);
         }
     }
 }

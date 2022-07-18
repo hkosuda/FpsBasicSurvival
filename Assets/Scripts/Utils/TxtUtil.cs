@@ -101,7 +101,7 @@ namespace MyGame
             return n.ToString();
         }
 
-        static public string Time(float time, bool msec)
+        static public string Time(float time, bool msec, string separator = ":")
         {
             var min = (int)(time / 60.0f);
             var sec = (int)(time - min * 60.0f);
@@ -110,12 +110,12 @@ namespace MyGame
             {
                 var ms = (int)((time - min * 60.0f - sec) * 100.0f);
 
-                return PaddingZero2(min) + ":" + PaddingZero2(sec) + ":" + PaddingZero2(ms);
+                return PaddingZero2(min) + separator + PaddingZero2(sec) + separator + PaddingZero2(ms);
             }
 
             else
             {
-                return PaddingZero2(min) + ":" + PaddingZero2(sec);
+                return PaddingZero2(min) + separator + PaddingZero2(sec);
             }
         }
     }

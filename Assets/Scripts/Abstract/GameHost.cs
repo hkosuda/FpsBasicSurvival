@@ -62,6 +62,8 @@ namespace MyGame
 
         static public void BeginHost(GameHost host)
         {
+            CreateWorld();
+
             if (host == null) { return; }
 
             foreach (var manager in host.componentList)
@@ -74,6 +76,8 @@ namespace MyGame
 
         static public void StopHost(GameHost host)
         {
+            DestroyWorld();
+
             if (host == null) { return; }
 
             foreach (var manager in host.componentList)
