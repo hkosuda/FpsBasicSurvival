@@ -7,18 +7,24 @@ namespace MyGame
 {
     public class SVUI_Weapon : MonoBehaviour
     {
+        static readonly int largeTextSize = 24;
+        static readonly int smallTextSize = 20;
+
         static TextMeshProUGUI ammoText;
         static TextMeshProUGUI weaponText;
 
         static int currentAmmoInMag;
         static int currentAmmoInBag;
 
-        static Weapon currentWeapon;
+        static WeaponAnimator.AnimationWeapon currentWeapon;
 
         void Start()
         {
             weaponText = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
             ammoText = gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+
+            UpdateAmmoText();
+            UpdateWeaponText();
         }
 
         void Update()
@@ -34,7 +40,7 @@ namespace MyGame
                 UpdateAmmoText();
             }
 
-            var _currentWeapon = WeaponSystem.CurrentWeapon.Weapon;
+            var _currentWeapon = WeaponAnimator.CurrentWeapon;
 
             if (currentWeapon != _currentWeapon)
             {
@@ -81,21 +87,31 @@ namespace MyGame
 
         static void UpdateWeaponText()
         {
-            if (currentWeapon == Weapon.ak)
+            if (currentWeapon == WeaponAnimator.AnimationWeapon.ak)
             {
+                weaponText.fontSize = largeTextSize;
                 weaponText.text = "AK-47";
                 return;
             }
 
-            if(currentWeapon == Weapon.de)
+            if(currentWeapon == WeaponAnimator.AnimationWeapon.de)
             {
+                weaponText.fontSize = largeTextSize;
                 weaponText.text = "Desert Eagle";
                 return;
             }
 
-            if (currentWeapon == Weapon.m9)
+            if (currentWeapon == WeaponAnimator.AnimationWeapon.m9)
             {
+                weaponText.fontSize = largeTextSize;
                 weaponText.text = "M9 Bayonet";
+                return;
+            }
+
+            if (currentWeapon == WeaponAnimator.AnimationWeapon.bar)
+            {
+                weaponText.fontSize = smallTextSize;
+                weaponText.text = "Something like a crowbar";
                 return;
             }
 

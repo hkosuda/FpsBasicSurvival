@@ -6,7 +6,13 @@ namespace MyGame
 {
     public class WeaponAnimator : MonoBehaviour
     {
+        public enum AnimationWeapon
+        {
+            ak, de, m9, bar,
+        }
+
         static Animator animator;
+        static public AnimationWeapon CurrentWeapon { get; private set; }
 
         void Awake()
         {
@@ -43,16 +49,21 @@ namespace MyGame
             if (weapon == Weapon.ak)
             {
                 animator.SetTrigger("SwitchAk");
+                CurrentWeapon = AnimationWeapon.ak;
+
             }
 
             else if (weapon == Weapon.de)
             {
                 animator.SetTrigger("SwitchDe");
+                CurrentWeapon = AnimationWeapon.de;
             }
 
             else if (weapon == Weapon.m9)
             {
-                animator.SetTrigger("SwitchM9");
+                //animator.SetTrigger("SwitchM9");
+                animator.SetTrigger("SwitchCr");
+                CurrentWeapon = AnimationWeapon.bar;
             }
         }
 
