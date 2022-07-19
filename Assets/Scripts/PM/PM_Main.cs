@@ -22,7 +22,7 @@ namespace MyGame
             new PM_PostProcessor(),
         };
 
-        void Start()
+        void Awake()
         {
             foreach(var controller in controllerList)
             {

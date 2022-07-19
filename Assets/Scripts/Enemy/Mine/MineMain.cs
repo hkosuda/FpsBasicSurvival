@@ -7,66 +7,23 @@ namespace MyGame
 {
     public class MineMain : EnemyMain
     {
-        static public EventHandler<MineMain> Explosion { get; set; }
+        static public EventHandler<MineMain> MineExplosion { get; set; }
 
         private void Awake()
         {
-            var _hp = Params.mine_hp;
-            var rate = Params.mine_hp_increase;
-
-            HP = _hp * (1.0f + rate * SV_Round.RoundNumber);
-
-            var interactive = gameObject.GetComponent<InteractiveObject>();
-            interactive.SetOnShotReaction(OnShot);
-
-            EnemyType = EnemyType.mine;
-        }
-
-        void OnShot()
-        {
-            var damageRate = Calcf.SafetyDiv((float)SV_Status.CurrentDamageRate, (float)SV_Status.DefaultDamageRate, 1.0f);
-            var damage = GetDamage() * damageRate;
-
-            HP -= damage;
-
-            if (HP <= 0.0f)
-            {
-                KilledBy = Killer.player;
-                EnemyDestroyed?.Invoke(this, this);
-                Destroy(gameObject);
-            }
-
-            // - inner function
-            static float GetDamage()
-            {
-                //var weapon = WeaponManager.ActiveWeapon;
-
-                //if (weapon == Weapon.akm)
-                //{
-                //    return Params.ak_damage;
-                //}
-
-                //if (weapon == Weapon.deagle)
-                //{
-                //    return Params.de_damage;
-                //}
-
-                return 0.0f;
-            }
+            Init(EnemyType.mine, OnShot);
         }
 
         public void OnTriggerStay(Collider collider)
         {
-            if (collider.tag == "Player")
+            if (collider.gameObject.layer == Const.playerLayer)
             {
-                var _damage = Params.mine_damage;
+                var defaultDamage = Params.mine_damage;
                 var rate = Params.mine_damage_increase;
-                var damage = _damage + (1.0f + rate * SV_Round.RoundNumber);
+                var damage = defaultDamage * (1.0f + rate * SV_Round.RoundNumber);
 
-                KilledBy = Killer.myself;
-                SV_Status.DamageTaken?.Invoke(null, damage);
-                Explosion?.Invoke(null, this);
-                EnemyDestroyed?.Invoke(null, this);
+                EnemyGivenDamage?.Invoke(null, damage);
+                MineExplosion?.Invoke(null, this);
 
                 Destroy(gameObject);
                 return;

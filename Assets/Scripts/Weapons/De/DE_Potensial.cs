@@ -18,7 +18,7 @@ namespace MyGame
                 potentialIncrease: 0.3f,
                 shootingInterval: 0.1f,
                 resetTime: 0.3f,
-                lifting: 0.8f,
+                lifting: 0.2f,
                 h_random: 0.6f,
                 v_random: 1.0f,
                 h_running: 3.0f,

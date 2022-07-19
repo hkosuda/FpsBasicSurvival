@@ -7,13 +7,15 @@ namespace MyGame
 {
     public class DE_Availability : WeaponControllerComponent
     {
-        static public readonly float preparingTime = 0.67f;
+        static public readonly float preparingTime = 0.83f;
         static public readonly float shootingInterval = 0.14f;
 
         static public bool Available { get; private set; }
 
         static float shootingIntervalRemain;
         static float preparingTimeRemain;
+
+        static public int AmmoInMag { get; set; } = 7;
 
         public override void Initialize()
         {
@@ -61,6 +63,8 @@ namespace MyGame
 
             if (preparingTimeRemain < 0.0f) { preparingTimeRemain = 0.0f; }
             if (shootingIntervalRemain < 0.0f) { shootingIntervalRemain = 0.0f; }
+
+            if (AmmoInMag <= 0) { Available = false; return; }
 
             if (preparingTimeRemain > 0.0f || shootingIntervalRemain > 0.0f)
             {

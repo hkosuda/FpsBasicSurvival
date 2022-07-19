@@ -92,12 +92,12 @@ namespace MyGame
 
         void DamageProcessing()
         {
-            var _damage = Params.turret_damage;
+            var defaultDamage = Params.turret_damage;
             var rate = Params.turret_damage_increase;
 
-            var damage = _damage * (1.0f + rate * SV_Round.RoundNumber);
+            var damage = defaultDamage * (1.0f + rate * SV_Round.RoundNumber);
 
-            SV_Status.DamageTaken?.Invoke(null, damage);
+           EnemyMain.EnemyGivenDamage?.Invoke(null, damage);
             Destroy(gameObject);
         }
 

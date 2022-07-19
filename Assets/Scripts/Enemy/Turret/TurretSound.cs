@@ -17,16 +17,19 @@ namespace MyGame
 
         private void Awake()
         {
-            detectedSound = Resources.Load<AudioClip>("Audio/enemy/enemy_detect_player");
-            shotSound = Resources.Load<AudioClip>("Audio/enemy/turret_shooting");
+            if (detectedSound == null) { detectedSound = Resources.Load<AudioClip>("Sound/Enemy/detected_alert"); }
+            if (shotSound == null) { shotSound = Resources.Load<AudioClip>("Sound/Enemy/turret_shooting"); }
 
             brain = gameObject.GetComponent<TurretBrain>();
             shootingSystem = gameObject.GetComponent<TurretShooter>();
 
-            SetEvent(1);
-
             source = gameObject.GetComponent<AudioSource>();
             engineSource = gameObject.GetComponent<AudioSource>();
+        }
+
+        private void Start()
+        {
+            SetEvent(1);
         }
 
         private void OnDestroy()
@@ -52,13 +55,13 @@ namespace MyGame
             if (indicator > 0)
             {
                 shootingSystem.Shot += PlayShotSound;
-                brain.FindStriker += PlayDetectedSound;
+                brain.Detected += PlayDetectedSound;
             }
 
             else
             {
-                if (brain != null) { brain.FindStriker -= PlayDetectedSound; }
-                if (shootingSystem != null) { shootingSystem.Shot -= PlayShotSound; }
+                shootingSystem.Shot -= PlayShotSound;
+                brain.Detected -= PlayDetectedSound;
             }
         }
 

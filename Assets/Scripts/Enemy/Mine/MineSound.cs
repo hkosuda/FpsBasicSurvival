@@ -15,14 +15,17 @@ namespace MyGame
 
         private void Awake()
         {
-            if (detectedAlert == null) { detectedAlert = Resources.Load<AudioClip>("Audio/enemy/detected_alert"); }
+            if (detectedAlert == null) { detectedAlert = Resources.Load<AudioClip>("Sound/Enemy/detected_alert"); }
 
             brain = gameObject.GetComponent<MineBrain>();
 
-            SetEvent(1);
-
             source = gameObject.GetComponent<AudioSource>();
             engineSource = gameObject.GetComponent<AudioSource>();
+        }
+
+        private void Start()
+        {
+            SetEvent(1);
         }
 
         private void OnDestroy()
@@ -47,12 +50,12 @@ namespace MyGame
         {
             if (indicator > 0)
             {
-                brain.PlayerDetected += PlayDetectedSound;
+                brain.Detected += PlayDetectedSound;
             }
 
             else
             {
-                if (brain != null) { brain.PlayerDetected -= PlayDetectedSound; }
+                brain.Detected -= PlayDetectedSound;
             }
         }
 

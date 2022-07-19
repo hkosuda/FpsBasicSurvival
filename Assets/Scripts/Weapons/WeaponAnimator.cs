@@ -25,12 +25,16 @@ namespace MyGame
             {
                 WeaponSystem.WeaponChanged += BeginTakingoutAnimation;
                 WeaponController.Shot += BeginShotAnimation;
+
+                AK_Reload.ReloadingBegin += BeginReloadingAnimation;
             }
 
             else
             {
                 WeaponSystem.WeaponChanged -= BeginTakingoutAnimation;
                 WeaponController.Shot -= BeginShotAnimation;
+
+                AK_Reload.ReloadingBegin -= BeginReloadingAnimation;
             }
         }
 
@@ -65,6 +69,11 @@ namespace MyGame
             {
                 animator.SetTrigger("ShotDe");
             }
+        }
+
+        static void BeginReloadingAnimation(object obj, bool mute)
+        {
+            animator.SetTrigger("ReloadAk");
         }
     }
 }

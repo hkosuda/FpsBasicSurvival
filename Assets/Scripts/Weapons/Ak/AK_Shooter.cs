@@ -19,7 +19,9 @@ namespace MyGame
         public override void Update(float dt)
         {
             if (!Keyconfig.CheckInput(KeyAction.shot, false)) { return; }
+
             if (!AK_Availability.Available) { return; }
+            if (AK_Reload.IsReloading) { return; }
 
             DeShot();
         }
@@ -29,6 +31,7 @@ namespace MyGame
             var ray = GetRay();
 
             WeaponController.Shot?.Invoke(null, ray.direction);
+            AK_Availability.AmmoInMag -= 1;
 
             if (Physics.Raycast(ray, hitInfo: out RaycastHit hit))
             {

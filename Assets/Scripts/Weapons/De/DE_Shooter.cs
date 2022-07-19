@@ -31,6 +31,7 @@ namespace MyGame
             var ray = GetRay();
 
             WeaponController.Shot?.Invoke(null, ray.direction);
+            DE_Availability.AmmoInMag -= 1;
 
             if (Physics.Raycast(ray, hitInfo: out RaycastHit hit))
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,16 @@ namespace MyGame
 {
     public class GameSystem : MonoBehaviour
     {
-        static readonly string rootName = "root";
+        static public EventHandler<bool> HostSwitched { get; set; }
+
+        static readonly string rootName = "Root";
 
         [SerializeField] HostName defaultHost = HostName.survival;
 
         static public Dictionary<HostName, GameHost> HostList { get; private set; } = new Dictionary<HostName, GameHost>()
         {
-            { HostName.survival, new SvHost(HostName.survival) }
+            { HostName.survival, new SvHost(HostName.survival) },
+            { HostName.ez_tower, new TowerHost(HostName.ez_tower) },
         };
 
         static public GameObject Root { get; private set; }
@@ -41,6 +45,8 @@ namespace MyGame
 
             GameHost.InitializeHost(CurrentHost);
             GameHost.BeginHost(CurrentHost);
+
+            HostSwitched?.Invoke(null, false);
         }
     }
 }

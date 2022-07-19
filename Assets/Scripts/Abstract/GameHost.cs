@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace MyGame
     public enum HostName
     {
         survival,
+        ez_tower,
+        ez_tower_ta,
     }
 
     public abstract class GameHost
@@ -91,7 +94,7 @@ namespace MyGame
         {
             if (World != null)
             {
-                Object.Destroy(World);
+                GameObject.Destroy(World);
             }
 
             World = new GameObject(worldName);
@@ -102,7 +105,7 @@ namespace MyGame
         {
             if (World == null) { return; }
 
-            Object.Destroy(World);
+            GameObject.Destroy(World);
         }
 
         static public GameObject Instantiate(GameObject prefab, Vector3? position = null, Quaternion? quaternion = null)
@@ -115,7 +118,7 @@ namespace MyGame
                 return null; 
             }
 
-            var gameObject = Object.Instantiate(prefab);
+            var gameObject = GameObject.Instantiate(prefab);
 
             gameObject.transform.position = position ?? Vector3.zero;
             gameObject.transform.rotation = quaternion ?? Quaternion.identity;

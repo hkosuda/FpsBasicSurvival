@@ -8,6 +8,7 @@ Shader "Custom/Checkpoint"
         _Lines("Number of Lines", Float) = 10
 
         _Y ("Y", Float) = 0
+        _DebugMode ("Debug Mode", Float) = 1
     }
         SubShader
         {
@@ -24,6 +25,7 @@ Shader "Custom/Checkpoint"
             half _Lines;
 
             half _Y;
+            half _DebugMode;
 
             half4 _Color;
 
@@ -51,6 +53,12 @@ Shader "Custom/Checkpoint"
 
             void surf(Input IN, inout SurfaceOutputStandard o)
             {
+                if (_DebugMode > 0)
+                {
+                    o.Albedo = _Color;
+                    o.Alpha = 0.2;
+                    return;
+                }
 
                 if (abs(IN.worldNormal.y) > 0.98)
                 {

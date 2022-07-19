@@ -6,12 +6,12 @@ namespace MyGame
 {
     public class AK_Availability : WeaponControllerComponent
     {
-        static public readonly float preparingTime = 0.67f;
+        static public readonly float preparingTime = 1.0f;
 
         static public bool Available { get; private set; }
 
         static float shootingIntervalRemain;
-        static float preparingTimeRemain;
+        static public float PreparingTimeRemain { get; private set; }
 
         static public int AmmoInMag { get; set; } = 30;
         static public int AmmoInBag { get; set; } = 150;
@@ -31,7 +31,7 @@ namespace MyGame
 
         public override void Activate()
         {
-            preparingTimeRemain = preparingTime;
+            PreparingTimeRemain = preparingTime;
             shootingIntervalRemain = 0.0f;
         }
 
@@ -60,13 +60,15 @@ namespace MyGame
 
         public override void Update(float dt)
         {
-            preparingTimeRemain -= dt;
+            PreparingTimeRemain -= dt;
             shootingIntervalRemain -= dt;
 
-            if (preparingTimeRemain < 0.0f) { preparingTimeRemain = 0.0f; }
+            if (PreparingTimeRemain < 0.0f) { PreparingTimeRemain = 0.0f; }
             if (shootingIntervalRemain < 0.0f) { shootingIntervalRemain = 0.0f; }
 
-            if (preparingTimeRemain > 0.0f || shootingIntervalRemain > 0.0f)
+            if (AmmoInMag <= 0) { Available = false; return; }
+
+            if (PreparingTimeRemain > 0.0f || shootingIntervalRemain > 0.0f)
             {
                 Available = false;
             }

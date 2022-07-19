@@ -49,7 +49,7 @@ namespace MyGame
         static public readonly int mine_destroy_reward = 200;
         static public readonly int turret_destroy_reward = 200;
 
-        static public readonly float money_increase_after_round = 2.0f;
+        static public readonly float money_increase_after_round = 1.0f;
 
         static public readonly float mine_damage = 20.0f;
         static public readonly float mine_damage_increase = 0.5f;
@@ -81,7 +81,7 @@ namespace MyGame
         static public readonly float damage_reduction_const = 100.0f;
         static public readonly float sv_armor_reduction_rate = 0.5f;
 
-        static public readonly float enemy_active_range = 200.0f;
+        static public readonly float enemy_active_range = 300.0f;
 
         static public readonly int sv_clear_round = 7;
 

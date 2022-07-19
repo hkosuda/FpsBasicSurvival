@@ -8,31 +8,7 @@ namespace MyGame
     {
         private void Awake()
         {
-            var _hp = Params.turret_hp;
-            var rate = Params.turret_hp_increase;
-
-            HP = _hp * (1.0f + rate * SV_Round.RoundNumber);
-
-            var interactive = gameObject.GetComponent<InteractiveObject>();
-            interactive.SetOnShotReaction(OnShot);
-
-            EnemyType = EnemyType.turret;
-        }
-
-        void OnShot()
-        {
-            var damageRate = Calcf.SafetyDiv((float)SV_Status.CurrentDamageRate, (float)SV_Status.DefaultDamageRate, 1.0f);
-            var damage = Params.ak_damage * damageRate;
-
-            HP -= damage;
-            EnemyDamageTaken(null, this);
-
-            if (HP <= 0.0f)
-            {
-                KilledBy = Killer.player;
-                EnemyDestroyed?.Invoke(this, this);
-                Destroy(gameObject);
-            }
+            Init(EnemyType.turret, OnShot);
         }
     }
 }
