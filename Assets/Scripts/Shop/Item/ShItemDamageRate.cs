@@ -37,7 +37,7 @@ namespace MyGame
         protected override void Apply()
         {
             CalcNextValue();
-            SV_Status.CurrentDamageRate = nextValue;
+            SV_Status.SetDamageRate(nextValue);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace MyGame
             {
                 IsTracking = false;
 
-                if (SearchStrikerInRoamingMode(Params.turret_detect_range))
+                if (SearchStrikerInRoamingMode(Const.enemy_detect_range))
                 {
                     mode = Mode.shooting;
                     missingTime = 0.0f;
@@ -55,7 +55,7 @@ namespace MyGame
 
                 else
                 {
-                    UpdateMethodInRoaming(dt);
+                    UpdateMethodInRoaming(dt, SvParams.Get(SvParam.turret_roaming_speed));
                 }
             }
 
@@ -63,7 +63,7 @@ namespace MyGame
             {
                 IsTracking = true;
 
-                if (SearchStrikerInRoamingMode(Params.turret_detect_range))
+                if (SearchPlayerInShootingMode(Const.enemy_detect_range))
                 {
                     missingTime = 0.0f;
                     shootingSystem.Shoot();
@@ -92,7 +92,7 @@ namespace MyGame
                 else
                 {
                     missingTime += dt;
-                    var trackingDuration = Params.turret_tracking_duration;
+                    var trackingDuration = SvParams.Get(SvParam.turret_tracking_duration);
 
                     if (movingSystem.PathLength() == 0 && missingTime > trackingDuration)
                     {
@@ -101,15 +101,37 @@ namespace MyGame
 
                     else if (movingSystem.PathLength() == 0)
                     {
-                        TrackingUpdateMethod(Player.Myself, dt, true);
+                        TrackingUpdateMethod(Player.Myself, dt, true, SvParams.Get(SvParam.turret_tracking_speed));
                     }
 
                     else
                     {
-                        TrackingUpdateMethod(Player.Myself, dt, false);
+                        TrackingUpdateMethod(Player.Myself, dt, false, SvParams.Get(SvParam.turret_tracking_speed));
                     }
                 }
             }
+        }
+
+        protected bool SearchPlayerInShootingMode(float detectableRange)
+        {
+            var sightAngle = 90.0f;
+
+            var originPosition = new Vector3(gameObject.transform.position.x, yOffset, gameObject.transform.position.z);
+            var targetPosition = new Vector3(Player.Myself.transform.position.x, yOffset, Player.Myself.transform.position.z);
+
+            var dX = targetPosition - originPosition;
+            if (dX.magnitude > detectableRange) { return false; }
+
+            var rotY = gameObject.transform.eulerAngles.y;
+            var theta = Mathf.Atan2(dX.x, dX.z) * Mathf.Rad2Deg;
+
+            var deltaTheta = Calcf.AngleDelta(rotY, theta);
+            if (Mathf.Abs(deltaTheta) > sightAngle) { return false; }
+
+            Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude);
+            if (hit.collider == null) { return false; }
+
+            return hit.collider.gameObject.layer == Const.playerLayer;
         }
     }
 }

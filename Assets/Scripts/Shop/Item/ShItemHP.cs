@@ -13,13 +13,13 @@ namespace MyGame
 
         protected override string CalcCurrentValue()
         {
-            currentValue = SV_Status.StatusList[Status.hp];
+            currentValue = SV_Status.CurrentHP;
             return currentValue.ToString("#,0");
         }
 
         protected override string CalcNextValue()
         {
-            currentValue = SV_Status.StatusList[Status.hp];
+            currentValue = SV_Status.CurrentHP;
 
             var nCart = SV_ShopItem.CartList[Item];
             nextValue = currentValue + nCart * increase;
@@ -54,7 +54,7 @@ namespace MyGame
         protected override void Apply()
         {
             CalcNextValue();
-            SV_Status.StatusList[Status.hp] = nextValue;
+            SV_Status.SetHP(nextValue);
         }
     }
 }

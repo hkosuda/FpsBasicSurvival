@@ -104,7 +104,7 @@ namespace MyGame
 
         static void UpdateCart()
         {
-            MoneyRemain = SV_Status.StatusList[Status.money];
+            MoneyRemain = SV_Status.CurrentMoney;
 
             foreach(var item in itemList)
             {

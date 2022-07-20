@@ -49,6 +49,11 @@ namespace MyGame
                 }
             }
         }
+
+        public override void Inactivate()
+        {
+            IsReloading = false;
+        }
     }
 }
 

@@ -13,7 +13,7 @@ namespace MyGame
 
         protected override string CalcCurrentValue()
         {
-            currentValue = SV_Status.StatusList[Status.armor];
+            currentValue = SV_Status.CurrentArmor;
             return currentValue.ToString("#,0");
         }
 
@@ -54,7 +54,7 @@ namespace MyGame
         protected override void Apply()
         {
             CalcNextValue();
-            SV_Status.StatusList[Status.armor] = nextValue;
+            SV_Status.SetArmor(nextValue);
         }
     }
 }

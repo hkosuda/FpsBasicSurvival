@@ -155,7 +155,7 @@ namespace MyGame
             {
                 var val = Random.Range(0.0f, 1.0f);
 
-                if (val < Params.sv_room_space_ratio)
+                if (val < Const.room_space_ratio)
                 {
                     return true;
                 }

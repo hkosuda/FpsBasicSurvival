@@ -21,8 +21,8 @@ namespace MyGame
         private void Awake()
         {
             audioSource = gameObject.GetComponent<AudioSource>();
-            landingSound = Resources.Load<AudioClip>("PmSound/landing");
-            footstepSound = Resources.Load<AudioClip>("PmSound/footstep");
+            landingSound = Resources.Load<AudioClip>("Player/landing");
+            footstepSound = Resources.Load<AudioClip>("Player/footstep");
         }
 
         void Start()
@@ -75,7 +75,7 @@ namespace MyGame
                 return;
             }
 
-            var speed = PmUtil._maxSpeedOnTheGround;
+            var speed = Params.pm_max_speed_on_ground;
 
             if (Player.Rb.velocity.magnitude < speed * 0.6f)
             {

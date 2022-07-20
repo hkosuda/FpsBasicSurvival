@@ -34,7 +34,7 @@ namespace MyGame
             {
                 IsTracking = false;
 
-                if (SearchStrikerInRoamingMode(Params.mine_detect_range))
+                if (SearchStrikerInRoamingMode(Const.enemy_detect_range))
                 {
                     mode = Mode.tracking;
                     missingTime = 0.0f;
@@ -49,7 +49,7 @@ namespace MyGame
 
                 else
                 {
-                    UpdateMethodInRoaming(dt);
+                    UpdateMethodInRoaming(dt, SvParams.Get(SvParam.mine_roaming_speed));
                 }
             }
 
@@ -60,7 +60,7 @@ namespace MyGame
                 if (SearchStrikerInTrackingMode())
                 {
                     missingTime = 0.0f;
-                    TrackingUpdateMethod(Player.Myself, dt, true);
+                    TrackingUpdateMethod(Player.Myself, dt, true, SvParams.Get(SvParam.mine_tracking_speed));
 
                     Face2Target();
                 }
@@ -68,7 +68,7 @@ namespace MyGame
                 else
                 {
                     missingTime += dt;
-                    var trackingDuration = Params.mine_tracking_duration;
+                    var trackingDuration = SvParams.Get(SvParam.mine_tracking_duration);
 
                     if (movingSystem.PathLength() == 0 && missingTime > trackingDuration)
                     {
@@ -77,12 +77,12 @@ namespace MyGame
 
                     else if (movingSystem.PathLength() == 0)
                     {
-                        TrackingUpdateMethod(Player.Myself, dt, true);
+                        TrackingUpdateMethod(Player.Myself, dt, true, SvParams.Get(SvParam.mine_tracking_speed));
                     }
 
                     else
                     {
-                        TrackingUpdateMethod(Player.Myself, dt, false);
+                        TrackingUpdateMethod(Player.Myself, dt, false, SvParams.Get(SvParam.mine_tracking_speed));
                     }
                 }
             }

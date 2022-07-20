@@ -55,7 +55,7 @@ namespace MyGame
 
         static void BeginCooldown(object obj, Vector3 direction)
         {
-            shootingIntervalRemain = Params.ak_firing_interval;
+            shootingIntervalRemain = Const.ak_firing_interval;
         }
 
         public override void Update(float dt)

@@ -56,8 +56,8 @@ namespace MyGame
 
             spawnRate = new Dictionary<EnemyType, float>()
             {
-                { EnemyType.mine, Params.mine_spawn_rate },
-                { EnemyType.turret, 1.0f - Params.mine_spawn_rate },
+                { EnemyType.mine, SvParams.Get(SvParam.mine_spawn_rate) },
+                { EnemyType.turret, 1.0f - SvParams.Get(SvParam.mine_spawn_rate) },
             };
 
             var objectList = SvUtil.RandomSpawn(randomCandidatePointList, enemyPrefabList, spawnRate, EnemyType.mine, maxEnemy);
@@ -67,10 +67,10 @@ namespace MyGame
                 spawnCounter++;
 
                 var bomb = objectList[n].GetComponent<MineBrain>();
-                if (bomb != null) { bomb.ID = 10 * spawnCounter; continue; }
+                if (bomb != null) { bomb.ID = spawnCounter; continue; }
 
                 var turret = objectList[n].GetComponent<TurretBrain>();
-                if (turret != null) { turret.ID = 10 * spawnCounter; continue; }
+                if (turret != null) { turret.ID = spawnCounter; continue; }
             }
 
             //
@@ -152,19 +152,19 @@ namespace MyGame
 
             if (turret != null)
             {
-                turret.ID = 10 * spawnCounter;
+                turret.ID = spawnCounter;
             }
 
             else
             {
-                mine.ID = 10 * spawnCounter;
+                mine.ID = spawnCounter;
             }
 
             // function
             static bool EnemiesCheck()
             {
                 var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                var min_enemies = Mathf.RoundToInt(SV_Round.NumberOfEnemies * Params.sv_min_enemies_rate);
+                var min_enemies = Mathf.RoundToInt(SV_Round.NumberOfEnemies * SvParams.Get(SvParam.min_enemies_rate));
 
                 if (enemies.Count() < min_enemies)
                 {
@@ -178,7 +178,7 @@ namespace MyGame
             static bool ProbabilityCheck()
             {
                 var value = UnityEngine.Random.Range(0.0f, 1.0f);
-                var probability = Params.sv_enemy_respawn_probability;
+                var probability = SvParams.Get(SvParam.enemy_respawn_probability);
 
                 if (probability == 0.0f)
                 {

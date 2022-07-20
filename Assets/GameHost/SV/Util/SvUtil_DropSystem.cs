@@ -147,15 +147,11 @@ namespace MyGame
                 var maxPoints = pointList.Count;
                 if (maxPoints < maxDrops) { maxDrops = maxPoints; }
 
-                Debug.Log("Max Drops : " + maxDrops.ToString());
-
                 var dropNumberList = new Dictionary<T, int>();
                 var counter = 0;
 
                 foreach(var pair in normalizedDropRateList)
                 {
-                    Debug.Log("Rate : " + pair.Value.ToString());
-
                     var number = Mathf.FloorToInt(pair.Value * maxDrops);
                     counter += number;
 
@@ -189,8 +185,6 @@ namespace MyGame
                 {
                     var prefab = prefabList[dropNum.Key];
                     var num = dropNum.Value;
-
-                    Debug.Log(dropNum.Key.ToString() + ":" + num.ToString());
 
                     for(var n = 0; n < num; n++)
                     {

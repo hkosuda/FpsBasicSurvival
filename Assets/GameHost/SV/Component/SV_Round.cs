@@ -15,9 +15,11 @@ namespace MyGame
         //static public int MazeCol { get; private set; } = 3;
 
         static public int NumberOfEnemies { get; private set; } = 20;
+        static public int CurrentKey { get; set; }
 
         public override void Initialize()
         {
+            SvParams.Initialize();
             RoundNumber = -1;
         }
 
@@ -29,6 +31,7 @@ namespace MyGame
         public override void Begin()
         {
             RoundNumber++;
+            CurrentKey = 0;
         }
 
         public override void Stop()

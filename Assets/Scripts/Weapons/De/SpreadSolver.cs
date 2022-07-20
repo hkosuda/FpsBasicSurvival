@@ -16,7 +16,7 @@ namespace MyGame
             var radRotY = Player.Camera.transform.eulerAngles.y * Mathf.Deg2Rad;
 
             var v = new Vector2(Player.Rb.velocity.x, Player.Rb.velocity.z).magnitude;
-            var vRate = Calcf.SafetyDiv(v, PmUtil._maxSpeedOnTheGround, 0.0f);
+            var vRate = Calcf.SafetyDiv(v, Params.pm_max_speed_on_ground, 0.0f);
 
             var isJumping = (PM_Landing.LandingIndicator <= 0) || PM_Jumping.JumpingBegin;
 

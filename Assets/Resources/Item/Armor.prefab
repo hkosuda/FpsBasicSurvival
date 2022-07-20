@@ -204,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3748435242101464076}
   - component: {fileID: 3882816282138851275}
+  - component: {fileID: 3467098621269501837}
   m_Layer: 8
   m_Name: Armor
   m_TagString: Untagged
@@ -240,6 +241,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &3467098621269501837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6755046379415829386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cda53934876664b8d553e26762c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8380279417369812216
 GameObject:
   m_ObjectHideFlags: 0

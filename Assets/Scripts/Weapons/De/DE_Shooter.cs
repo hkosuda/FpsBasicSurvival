@@ -20,10 +20,21 @@ namespace MyGame
 
         public override void Update(float dt)
         {
-            if (!Keyconfig.CheckInput(KeyAction.shot, true)) { return; }
-            if (!DE_Availability.Available) { return; }
+            if (Keyconfig.CheckInput(KeyAction.shot, true))
+            {
+                if (DE_Availability.AmmoInMag == 0)
+                {
+                    WeaponController.Empty?.Invoke(null, false);
+                }
 
-            DeShot();
+                else
+                {
+                    if (DE_Availability.Available)
+                    {
+                        DeShot();
+                    }
+                }
+            }
         }
 
         static void DeShot()

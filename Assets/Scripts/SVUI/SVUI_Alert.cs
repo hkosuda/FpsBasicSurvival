@@ -8,6 +8,8 @@ namespace MyGame
 {
     public class SVUI_Alert : MonoBehaviour
     {
+        static readonly float alphaOffset = 0.05f;
+
         static GameObject myself;
         static GameObject _alert;
 
@@ -16,6 +18,8 @@ namespace MyGame
 
         static List<GameObject> roots;
         static List<RectTransform> rootRects;
+
+        static List<Image> imageList;
 
         private void Awake()
         {
@@ -27,6 +31,8 @@ namespace MyGame
 
             roots = new List<GameObject>();
             rootRects = new List<RectTransform>();
+
+            imageList = new List<Image>();
         }
 
         void Start()
@@ -43,13 +49,13 @@ namespace MyGame
         {
             if (indicator > 0)
             {
-                EnemyBrain.PlayerDetected += Initialize;
+                EnemyBrain.PlayerDetected += BeginAlert;
                 TimerSystem.Updated += UpdateMethod;
             }
 
             else
             {
-                EnemyBrain.PlayerDetected -= Initialize;
+                EnemyBrain.PlayerDetected -= BeginAlert;
                 TimerSystem.Updated -= UpdateMethod;
             }
         }
@@ -68,17 +74,18 @@ namespace MyGame
                     enemies.RemoveAt(n);
                     roots.RemoveAt(n);
                     rootRects.RemoveAt(n);
+                    imageList.RemoveAt(n);
                 }
 
                 else
                 {
-                    UpdateRotation(enemies[n], rootRects[n]);
+                    UpdateRotation(enemies[n], rootRects[n], imageList[n]);
                 }
             }
         }
 
         // function
-        static void UpdateRotation(GameObject target, RectTransform rootRect)
+        static void UpdateRotation(GameObject target, RectTransform rootRect, Image image)
         {
             if (target == null)
             {
@@ -94,9 +101,15 @@ namespace MyGame
             var dt = theta2 - theta1;
 
             rootRect.rotation = Quaternion.Euler(0, 0, -dt);
+
+            var distance = new Vector2(dx, dz).magnitude;
+            var alpha = GetAlpha(distance);
+            var c = image.color;
+
+            image.color = new Color(c.r, c.g, c.b, alpha);
         }
 
-        static void Initialize(object obj, EnemyBrain brain)
+        static void BeginAlert(object obj, EnemyBrain brain)
         {
             var alert = GameObject.Instantiate(_alert);
             alert.transform.SetParent(myself.transform);
@@ -112,23 +125,34 @@ namespace MyGame
             roots.Add(alert);
             rootRects.Add(rect);
 
-            UpdateRotation(enemy, rect);
-
             // set color
             var img = alert.transform.GetChild(0).gameObject.GetComponent<Image>();
+            var alpha = GetAlpha((Player.Myself.transform.position - brain.gameObject.transform.position).magnitude);
+
             Color color;
 
             if (brain.EnemyType == EnemyType.mine)
             {
-                color = new Color(1.0f, 1.0f, 0.0f);
+                color = new Color(1.0f, 1.0f, 0.0f, alpha);
             }
 
             else
             {
-                color = new Color(1.0f, 0.0f, 0.0f);
+                color = new Color(1.0f, 0.0f, 0.0f, alpha);
             }
 
             img.color = color;
+            imageList.Add(img);
+
+            UpdateRotation(enemy, rect, img);
+        }
+
+        static float GetAlpha(float distance)
+        {
+            var value = Calcf.Clip(0.0f, 1.0f, 1.0f - distance / Const.enemy_detect_range);
+            var alpha = (1.0f - alphaOffset) * value;
+
+            return alpha + alphaOffset;
         }
     }
 }

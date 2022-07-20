@@ -45,9 +45,9 @@ namespace MyGame
         void UpdateMethod(object obj, float dt)
         {
             pastTime += Time.deltaTime;
-            if (pastTime > Params.turret_shell_exist_time) { Destroy(gameObject); }
+            if (pastTime > SvParams.Get(SvParam.turret_shell_exist_time)) { Destroy(gameObject); }
 
-            var speed = Params.turret_shell_speed;
+            var speed = SvParams.Get(SvParam.turret_shell_speed);
             gameObject.transform.position = origin + direction.normalized * pastTime * speed;
 
             RaycastCheck(gameObject.transform.position, direction, speed * dt);
@@ -92,8 +92,8 @@ namespace MyGame
 
         void DamageProcessing()
         {
-            var defaultDamage = Params.turret_damage;
-            var rate = Params.turret_damage_increase;
+            var defaultDamage = SvParams.Get(SvParam.turret_damage);
+            var rate = SvParams.Get(SvParam.turret_damage_increase);
 
             var damage = defaultDamage * (1.0f + rate * SV_Round.RoundNumber);
 
@@ -103,21 +103,23 @@ namespace MyGame
 
         void RaycastCheck(Vector3 origin, Vector3 direction, float distance)
         {
-            Physics.SphereCast(origin: origin, radius: 0.05f, direction: direction, out RaycastHit hit, maxDistance: distance);
-
-            if (hit.collider == null)
+            if (Physics.SphereCast(origin: origin, radius: 0.05f, direction: direction, out RaycastHit hit, maxDistance: distance))
             {
-                return;
-            }
+                if (hit.collider.gameObject.layer == Const.playerLayer)
+                {
+                    DamageProcessing();
+                    Destroy(gameObject);
+                }
 
-            if (hit.collider.tag == "Player")
-            {
-                DamageProcessing();
-            }
+                else if (hit.collider.gameObject.layer == Const.itemLayer)
+                {
+                    return;
+                }
 
-            else
-            {
-                Destroy(gameObject);
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 

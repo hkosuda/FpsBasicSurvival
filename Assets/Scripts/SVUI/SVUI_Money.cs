@@ -67,14 +67,11 @@ namespace MyGame
                 addMoneyText.gameObject.SetActive(false);
                 addMoney = 0;
 
-                if (SV_Status.StatusList != null)
+                if (currentMoney != SV_Status.CurrentMoney)
                 {
-                    if (currentMoney != SV_Status.StatusList[Status.money])
-                    {
-                        currentMoney = SV_Status.StatusList[Status.money];
+                    currentMoney = SV_Status.CurrentMoney;
 
-                        UpdateText();
-                    }
+                    UpdateText();
                 }
             }
         }

@@ -23,19 +23,21 @@ namespace MyGame
         static public EventHandler<bool> PlayerDead { get; set; }
         static public EventHandler<int> PlayerGotMoney { get; set; }
 
-        static public Dictionary<Status, int> StatusList { get; private set; }
+        static public int CurrentHP { get; private set; }
+        static public int CurrentArmor { get; private set; }
+        static public int CurrentMoney { get; private set; }
+        
+        static public int CurrentMaxHP { get; private set; }
+        static public int CurrentMaxArmor { get; private set; }
 
-        static public int CurrentMaxHP { get; set; }
-        static public int CurrentMaxArmor { get; set; }
-        static public int CurrentDamageRate { get; set; }
-        static public int CurrentMoneyRate { get; set; }
+        static public int CurrentDamageRate { get; private set; }
+        static public int CurrentMoneyRate { get; private set; }
 
         public override void Initialize()
         {
-            StatusList = new Dictionary<Status, int>()
-            {
-                { Status.hp, defaultMaxHP }, { Status.armor, defaultMaxArmor }, { Status.money, Params.initial_money },
-            };
+            CurrentHP = defaultMaxHP;
+            CurrentArmor = defaultMaxArmor;
+            CurrentMoney = SvParams.GetInt(SvParam.initial_money);
 
             // set values
             CurrentMaxHP = defaultMaxHP;
@@ -55,8 +57,8 @@ namespace MyGame
         {
             if (SV_Round.RoundNumber == 0) { return; }
 
-            var moneyNext = StatusList[Status.money] * (1.0f + Params.money_increase_after_round);
-            StatusList[Status.money] = Mathf.RoundToInt(moneyNext);
+            var moneyNext = CurrentMoney * (1.0f + SvParams.Get(SvParam.money_increase_after_round));
+            CurrentMoney = Mathf.RoundToInt(moneyNext);
         }
 
         public override void Stop()
@@ -82,85 +84,136 @@ namespace MyGame
         static void TakeDamage(object obj, float gotDamage)
         {
             var hpDamage = Mathf.RoundToInt(gotDamage * DamageRate());
-            var armorDamage = Mathf.RoundToInt(gotDamage * Params.sv_armor_reduction_rate);
+            var armorDamage = Mathf.RoundToInt(gotDamage * Const.armor_reduction_rate);
 
             if (hpDamage < 1) { hpDamage = 1; }
             if (armorDamage < 1) { armorDamage = 1; }
 
             // armor damage
-            StatusList[Status.armor] -= armorDamage;
-            if (Mathf.RoundToInt(StatusList[Status.armor]) < 0) { StatusList[Status.armor] = 0; }
+            CurrentArmor -= armorDamage;
+            if (CurrentArmor < 0) { CurrentArmor = 0; }
 
             // hp damage
-            StatusList[Status.hp] -= hpDamage;
+            CurrentHP -= hpDamage;
             PlayerDamageTaken?.Invoke(null, hpDamage);
 
             // is dead or not
-            if (Mathf.RoundToInt(StatusList[Status.hp]) <= 0)
+            if (CurrentHP <= 0)
             {
-                StatusList[Status.hp] = 0;
+                CurrentHP = 0;
                 PlayerDead?.Invoke(null, false);
             }
 
             // - inner function
             static float DamageRate()
             {
-                var constant = Params.damage_reduction_const;
-                var armor = (float)StatusList[Status.armor];
+                var constant = Const.damage_reduction_const;
+                var armor = (float)CurrentArmor;
 
                 return Calcf.SafetyDiv(constant, armor + constant, 1.0f);
             }
         }
 
-        static void Heal(object obj, float heal)
+        static public void Heal(int addHP)
         {
-            var currentHP = StatusList[Status.hp];
-            var nextHP = currentHP + Mathf.RoundToInt(Mathf.Abs(heal));
+            var nextHP = CurrentHP + addHP;
 
             if (nextHP > CurrentMaxHP)
             {
                 nextHP = CurrentMaxHP;
             }
 
-            StatusList[Status.hp] = nextHP;
+            CurrentHP = nextHP;
+        }
+
+        static public void RepairArmor(int amount)
+        {
+            var nextArmor = CurrentArmor + amount;
+
+            if (nextArmor > CurrentMaxArmor)
+            {
+                nextArmor = CurrentMaxArmor;
+            }
+
+            CurrentArmor = nextArmor;
         }
 
         static void ReceiveReward(object obj, EnemyMain enemyMain)
         {
             if (enemyMain.HP > 0) { return; }
 
-            var rate = Calcf.SafetyDiv(CurrentMoneyRate, defaultMomeyRate, 0.0f);
             var reward = 0.0f;
 
             if (enemyMain.EnemyType == EnemyType.mine)
             {
-                reward = Params.mine_destroy_reward;
+                reward = SvParams.Get(SvParam.mine_destroy_reward);
             }
 
             if (enemyMain.EnemyType == EnemyType.turret)
             {
-                reward = Params.turret_destroy_reward;
+                reward = SvParams.Get(SvParam.turret_destroy_reward);
             }
 
-            AddMoney(Mathf.RoundToInt(reward * rate));
+            AddMoney(Mathf.RoundToInt(reward));
         }
 
         static public void AddMoney(int add)
         {
-            StatusList[Status.money] += add;
-            PlayerGotMoney?.Invoke(null, add);
+            var rate = Calcf.SafetyDiv(CurrentMoneyRate, defaultMomeyRate, 1.0f);
+            var addMoney = Mathf.RoundToInt((float)add * rate);
+
+            CurrentMoney += addMoney;
+            PlayerGotMoney?.Invoke(null, addMoney);
         }
 
         static public float CurrentAkDamage()
         {
-            var akDamage = Params.ak_damage;
+            var akDamage = SvParams.Get(SvParam.ak_damage);
             return akDamage * (float)CurrentDamageRate / (float)defaultDamageRate;
         }
 
         static public float CurrentDeDamage()
         {
-            var deDamage = Params.de_damage;
+            var deDamage = SvParams.Get(SvParam.de_damage);
             return deDamage * (float)CurrentDamageRate / (float)defaultDamageRate;
+        }
+
+        //
+        // set method
+
+        static public void SetArmor(int armor)
+        {
+            CurrentArmor = armor;
+        }
+
+        static public void SetHP(int hp)
+        {
+            CurrentHP = hp;
+        }
+
+        static public void SetMoney(int money)
+        {
+            CurrentMoney = money;
+        }
+
+        static public void SetMaxHP(int maxHP)
+        {
+            CurrentMaxHP = maxHP;
+        }
+
+        static public void SetMaxArmor(int maxArmor)
+        {
+            CurrentMaxArmor = maxArmor;
+        }
+
+        static public void SetDamageRate(int damageRate)
+        {
+            CurrentDamageRate = damageRate;
+        }
+
+        static public void SetMoneyRate(int moneyRate)
+        {
+            CurrentMoneyRate = moneyRate;
         }
     }
 }

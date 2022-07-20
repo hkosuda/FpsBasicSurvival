@@ -37,7 +37,7 @@ namespace MyGame
         protected override void Apply()
         {
             CalcNextValue();
-            SV_Status.CurrentMoneyRate = nextValue;
+            SV_Status.SetMoneyRate(nextValue);
         }
     }
 }

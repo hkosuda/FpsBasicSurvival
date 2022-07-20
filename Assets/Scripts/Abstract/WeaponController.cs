@@ -9,9 +9,7 @@ namespace MyGame
     {
         static public EventHandler<RaycastHit> ShootingHit { get; set; }
         static public EventHandler<Vector3> Shot { get; set; }
-
         static public EventHandler<bool> Empty { get; set; }
-        static public EventHandler<bool> ReloadingBegin { get; set; }
 
         public Weapon Weapon { get; protected set; }
 

@@ -21,18 +21,15 @@ namespace MyGame
 
         void Update()
         {
-            if (SV_Status.StatusList != null)
+            var _currentHP = SV_Status.CurrentHP;
+            var _currentMaxHP = SV_Status.CurrentMaxHP;
+
+            if (currentHP != _currentHP || currentMaxHP != _currentMaxHP)
             {
-                var _currentHP = SV_Status.StatusList[Status.hp];
-                var _currentMaxHP = SV_Status.CurrentMaxHP;
+                currentHP = _currentHP;
+                currentMaxHP = _currentMaxHP;
 
-                if (_currentHP != currentMaxHP || _currentMaxHP != currentMaxHP)
-                {
-                    currentHP = _currentHP;
-                    currentMaxHP = _currentMaxHP;
-
-                    UpdateUI();
-                }
+                UpdateUI();
             }
         }
 

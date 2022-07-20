@@ -18,12 +18,23 @@ namespace MyGame
 
         public override void Update(float dt)
         {
-            if (!Keyconfig.CheckInput(KeyAction.shot, false)) { return; }
-
-            if (!AK_Availability.Available) { return; }
             if (AK_Reload.IsReloading) { return; }
 
-            DeShot();
+            if (Keyconfig.CheckInput(KeyAction.shot, false))
+            {
+                if (AK_Availability.AmmoInMag == 0 && Keyconfig.CheckInput(KeyAction.shot, true))
+                {
+                    WeaponController.Empty?.Invoke(null, false);
+                }
+
+                else
+                {
+                    if (AK_Availability.Available)
+                    {
+                        DeShot();
+                    }
+                }
+            }
         }
 
         static void DeShot()

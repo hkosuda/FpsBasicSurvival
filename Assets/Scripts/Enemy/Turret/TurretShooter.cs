@@ -61,7 +61,7 @@ namespace MyGame
 
             var origin = new Vector3(gameObject.transform.position.x, CannonHeight, gameObject.transform.position.z);
             var direction = Shooter.GetDirectionWithSpread(origin, Player.Myself.transform.position);
-            var distance = Params.turret_shell_speed * Params.turret_shell_exist_time;
+            var distance = SvParams.Get(SvParam.turret_shell_speed) * SvParams.Get(SvParam.turret_shell_exist_time);
 
             Physics.Raycast(origin, direction, out RaycastHit hit, distance);
 
@@ -86,7 +86,7 @@ namespace MyGame
 
         public void ResetCooldownTime()
         {
-            cooldownRemain = Params.turret_shooting_interval;
+            cooldownRemain = SvParams.Get(SvParam.turret_shooting_interval);
         }
     }
 
@@ -139,8 +139,8 @@ namespace MyGame
                 float r = pqr_vector[2];
 
                 // <calc spread>
-                float h_max = Params.turret_shell_h_spread;
-                float v_max = Params.turret_shell_v_spread;
+                float h_max = SvParams.Get(SvParam.turret_shell_h_spread);
+                float v_max = SvParams.Get(SvParam.turret_shell_v_spread);
 
                 float[] qr_spread = GetEllipseRandomSpread(h_max, v_max);
                 // </calc spread>

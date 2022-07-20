@@ -14,7 +14,8 @@ namespace MyGame
         static readonly int offsetSize = 3;
 
         static readonly int keyNumber = 6;
-        static readonly int compassNumber = 3;
+        //static readonly int compassNumber = 3;
+        static readonly int compassNumber = 10;
         static readonly int normalItemNumber = 30;
 
         static readonly Dictionary<Item, float> keyDropRateList = new Dictionary<Item, float>() { { Item.key, 1.0f } };

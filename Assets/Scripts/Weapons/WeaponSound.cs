@@ -10,19 +10,27 @@ namespace MyGame
         static AudioSource audioSource;
 
         static AudioClip ak_shooting;
-        static AudioClip ak_reloading_mag_off;
-        static AudioClip ak_reloading_mag_in;
-        static AudioClip ak_reloading_lever;
+        static AudioClip ak_mag_off;
+        static AudioClip ak_mag_in;
+        static AudioClip ak_lever;
 
         static AudioClip de_shooting;
         static AudioClip m9_takeout;
+
+        static AudioClip empty;
 
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
 
             ak_shooting = GetClip("ak_shooting");
+            ak_mag_off = GetClip("ak_mag_off");
+            ak_mag_in = GetClip("ak_mag_in");
+            ak_lever = GetClip("ak_lever");
+
             de_shooting = GetClip("de_shooting");
+
+            empty = GetClip("empty");
 
             // - inner function
             static AudioClip GetClip(string clipName)
@@ -46,11 +54,13 @@ namespace MyGame
             if (indicator > 0)
             {
                 WeaponController.Shot += PlayShootingSound;
+                WeaponController.Empty += PlayEmptySound;
             }
 
             else
             {
                 WeaponController.Shot -= PlayShootingSound;
+                WeaponController.Empty -= PlayEmptySound;
             }
         }
 
@@ -67,6 +77,33 @@ namespace MyGame
                 audioSource.volume = Params.volume_shooting;
                 audioSource.PlayOneShot(de_shooting);
             }
+        }
+
+        static void PlayEmptySound(object obj, bool mute)
+        {
+            audioSource.volume = Params.volume_shooting;
+            audioSource.PlayOneShot(empty);
+        }
+
+        //
+        // used in animation
+
+        void PlayMagOffSound()
+        {
+            audioSource.volume = Params.volume_shooting;
+            audioSource.PlayOneShot(ak_mag_off);
+        }
+
+        void PlayMagInSound()
+        {
+            audioSource.volume = Params.volume_shooting;
+            audioSource.PlayOneShot(ak_mag_in);
+        }
+
+        void PlayLeverSound()
+        {
+            audioSource.volume = Params.volume_shooting;
+            audioSource.PlayOneShot(ak_lever);
         }
     }
 }

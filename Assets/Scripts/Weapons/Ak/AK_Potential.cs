@@ -16,7 +16,7 @@ namespace MyGame
             SpreadParam = new SpreadParam(
                 maxPotential: 0.6f,
                 potentialIncrease: 0.06f,
-                shootingInterval: Params.ak_firing_interval,
+                shootingInterval: Const.ak_firing_interval,
                 resetTime: 0.2f,
                 lifting: 1.2f,
                 h_random: 0.35f,

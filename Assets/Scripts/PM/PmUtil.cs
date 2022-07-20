@@ -7,38 +7,28 @@ namespace MyGame
     public class PmUtil
     {
         // constants
-        static public readonly float _maxSpeedOnTheGround = 7.7f;
-        static public readonly float _maxSpeedInTheAir = 1.4f;
-        static public readonly float _accelOnTheGround = 65.0f;
-        static public readonly float _accelInTheAir = 5000.0f;
-        static public readonly float _draggingAccel = 45.0f;
-
-        static public readonly float _crouchingMaxSpeed = 3.5f;
-        static public readonly float _crouchingAccel = 60.0f;
-        static public readonly float _crouchingDraggingAccel = 55.0f;
-
         static public Vector2 AddVector { get; private set; }
         static public Vector2 NextVector { get; private set; }
 
         static public Vector2 CalcVector(Vector2 inputVector, Vector2 currentVector, float dt, bool onground, bool crouching)
         {
             // load settings 
-            var draggingAccel = _draggingAccel;
-            var maxSpeed = _maxSpeedOnTheGround;
-            var accel = _accelOnTheGround;
-
-            if (onground && crouching)
-            {
-                maxSpeed = _crouchingMaxSpeed;
-                accel = _crouchingAccel;
-                draggingAccel = _crouchingDraggingAccel;
-            }
+            var draggingAccel = Params.pm_dragging_accel;
+            var maxSpeed = Params.pm_max_speed_on_ground;
+            var accel = Params.pm_accel_on_ground;
 
             if (!onground)
             {
                 draggingAccel = 0.0f;
-                maxSpeed = _maxSpeedInTheAir;
-                accel = _accelInTheAir;
+                maxSpeed = Params.pm_max_speed_in_air;
+                accel = Params.pm_accel_in_air;
+            }
+
+            else if (crouching)
+            {
+                draggingAccel = Params.pm_dragging_accel_in_crouching;
+                maxSpeed = Params.pm_max_speed_in_crouching;
+                accel = Params.pm_accel_in_crouching;
             }
 
             var normalizedInputVector = inputVector.normalized;

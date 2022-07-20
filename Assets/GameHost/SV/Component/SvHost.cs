@@ -6,6 +6,8 @@ namespace MyGame
 {
     public class SvHost : GameHost
     {
+        static public Difficulty CurrentDifficulty { get; private set; } = Difficulty.eazy;
+
         public SvHost(HostName hostName) : base(hostName)
         {
             componentList = new List<HostComponent>()

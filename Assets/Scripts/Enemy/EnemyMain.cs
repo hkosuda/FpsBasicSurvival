@@ -28,7 +28,7 @@ namespace MyGame
 
         static readonly Dictionary<EnemyType, int> hpIncreaseList = new Dictionary<EnemyType, int>()
         {
-            {EnemyType.mine, 10 }, { EnemyType.turret, 15 }
+            {EnemyType.mine, 1 }, { EnemyType.turret, 1 }
         };
 
         static public EventHandler<EnemyMain> EnemyDamageTaken { get; set; }

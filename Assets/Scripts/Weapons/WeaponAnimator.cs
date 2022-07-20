@@ -6,13 +6,18 @@ namespace MyGame
 {
     public class WeaponAnimator : MonoBehaviour
     {
+        static float switchIntervalThresh = 0.05f;
+        static float crowbarProbability = 0.5f;
+
         public enum AnimationWeapon
         {
             ak, de, m9, bar,
         }
 
-        static Animator animator;
         static public AnimationWeapon CurrentWeapon { get; private set; }
+
+        static Animator animator;
+        static float switchInterval;
 
         void Awake()
         {
@@ -29,6 +34,8 @@ namespace MyGame
         {
             if (indicator > 0)
             {
+                TimerSystem.Updated += UpdateMethod;
+
                 WeaponSystem.WeaponChanged += BeginTakingoutAnimation;
                 WeaponController.Shot += BeginShotAnimation;
 
@@ -37,11 +44,19 @@ namespace MyGame
 
             else
             {
+                TimerSystem.Updated -= UpdateMethod;
+
                 WeaponSystem.WeaponChanged -= BeginTakingoutAnimation;
                 WeaponController.Shot -= BeginShotAnimation;
 
                 AK_Reload.ReloadingBegin -= BeginReloadingAnimation;
             }
+        }
+        
+        static void UpdateMethod(object obj, float dt)
+        {
+            switchInterval += dt;
+            if (switchInterval > switchIntervalThresh) { switchInterval = switchIntervalThresh + 1.0f; }
         }
 
         static void BeginTakingoutAnimation(object obj, Weapon weapon)
@@ -50,7 +65,6 @@ namespace MyGame
             {
                 animator.SetTrigger("SwitchAk");
                 CurrentWeapon = AnimationWeapon.ak;
-
             }
 
             else if (weapon == Weapon.de)
@@ -61,10 +75,31 @@ namespace MyGame
 
             else if (weapon == Weapon.m9)
             {
-                //animator.SetTrigger("SwitchM9");
-                animator.SetTrigger("SwitchCr");
-                CurrentWeapon = AnimationWeapon.bar;
+                if (switchInterval < switchIntervalThresh)
+                {
+                    animator.SetTrigger("SwitchM9");
+                    CurrentWeapon = AnimationWeapon.m9;
+                }
+
+                else
+                {
+                    var rnd = UnityEngine.Random.Range(0.0f, 1.0f);
+
+                    if (rnd > crowbarProbability)
+                    {
+                        animator.SetTrigger("SwitchM9");
+                        CurrentWeapon = AnimationWeapon.m9;
+                    }
+
+                    else
+                    {
+                        animator.SetTrigger("SwitchCr");
+                        CurrentWeapon = AnimationWeapon.bar;
+                    }
+                }
             }
+
+            switchInterval = 0.0f;
         }
 
         static void BeginShotAnimation(object obj, Vector3 direction)

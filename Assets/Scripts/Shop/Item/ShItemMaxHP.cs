@@ -38,7 +38,7 @@ namespace MyGame
         protected override void Apply()
         {
             CalcNextValue();
-            SV_Status.CurrentMaxHP = nextValue;
+            SV_Status.SetMaxHP(nextValue);
         }
     }
 }

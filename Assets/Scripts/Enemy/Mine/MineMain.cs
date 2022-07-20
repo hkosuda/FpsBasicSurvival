@@ -18,8 +18,8 @@ namespace MyGame
         {
             if (collider.gameObject.layer == Const.playerLayer)
             {
-                var defaultDamage = Params.mine_damage;
-                var rate = Params.mine_damage_increase;
+                var defaultDamage = SvParams.Get(SvParam.mine_damage);
+                var rate = SvParams.Get(SvParam.mine_damage_increase);
                 var damage = defaultDamage * (1.0f + rate * SV_Round.RoundNumber);
 
                 EnemyGivenDamage?.Invoke(null, damage);

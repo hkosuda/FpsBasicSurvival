@@ -42,7 +42,7 @@ namespace MyGame
 
         static void UpdateRoundText()
         {
-            roundText.text = "Round " + SV_Round.RoundNumber.ToString() + " / " + Params.sv_clear_round.ToString();
+            roundText.text = "Round " + SV_Round.RoundNumber.ToString() + " / " + SvParams.GetInt(SvParam.clear_round).ToString();
         }
 
         static void UpdateTimeText()

@@ -38,7 +38,7 @@ namespace MyGame
         protected override void Apply()
         {
             CalcNextValue();
-            SV_Status.CurrentMaxArmor = nextValue;
+            SV_Status.SetMaxArmor(nextValue);
         }
     }
 }

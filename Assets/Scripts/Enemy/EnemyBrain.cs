@@ -7,7 +7,7 @@ namespace MyGame
 {
     public abstract class EnemyBrain : MonoBehaviour
     {
-        static protected readonly int updateCycle = 5;
+        static protected readonly int updateCycle = 6;
         static protected readonly float yOffset = 1.0f;
 
         static public EventHandler<EnemyBrain> PlayerDetected { get; set; }
@@ -95,19 +95,27 @@ namespace MyGame
 
         protected bool SearchStrikerInTrackingMode()
         {
-            var originPosition = new Vector3(gameObject.transform.position.x, yOffset, gameObject.transform.position.z);
-            var targetPosition = new Vector3(Player.Myself.transform.position.x, yOffset, Player.Myself.transform.position.z);
+            if (updateCounter == 0)
+            {
+                var originPosition = new Vector3(gameObject.transform.position.x, yOffset, gameObject.transform.position.z);
+                var targetPosition = new Vector3(Player.Myself.transform.position.x, yOffset, Player.Myself.transform.position.z);
 
-            var dX = targetPosition - originPosition;
+                var dX = targetPosition - originPosition;
 
-            // raycast test
-            Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Const.bounceLayer);
-            if (hit.collider != null) { return false; }
+                // raycast test
+                Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Const.bounceLayer);
+                if (hit.collider != null) { return false; }
 
-            return true;
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
         }
 
-        protected void UpdateMethodInRoaming(float dt)
+        protected void UpdateMethodInRoaming(float dt, float speed)
         {
             if (movingSystem.PathLength() == 0)
             {
@@ -120,7 +128,6 @@ namespace MyGame
                 movingSystem.SetPath(AStar.GetPath(field, startPosition, goalPosition));
             }
 
-            var speed = Params.mine_roaming_speed;
             movingSystem.MoveOn(dt, speed);
 
             // - inner function
@@ -151,7 +158,7 @@ namespace MyGame
             }
         }
 
-        protected void TrackingUpdateMethod(GameObject target, float dt, bool updatePath)
+        protected void TrackingUpdateMethod(GameObject target, float dt, bool updatePath, float speed)
         {
             if (updateCounter == 0)
             {
@@ -166,14 +173,13 @@ namespace MyGame
                 }
             }
 
-            var speed = Params.turret_tracking_speed;
             movingSystem.MoveOn(dt, speed);
         }
 
         protected bool InTheActiveRange()
         {
             var distance = (Player.Myself.transform.position - gameObject.transform.position).magnitude;
-            return distance < Params.enemy_active_range;
+            return distance < Const.enemy_active_range;
         }
     }
 }

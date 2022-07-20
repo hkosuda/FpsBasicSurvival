@@ -288,6 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3658844357147949319}
   - component: {fileID: 1811562103921282265}
+  - component: {fileID: 8752307266820354033}
   m_Layer: 8
   m_Name: Compass
   m_TagString: Untagged
@@ -324,6 +325,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &8752307266820354033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658844357147949318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339d349a4d3f5384dbba267499f3bb88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6680353925133750341
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace MyGame
     {
         static public readonly float wall_width = 8.0f;
         static public readonly float wall_depth = 2.0f;
-        static public readonly float wall_height = 10.0f;
+        static public readonly float wall_height = 5.0f;
 
         static public GameObject MazeRoot { get; private set; }
 
@@ -118,7 +118,7 @@ namespace MyGame
                 roof.transform.localScale = size;
                 floor.transform.localScale = size;
 
-                roof.SetActive(false);
+                //roof.SetActive(false);
             }
 
             // - inner function

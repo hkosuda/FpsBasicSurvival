@@ -21,18 +21,15 @@ namespace MyGame
 
         void Update()
         {
-            if (SV_Status.StatusList != null)
+            var _currentArmor = SV_Status.CurrentArmor;
+            var _currentMaxArmor = SV_Status.CurrentMaxArmor;
+
+            if (currentArmor !=_currentArmor || currentMaxArmor != _currentMaxArmor)
             {
-                var _currentArmor = SV_Status.StatusList[Status.armor];
-                var _currentMaxArmor = SV_Status.CurrentMaxArmor;
+                currentArmor = _currentArmor;
+                currentMaxArmor = _currentMaxArmor;
 
-                if (_currentArmor != currentMaxArmor || _currentMaxArmor != currentMaxArmor)
-                {
-                    currentArmor = _currentArmor;
-                    currentMaxArmor = _currentMaxArmor;
-
-                    UpdateUI();
-                }
+                UpdateUI();
             }
         }
 
