@@ -10,6 +10,8 @@ namespace MyGame
         survival,
         ez_tower,
         ez_tower_ta,
+        ez_stream,
+        ez_stream_ta,
     }
 
     public abstract class GameHost
@@ -87,6 +89,8 @@ namespace MyGame
             {
                 manager.Stop();
             }
+
+            host.Stop();
         }
 
         // utility

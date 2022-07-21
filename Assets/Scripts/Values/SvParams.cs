@@ -300,7 +300,7 @@ namespace MyGame
             //
             // system
             
-            { SvParam.initial_money, 3500 },
+            { SvParam.initial_money, 35000 },
             { SvParam.clear_round, 7 },
 
             //
@@ -312,8 +312,8 @@ namespace MyGame
             //
             // key
             
-            { SvParam.drop_keys, 15 },
-            { SvParam.require_keys, 15 },
+            { SvParam.drop_keys, 6 },
+            { SvParam.require_keys, 3 },
         };
     }
 }

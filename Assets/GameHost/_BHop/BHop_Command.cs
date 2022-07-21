@@ -21,6 +21,9 @@ namespace MyGame
             {
                 CommandReceiver.AddCommand(command);
             }
+
+            CommandReceiver.RequestCommand("bind z back", null);
+            CommandReceiver.RequestCommand("invoke add on_course_out back", null);
         }
 
         public override void Shutdown()

@@ -35,7 +35,9 @@ namespace MyGame
         protected override void Apply()
         {
             CalcNextValue();
+
             AK_Availability.MaxAmmoInMag = nextValue;
+            AK_Availability.AmmoInMag = AK_Availability.MaxAmmoInMag;
         }
     }
 }

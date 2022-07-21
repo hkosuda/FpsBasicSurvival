@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,16 @@ namespace MyGame
     [RequireComponent(typeof(BoxCollider))]
     public class Goal : MonoBehaviour
     {
+        static public EventHandler<bool> InsufficientKeys { get; set; }
+
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.layer == Const.playerLayer)
-            {
-                TimerSystem.Pause();
-                SV_ShopItem.BeginShopping();
-            }
+            if (other.gameObject.layer != Const.playerLayer) { return; }
+            if (SV_Round.RoundNumber > 0 && SV_Round.CurrentKey < SvParams.GetInt(SvParam.require_keys)) { return; }
+
+            TimerSystem.Pause();
+            SV_ShopItem.BeginShopping();
         }
     }
-
 }
+

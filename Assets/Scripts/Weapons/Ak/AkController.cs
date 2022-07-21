@@ -17,7 +17,6 @@ namespace MyGame
                 new AK_Recoil(),
             };
         }
-
     }
 }
 

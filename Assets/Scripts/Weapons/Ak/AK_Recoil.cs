@@ -42,7 +42,7 @@ namespace MyGame
 
             var addRot = LinerDampingSolver.GetPosition();
 
-            PM_Camera.addRotX = addRot[0];
+            PM_Camera.addRotX = -addRot[0];
             PM_Camera.addRotY = addRot[1];
         }
     }

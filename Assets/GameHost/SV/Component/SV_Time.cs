@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ namespace MyGame
 {
     public class SV_Time : HostComponent
     {
+        static public EventHandler<bool> TimeOut { get; set; }
+
         static public float ActiveTime { get; private set; }
         static public float TimeRemain { get; private set; }
 

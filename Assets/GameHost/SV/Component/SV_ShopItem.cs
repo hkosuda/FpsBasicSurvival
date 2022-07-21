@@ -26,8 +26,6 @@ namespace MyGame
         static Dictionary<ShopItem, ShopItemButton> itemList;
 
         // utility
-        static public int TotalCost { get; private set; }
-
         static GameObject _shop;
         static GameObject shop;
 
@@ -55,6 +53,9 @@ namespace MyGame
 
         public override void Begin()
         {
+            LevelList[ShopItem.hp] = SV_Round.RoundNumber;
+            LevelList[ShopItem.armor] = SV_Round.RoundNumber;
+
             CartList = new Dictionary<ShopItem, int>();
 
             foreach (ShopItem item in Enum.GetValues(typeof(ShopItem)))
@@ -70,7 +71,14 @@ namespace MyGame
 
         public override void Stop()
         {
-            // nothing to do.
+            foreach (var item in CartList)
+            {
+                if (item.Key == ShopItem.hp || item.Key == ShopItem.armor) { continue; }
+
+                LevelList[item.Key] += item.Value;
+            }
+
+            SV_Status.SetMoney(MoneyRemain);
         }
 
         static public void BeginShopping()

@@ -52,7 +52,7 @@ namespace MyGame
             var randPoints = SvUtil.GetRandomBlankPointList(new List<int[]>() { SV_GoalStart.StartPoint, SV_GoalStart.GoalPoint });
 
             var randomCandidatePointList = GetCandidateListFromRandomBlankList(randPoints);
-            int maxEnemy = SV_Round.NumberOfEnemies;
+            int maxEnemy = SvParams.GetInt(SvParam.n_enemies);
 
             spawnRate = new Dictionary<EnemyType, float>()
             {
@@ -164,7 +164,7 @@ namespace MyGame
             static bool EnemiesCheck()
             {
                 var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                var min_enemies = Mathf.RoundToInt(SV_Round.NumberOfEnemies * SvParams.Get(SvParam.min_enemies_rate));
+                var min_enemies = Mathf.RoundToInt(SvParams.Get(SvParam.n_enemies) * SvParams.Get(SvParam.min_enemies_rate));
 
                 if (enemies.Count() < min_enemies)
                 {

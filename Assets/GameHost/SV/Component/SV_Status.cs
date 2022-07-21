@@ -14,8 +14,10 @@ namespace MyGame
 
     public class SV_Status : HostComponent
     {
-        static public readonly int defaultMaxHP = 1000;
-        static public readonly int defaultMaxArmor = 1000;
+        //static public readonly int defaultMaxHP = 1000;
+        //static public readonly int defaultMaxArmor = 1000;
+        static public readonly int defaultMaxHP = 10;
+        static public readonly int defaultMaxArmor = 10;
         static public readonly int defaultDamageRate = 100;
         static public readonly int defaultMomeyRate = 100;
 
@@ -57,8 +59,13 @@ namespace MyGame
         {
             if (SV_Round.RoundNumber == 0) { return; }
 
-            var moneyNext = CurrentMoney * (1.0f + SvParams.Get(SvParam.money_increase_after_round));
+            var rate = 1.0f + SvParams.Get(SvParam.money_increase_after_round);
+            Debug.Log(rate);
+
+            var moneyNext = CurrentMoney * rate;
             CurrentMoney = Mathf.RoundToInt(moneyNext);
+
+            Debug.Log(moneyNext);
         }
 
         public override void Stop()

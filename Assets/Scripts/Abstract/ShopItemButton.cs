@@ -13,7 +13,7 @@ namespace MyGame
             { ShopItem.hp, "体力" },
             { ShopItem.armor, "アーマー" },
             { ShopItem.max_hp, "体力の最大値" },
-            { ShopItem.max_armor, "アーマーの最大値" },
+            { ShopItem.max_armor, "アーマー最大値" },
             { ShopItem.damage_rate, "ダメージ率" },
             { ShopItem.money_rate, "獲得マネー倍率" },
             { ShopItem.ammo_in_mag, "装弾数" },
@@ -139,13 +139,13 @@ namespace MyGame
         public int TotalCost()
         {
             var level = SV_ShopItem.LevelList[Item];
-            var n_cart = SV_ShopItem.CartList[Item];
+            var nInCart = SV_ShopItem.CartList[Item];
 
             var total = 0;
 
-            for (var n = 1; n <= n_cart; n++)
+            for (var n = 0; n < nInCart; n++)
             {
-                total += costDefault + costDefault * (level + n - 1);
+                total += costDefault + costIncrease * (level + n);
             }
 
             return total;
@@ -201,7 +201,7 @@ namespace MyGame
 
         protected void UpdateDesctiption()
         {
-            //ShopPanel_Message.UpdateDiscription(item, Description());
+            Shop_Description.ShowDescription(itemNames[Item], Description());
         }
 
         protected abstract string CalcCurrentValue();

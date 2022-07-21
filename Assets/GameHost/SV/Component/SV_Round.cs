@@ -7,14 +7,6 @@ namespace MyGame
     public class SV_Round : HostComponent
     {
         static public int RoundNumber { get; private set; }
-
-        static public int MazeRow { get; private set; } = 13;
-        static public int MazeCol { get; private set; } = 13;
-
-        //static public int MazeRow { get; private set; } = 4;
-        //static public int MazeCol { get; private set; } = 3;
-
-        static public int NumberOfEnemies { get; private set; } = 20;
         static public int CurrentKey { get; set; }
 
         public override void Initialize()
@@ -36,7 +28,7 @@ namespace MyGame
 
         public override void Stop()
         {
-            RoundNumber = -1;
+
         }
     }
 }

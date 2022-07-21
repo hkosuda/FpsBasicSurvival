@@ -25,7 +25,7 @@ namespace MyGame
                 if (pastTime > replenishTime && !replenishEnd)
                 {
                     replenishEnd = true;
-                    AK_Availability.AmmoInMag = AK_Availability.MaxAmmoInMag;
+                    Reload();
                 }
 
                 if (pastTime > reloadingTime)
@@ -36,7 +36,9 @@ namespace MyGame
 
             else
             {
-                if (AK_Availability.PreparingTimeRemain <= 0.0f && AK_Availability.AmmoInMag < AK_Availability.MaxAmmoInMag)
+                if (AK_Availability.PreparingTimeRemain > 0.0f) { return; }
+
+                if (AK_Availability.AmmoInBag > 0 && AK_Availability.AmmoInMag < AK_Availability.MaxAmmoInMag)
                 {
                     if (Keyconfig.CheckInput(KeyAction.reload, true))
                     {
@@ -53,6 +55,26 @@ namespace MyGame
         public override void Inactivate()
         {
             IsReloading = false;
+        }
+
+        static void Reload()
+        {
+            var inBag = AK_Availability.AmmoInBag;
+            var inMag = AK_Availability.AmmoInMag;
+
+            var require = AK_Availability.MaxAmmoInMag - inMag;
+
+            if (require > inBag)
+            {
+                AK_Availability.AmmoInMag = inBag;
+                AK_Availability.AmmoInBag = 0;
+            }
+
+            else
+            {
+                AK_Availability.AmmoInMag += require;
+                AK_Availability.AmmoInBag -= require;
+            }
         }
     }
 }

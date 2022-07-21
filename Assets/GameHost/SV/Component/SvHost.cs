@@ -22,11 +22,13 @@ namespace MyGame
                 new SV_Status(),
                 new SV_Time(),
                 new SV_ShopItem(),
+                new SV_History(),
             };
         }
 
         static public void BeginNext()
         {
+            StopHost(GameSystem.HostList[HostName.survival]);
             BeginHost(GameSystem.HostList[HostName.survival]);
         }
     }

@@ -8,6 +8,7 @@ namespace MyGame
     public enum MapName
     {
         ez_tower,
+        ez_stream,
     }
 
     public class MapSystem : MonoBehaviour
@@ -24,6 +25,7 @@ namespace MyGame
             MapList = new Dictionary<MapName, GameObject>()
             {
                 { MapName.ez_tower, GetMap("ez_tower") },
+                { MapName.ez_stream, GetMap("ez_stream") },
             };
 
             // check method
