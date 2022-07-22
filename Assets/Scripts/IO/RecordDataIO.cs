@@ -15,7 +15,7 @@ namespace MyGame
         }
 
         static readonly string end = "end";
-        static readonly string accuracy = "f8";
+        static readonly string accuracy = "f5";
 
         static public readonly string folderName = "Record";
         static public readonly string extension = ".record.txt";
@@ -111,56 +111,21 @@ namespace MyGame
             }
         }
 
-        static public bool TryLoadHeader(string fileName, out CachedData cachedData, Tracer tracer)
+        // - inner function
+        static bool TryRead(string fileName, out string fullText)
         {
-            if (TryRead(fileName, out var completeData))
+            var asset = Resources.Load<TextAsset>(ReadFilePath(fileName));
+
+            if (asset == null)
             {
-                var splitted = completeData.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                if (splitted == null) { cachedData = null; return false; }
-
-                var lineList = new List<string>(splitted);
-
-                if (!Value2MapName(GetValue(TxtUtil.L(Info.map), lineList), out var mapName))
-                {
-                    var error = "マップ情報を読み込めませんでした";
-                    tracer.AddMessage(error, Tracer.Level.error);
-                }
-
-                if (!tracer.NoError) { cachedData = null; return false; }
-                cachedData = new CachedData(new List<float[]>(), mapName);
-
-                return true;
+                fullText = "";
+                return false;
             }
 
             else
             {
-                var error = "ファイルを読み込めません";
-                tracer.AddMessage(error, Tracer.Level.error);
-
-                cachedData = null;
-                return false;
-            }
-        }
-
-        // - inner function
-        static bool TryRead(string fileName, out string fullText)
-        {
-            var filePath = FilePath(fileName);
-
-            try
-            {
-                using (var sr = new StreamReader(filePath))
-                {
-                    fullText = sr.ReadToEnd();
-                }
-
+                fullText = asset.text;
                 return true;
-            }
-
-            catch
-            {
-                fullText = "";
-                return false;
             }
         }
 
@@ -233,7 +198,7 @@ namespace MyGame
         static public bool TrySave(string fileName, CachedData cachedData, Tracer tracer)
         {
             CreateDirectory();
-            var filePath = FilePath(fileName);
+            var filePath = WriteFilePath(fileName);
 
             try
             {
@@ -305,26 +270,36 @@ namespace MyGame
             }
         }
 
-        static public string FilePath(string filename)
+        static public string WriteFilePath(string filename)
         {
-            return FileDirectory() + filename + extension;
+            return WriteFileDirectory() + filename + extension;
         }
 
-        static public string FileDirectory()
+        static public string WriteFileDirectory()
         {
             return Application.dataPath + "/" + folderName + "/";
+        }
+
+        static public string ReadFilePath(string fileName)
+        {
+            return ReadFileDirectory() + fileName;
+        }
+
+        static public string ReadFileDirectory()
+        {
+            return "Record/";
         }
 
         static void CreateDirectory()
         {
             var message = "";
 
-            if (!Directory.Exists(FileDirectory()))
+            if (!Directory.Exists(WriteFileDirectory()))
             {
                 try
                 {
                     message = "フォルダを作成しました．";
-                    Directory.CreateDirectory(FileDirectory());
+                    Directory.CreateDirectory(WriteFileDirectory());
                 }
 
                 catch
@@ -354,26 +329,6 @@ namespace MyGame
 
                 return header;
             }
-        }
-
-        static public List<string> GetFiles()
-        {
-            var directory = FileDirectory();
-            var pathArray = Directory.GetFiles(directory, "*.record.txt");
-
-            if (pathArray == null || pathArray.Length == 0) { return new List<string>(); }
-
-            var fileList = new List<string>();
-            var regex = new Regex(@"\w+\.record\.txt\z");
-
-            foreach (var path in pathArray)
-            {
-                var fileNameWithExtension = regex.Match(path).Value;
-                var fileName = Regex.Match(fileNameWithExtension, @"\w+").Value;
-                fileList.Add(fileName);
-            }
-
-            return fileList;
         }
     }
 }

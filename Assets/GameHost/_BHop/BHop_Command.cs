@@ -6,7 +6,7 @@ namespace MyGame
 {
     public class BHop_Command : HostComponent
     {
-        static List<Command> commandList = new List<Command>()
+        static readonly List<Command> commandList = new List<Command>()
         {
             new BackCommand(TxtUtil.L(CommandName.Back)),
             new NextCommand(TxtUtil.L(CommandName.Next)),
@@ -22,8 +22,8 @@ namespace MyGame
                 CommandReceiver.AddCommand(command);
             }
 
-            CommandReceiver.RequestCommand("bind z back", null);
-            CommandReceiver.RequestCommand("invoke add on_course_out back", null);
+            CommandReceiver.RequestCommand("bind z \"back\"", null);
+            CommandReceiver.RequestCommand("toggle r \"recorder start\" \"recorder end\"", null);
         }
 
         public override void Shutdown()

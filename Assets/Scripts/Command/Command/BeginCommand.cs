@@ -19,7 +19,7 @@ namespace MyGame
 
         public override List<string> AvailableValues(List<string> values)
         {
-            if (values.Count < 2)
+            if (values.Count < 3)
             {
                 return availables;
             }

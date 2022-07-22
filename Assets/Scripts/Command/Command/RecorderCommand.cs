@@ -10,12 +10,12 @@ namespace MyGame
 
         public enum Option
         {
-            Start, End, Save, Stop,
+            Start, End, Stop,
         }
 
         static readonly List<string> availables = new List<string>()
         {
-            TxtUtil.L(Option.Start), TxtUtil.L(Option.End), TxtUtil.L(Option.Stop), TxtUtil.L(Option.Save)
+            TxtUtil.L(Option.Start), TxtUtil.L(Option.End), TxtUtil.L(Option.Stop),
         };
 
         public RecorderCommand(string commandName) : base(commandName)
@@ -24,10 +24,7 @@ namespace MyGame
             detail = "'recorder start' で記録を開始し，'recorder end' で記録を停止します．記録したデータは，次の記録が終了するまで一時的に保存されます．" +
                 "'ghost' や 'replay' の実行時に利用されるデータは，この一時的に保存されたデータです．\n" +
                 "'recorder stop' を実行すると，一時的な保存データを書き換えることなくレコーダーを停止できます．" +
-                "一時的に保存されている間に'recorder save <name>'を実行すると，ゲームを起動している間だけ名前付きでデータを保持し続けます（<name>の部分に任意の名前を入力します）．" +
-                "ここで作成した名前付きデータは，'replay' コマンドや 'ghost' コマンドで利用可能となります．\n" +
-                "レコーダーは，" + recorderLimitTime.ToString() + "で指定された時間が経過すると自動で停止します．\n" +
-                "保存したデータを削除するには，'recorder remove <name>'を実行してください．また，'remove_last' で最後に保存が行われたデータ名を持つデータを削除することができます．";
+                "レコーダーは，" + recorderLimitTime.ToString() + "で指定された時間が経過すると自動で停止します．";
         }
 
         public override List<string> AvailableValues(List<string> values)

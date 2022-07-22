@@ -9,7 +9,7 @@ namespace MyGame
 {
     public enum CommandName
     {
-        Invoke, Bind, Toggle, Exit, Back, Next, Local, Quit, Begin, Save, Load, Info, Recorder, Replay
+        Invoke, Bind, Toggle, Exit, Back, Next, Local, Quit, Begin, Save, Load, Info, Recorder, Replay, Demo
     }
 
     public class CommandReceiver : MonoBehaviour
@@ -17,7 +17,6 @@ namespace MyGame
         static public EventHandler<Tracer> RequestEnd { get; set; }
         static public List<Command> CommandList { get; private set; } = new List<Command>()
         {
-            new InvokeCommand(TxtUtil.L(CommandName.Invoke)),
             new BindCommand(TxtUtil.L(CommandName.Bind)),
             new ToggleCommand(TxtUtil.L(CommandName.Toggle)),
 
@@ -25,7 +24,43 @@ namespace MyGame
             new QuitCommand(TxtUtil.L(CommandName.Quit)),
 
             new BeginCommand(TxtUtil.L(CommandName.Begin)),
+            new DemoCommand(TxtUtil.L(CommandName.Demo)),
+
+#if UNITY_EDITOR
+            new DSaveCommand("dsave"),
+#endif
         };
+
+        private void Start()
+        {
+            SetEvent(1);
+        }
+
+        private void OnDestroy()
+        {
+            SetEvent(-1);
+        }
+
+        static void SetEvent(int indicator)
+        {
+            if (indicator > 0)
+            {
+                TimerSystem.Updated += UpdateMethod;
+            }
+
+            else
+            {
+                TimerSystem.Updated -= UpdateMethod;
+            }
+        }
+
+        static void UpdateMethod(object obj, float dt)
+        {
+            foreach(var command in CommandList)
+            {
+                command.Update(dt);
+            }
+        }
 
         static public void AddCommand(Command command)
         {

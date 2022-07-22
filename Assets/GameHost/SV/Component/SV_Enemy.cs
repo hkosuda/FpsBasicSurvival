@@ -44,6 +44,7 @@ namespace MyGame
 
         public override void Begin()
         {
+            if (SV_Round.RoundNumber == 0) { return; }
             if (GameHost.World  == null) { return; }
 
             spawnCounter = 0;

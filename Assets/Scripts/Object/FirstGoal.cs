@@ -1,18 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstGoal : MonoBehaviour
+namespace MyGame
 {
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(BoxCollider))]
+    public class FirstGoal : MonoBehaviour
     {
-        
-    }
+        [SerializeField] Difficulty difficulty;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Start()
+        {
+            gameObject.GetComponent<BoxCollider>().isTrigger = true;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.layer != Const.playerLayer) { return; }
+
+            SvParams.SwitchDifficulty(difficulty);
+
+            TimerSystem.Pause();
+            SV_ShopItem.BeginShopping();
+        }
     }
 }

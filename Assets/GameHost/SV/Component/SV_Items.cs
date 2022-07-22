@@ -57,6 +57,8 @@ namespace MyGame
 
         public override void Begin()
         {
+            if (SV_Round.RoundNumber == 0) { return; }
+
             var root = new GameObject("Items");
             root.transform.SetParent(GameHost.World.transform);
 

@@ -20,7 +20,15 @@ namespace MyGame
 
         public override void Begin()
         {
-            player.transform.position = ShareSystem.Point2Position(SV_GoalStart.StartPoint);
+            if (SV_Round.RoundNumber == 0)
+            {
+                Player.SetPosition(Vector3.zero, Vector3.zero);
+            }
+
+            else
+            {
+                Player.SetPosition(ShareSystem.Point2Position(SV_GoalStart.StartPoint), Vector3.zero);
+            }
         }
 
         public override void Stop()

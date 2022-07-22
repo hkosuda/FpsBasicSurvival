@@ -136,6 +136,8 @@ namespace MyGame
 
     static public class SvParams
     {
+        static public Difficulty CurrentDifficulty { get; private set; } = Difficulty.eazy;
+
         static Dictionary<SvParam, float> currentList;
         static bool initialized;
 
@@ -172,7 +174,7 @@ namespace MyGame
         {
             CheckParams();
 
-            if (SvHost.CurrentDifficulty == Difficulty.eazy)
+            if (CurrentDifficulty == Difficulty.eazy)
             {
                 currentList = eazyParamList;
             }
@@ -188,6 +190,14 @@ namespace MyGame
         {
             if (!initialized) { initialized = true; Initialize(); }
             return (int)currentList[sv];
+        }
+
+        static public void SwitchDifficulty(Difficulty difficulty)
+        {
+            if (difficulty == Difficulty.eazy)
+            {
+                currentList = eazyParamList;
+            }
         }
 
         static Dictionary<SvParam, float> eazyParamList = new Dictionary<SvParam, float>()

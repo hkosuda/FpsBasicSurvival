@@ -20,6 +20,8 @@ namespace MyGame
         static GameObject _floor;
         static GameObject _roof;
 
+        static GameObject _firstMap;
+
         public override void Initialize()
         {
             if (_wall == null)
@@ -36,11 +38,19 @@ namespace MyGame
             {
                 _roof = Resources.Load<GameObject>("SV/Roof");
             }
+
+            if (_firstMap == null)
+            {
+                _firstMap = Resources.Load<GameObject>("SV/sv_loby");
+            }
         }
 
         public override void Shutdown()
         {
             _wall = null;
+            _floor = null;
+            _roof = null;
+            _firstMap = null;
         }
 
         public override void Stop()
@@ -50,6 +60,12 @@ namespace MyGame
 
         public override void Begin()
         {
+            if (SV_Round.RoundNumber == 0)
+            {
+                GameHost.Instantiate(_firstMap);
+                return;
+            }
+
             MazeRoot = new GameObject("MazeRoot");
             MazeRoot.transform.SetParent(GameHost.World.transform);
 

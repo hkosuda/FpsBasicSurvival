@@ -10,13 +10,18 @@ namespace MyGame
     {
         static public EventHandler<Vector3> CourseOut { get; set; }
 
+        public bool removeMesh = true;
+
         private void Awake()
         {
             var collider = gameObject.GetComponent<BoxCollider>();
             collider.isTrigger = true;
 
-            Destroy(gameObject.GetComponent<MeshRenderer>());
-            Destroy(gameObject.GetComponent<MeshFilter>());
+            if (removeMesh)
+            {
+                Destroy(gameObject.GetComponent<MeshRenderer>());
+                Destroy(gameObject.GetComponent<MeshFilter>());
+            }
 
             // ignore laycast
             gameObject.layer = 2;

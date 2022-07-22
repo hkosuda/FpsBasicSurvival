@@ -33,13 +33,13 @@ namespace MyGame
             if (indicator > 0)
             {
                 TimerSystem.Updated += UpdateMethod;
-                GameSystem.HostSwitched += _FinishRecorder;
+                GameSystem.HostSwitched += FFinishRecorder;
             }
 
             else
             {
                 TimerSystem.Updated -= UpdateMethod;
-                GameSystem.HostSwitched -= _FinishRecorder;
+                GameSystem.HostSwitched -= FFinishRecorder;
             }
         }
 
@@ -118,7 +118,7 @@ namespace MyGame
             return dataList.Count;
         }
 
-        static public void _FinishRecorder(object obj, bool mute)
+        static public void FFinishRecorder(object obj, bool mute)
         {
             FinishRecorder(false);
         }

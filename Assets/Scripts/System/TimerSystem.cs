@@ -21,12 +21,20 @@ namespace MyGame
             Paused = false;
         }
 
-        static public void Pause()
+        static public void Pause(bool zeroTimeScale = true)
         {
             var prev = Paused;
-
             Paused = true;
-            Time.timeScale = 0.0f;
+
+            if (zeroTimeScale)
+            {
+                Time.timeScale = 0.0f;
+            }
+
+            else
+            {
+                Time.timeScale = 1.0f;
+            }
 
             if (prev != Paused) { TimerPaused?.Invoke(null, false); }
         }

@@ -28,6 +28,8 @@ namespace MyGame
 
         public override void Begin()
         {
+            if (SV_Round.RoundNumber == 0) { return; }
+
             var goalStart = LongestPathSolver.GetGoalStart(ShareSystem.Passable);
 
             GoalPoint = goalStart[0];

@@ -10,6 +10,11 @@ namespace MyGame
     {
         static public EventHandler<bool> InsufficientKeys { get; set; }
 
+        private void Start()
+        {
+            gameObject.GetComponent<BoxCollider>().isTrigger = true;
+        }
+
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.layer != Const.playerLayer) { return; }
