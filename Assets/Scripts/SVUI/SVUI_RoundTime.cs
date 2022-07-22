@@ -33,9 +33,9 @@ namespace MyGame
                 UpdateRoundText();
             }
 
-            if (currentTime != SV_Time.ActiveTime)
+            if (currentTime != SV_Time.TimeRemain)
             {
-                currentTime = SV_Time.ActiveTime;
+                currentTime = SV_Time.TimeRemain;
                 UpdateTimeText();
             }
         }
@@ -47,7 +47,7 @@ namespace MyGame
 
         static void UpdateTimeText()
         {
-            timerText.text = TxtUtil.Time(SV_Time.ActiveTime, true);
+            timerText.text = TxtUtil.Time(SV_Time.TimeRemain, true);
         }
     }
 }

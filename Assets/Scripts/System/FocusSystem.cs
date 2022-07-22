@@ -11,10 +11,9 @@ namespace MyGame
         static readonly int itemLayer = 1 << Const.itemLayer;
 
         static public EventHandler<GameObject> Focused { get; set; }
-        static public EventHandler<GameObject> Defocused { get; set; }
         static public EventHandler<GameObject> Touched { get; set; }
 
-        static GameObject currentFocusedObject;
+        static public GameObject CurrentFocusedObject;
 
         private void Start()
         {
@@ -47,30 +46,29 @@ namespace MyGame
             {
                 var focusedObject = hit.collider.gameObject;
                 
-                if (currentFocusedObject != focusedObject)
+                if (CurrentFocusedObject == null)
                 {
-                    Defocused?.Invoke(null, currentFocusedObject);
                     Focused?.Invoke(null, focusedObject);
-
-                    currentFocusedObject = focusedObject;
                 }
+
+                else if (CurrentFocusedObject != focusedObject)
+                {
+                    Focused?.Invoke(null, focusedObject);
+                }
+
+                CurrentFocusedObject = focusedObject;
             }
 
             else
             {
-                if (currentFocusedObject != null)
-                {
-                    Defocused?.Invoke(null, currentFocusedObject);
-                }
-
-                currentFocusedObject = null;
+                CurrentFocusedObject = null;
             }
 
             if (Keyconfig.CheckInput(KeyAction.check, true))
             {
-                if (currentFocusedObject != null)
+                if (CurrentFocusedObject != null)
                 {
-                    Touched?.Invoke(null, currentFocusedObject);
+                    Touched?.Invoke(null, CurrentFocusedObject);
                 }
             }
 
@@ -88,7 +86,6 @@ namespace MyGame
                 var z = Mathf.Cos(rotX) * Mathf.Cos(rotY);
 
                 var direction = new Vector3(x, y, z);
-
                 return new Ray(origin: origin, direction: direction);
             }
         }

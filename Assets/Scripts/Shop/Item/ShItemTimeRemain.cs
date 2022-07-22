@@ -16,7 +16,7 @@ namespace MyGame
 
         protected override string CalcCurrentValue()
         {
-            _currentValue = SV_Time.TimeRemain;
+            _currentValue = SV_Time.TimeRemain + SvParams.Get(SvParam.additional_time_after_round);
             return TxtUtil.Time(_currentValue, true, ".");
         }
 
@@ -37,8 +37,10 @@ namespace MyGame
 
         protected override void Apply()
         {
-            CalcNextValue();
-            SV_Time.SetTimeRemain(nextValue);
+            var nCart = SV_ShopItem.CartList[Item];
+            var additional = nCart * increase;
+
+            SV_Time.SetAdditionalTime(additional);
         }
     }
 }

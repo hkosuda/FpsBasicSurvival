@@ -47,7 +47,7 @@ namespace MyGame
         void DisagreeButtonProcessing()
         {
             disagree?.Invoke();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
         static GameObject _confirmation;

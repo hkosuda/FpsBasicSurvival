@@ -63,15 +63,17 @@ namespace MyGame
         static void Echo(object obj, Tracer tracer)
         {
             if (chatMessageList == null) { chatMessageList = new List<ChatMessage>(); }
-
             if (_chatMessage == null) { _chatMessage = Resources.Load<GameObject>("UiComponent/ChatMessage"); }
             //if (tracer.option == Tracer.Option.none || tracer.option == Tracer.Option.mute) { return; }
 
-            SendMessage(tracer.FullText());
+            SendChatMessage(tracer.FullText());
         }
 
-        static public void SendMessage(string message)
+        static public void SendChatMessage(string message)
         {
+            if (chatMessageList == null) { chatMessageList = new List<ChatMessage>(); }
+            if (_chatMessage == null) { _chatMessage = Resources.Load<GameObject>("UiComponent/ChatMessage"); }
+
             var chatMessage = Instantiate(_chatMessage);
             chatMessage.GetComponent<TextMeshProUGUI>().text = message;
 

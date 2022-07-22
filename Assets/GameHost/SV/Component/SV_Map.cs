@@ -58,8 +58,11 @@ namespace MyGame
             var row = SvParams.GetInt(SvParam.maze_row);
             var col = SvParams.GetInt(SvParam.maze_col);
 
-            //row = 3;
-            //col = 2;
+            if (SV_Round.RoundNumber == 0)
+            {
+                row = 3;
+                col = 2;
+            }
 
             var map = SvUtil_MazeLikeMapGenerator.Generate(row, col);
             var posSizeList = GetWallPositionAndSize(map);

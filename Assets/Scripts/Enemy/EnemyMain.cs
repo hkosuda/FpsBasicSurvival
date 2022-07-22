@@ -21,18 +21,8 @@ namespace MyGame
 
     public abstract class EnemyMain : MonoBehaviour
     {
-        static readonly Dictionary<EnemyType, int> defaultHpList = new Dictionary<EnemyType, int>()
-        {
-            {EnemyType.mine, 20 }, { EnemyType.turret, 40 }
-        };
-
-        static readonly Dictionary<EnemyType, int> hpIncreaseList = new Dictionary<EnemyType, int>()
-        {
-            {EnemyType.mine, 1 }, { EnemyType.turret, 1 }
-        };
-
-        static public EventHandler<EnemyMain> EnemyDamageTaken { get; set; }
         static public EventHandler<EnemyMain> EnemyDestroyed { get; set; }
+        static public EventHandler<float> EnemyDamageTaken { get; set; }
         static public EventHandler<float> EnemyGivenDamage { get; set; }
 
         public EnemyType EnemyType { get; protected set; }
@@ -42,10 +32,22 @@ namespace MyGame
         {
             EnemyType = enemyType;
 
-            var defaultHP = defaultHpList[enemyType];
-            var rate = hpIncreaseList[enemyType];
+            if (enemyType == EnemyType.mine)
+            {
+                var defaultHP = SvParams.GetInt(SvParam.mine_hp);
+                var rate = SvParams.Get(SvParam.mine_hp_increase);
 
-            HP = defaultHP * (1.0f + rate * SV_Round.RoundNumber);
+                HP = defaultHP * (1.0f + rate * SV_Round.RoundNumber);
+            }
+
+            else
+            {
+                var defaultHP = SvParams.GetInt(SvParam.turret_hp);
+                var rate = SvParams.Get(SvParam.turret_hp_increase);
+
+                HP = defaultHP * (1.0f + rate * SV_Round.RoundNumber);
+            }
+            
 
             var interactive = gameObject.GetComponent<InteractiveObject>();
             interactive.SetOnShotReaction(onShot);
@@ -55,11 +57,17 @@ namespace MyGame
         {
             var damage = GetDamage();
 
-            HP -= damage;
-            EnemyDamageTaken?.Invoke(null, this);
-
-            if (HP <= 0.0f)
+            if (damage < HP)
             {
+                HP -= damage;
+                EnemyDamageTaken?.Invoke(null, damage);
+            }
+
+            else
+            {
+                EnemyDamageTaken?.Invoke(null, HP);
+                HP = 0.0f;
+
                 EnemyDestroyed?.Invoke(null, this);
                 Destroy(gameObject);
             }
