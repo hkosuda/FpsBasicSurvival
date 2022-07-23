@@ -15,6 +15,7 @@ namespace MyGame
         static float shootingIntervalRemain;
         static float preparingTimeRemain;
 
+        static public int MaxAmmoInMag { get; } = 7;
         static public int AmmoInMag { get; set; } = 7;
 
         public override void Initialize()

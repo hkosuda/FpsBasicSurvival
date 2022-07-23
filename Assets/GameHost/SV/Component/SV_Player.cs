@@ -11,11 +11,13 @@ namespace MyGame
         public override void Initialize()
         {
             player = Player.Myself;
+            Params.pm_max_speed_in_air = Const.survival_max_speed_in_air;
         }
 
         public override void Shutdown()
         {
             player = null;
+            Params.pm_max_speed_in_air = Const.bhop_max_speed_in_air;
         }
 
         public override void Begin()

@@ -9,6 +9,7 @@ namespace MyGame
     {
         ez_tower,
         ez_stream,
+        ez_square,
     }
 
     public class MapSystem : MonoBehaviour
@@ -26,6 +27,7 @@ namespace MyGame
             {
                 { MapName.ez_tower, GetMap("ez_tower") },
                 { MapName.ez_stream, GetMap("ez_stream") },
+                { MapName.ez_square, GetMap("ez_square") },
             };
 
             // check method

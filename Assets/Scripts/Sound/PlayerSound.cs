@@ -57,6 +57,7 @@ namespace MyGame
         static void PlayLandingSound(object obj, RaycastHit hit)
         {
             if (landingSoundFrameBufferRemain > 0) { return; }
+            if (PM_Crouching.IsCrouching) { return; }
 
             audioSource.volume = Params.volume_landing;
 
@@ -76,8 +77,9 @@ namespace MyGame
             }
 
             var speed = Params.pm_max_speed_on_ground;
+            var velocity = new Vector2(Player.Rb.velocity.x, Player.Rb.velocity.z);
 
-            if (Player.Rb.velocity.magnitude < speed * 0.6f)
+            if (velocity.magnitude < speed * 0.6f)
             {
                 footstepIntervalRemain = footstepInterval;
                 return;

@@ -7,6 +7,10 @@ namespace MyGame
     public class Const : MonoBehaviour
     {
         //
+        // speed 
+        static public readonly float bhop_max_speed_in_air = 1.4f;
+        static public readonly float survival_max_speed_in_air = 1.4f;
+        //
         // layer
 
         static public readonly int bounceLayer = 6;
@@ -29,6 +33,11 @@ namespace MyGame
         static public readonly float armor_reduction_rate = 0.5f;
 
         static public readonly float room_space_ratio = 0.3f;
+
+        // speed 
+        static public readonly float ak_moving_speed_rate = 0.75f;
+        static public readonly float de_moving_speed_rate = 0.9f;
+        static public readonly float m9_moving_speed_rate = 1.0f;
     }
 }
 

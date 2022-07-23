@@ -6,7 +6,7 @@ namespace MyGame
 {
     public class PM_Crouching : Controller
     {
-        static readonly float playerMinSize = 0.7f;
+        static readonly float playerMinSize = 0.5f;
 
         static public bool IsCrouching { get; private set; }
 
@@ -22,6 +22,9 @@ namespace MyGame
                 if (PM_Landing.LandingIndicator >= 0)
                 {
                     IsCrouching = true;
+
+                    var v = Player.Rb.velocity;
+                    Player.Rb.velocity = new Vector3(v.x, -10.0f, v.z);
                 }
             }
 

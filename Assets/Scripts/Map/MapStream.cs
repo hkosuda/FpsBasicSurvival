@@ -6,7 +6,10 @@ namespace MyGame
 {
     public class MapStream : Map
     {
-        
+        private void Awake()
+        {
+            MapName = MapName.ez_stream;
+        }
     }
 }
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace MyGame
 {
-    public class MapTower : Map
+    public class MapSquare : Map
     {
         private void Awake()
         {
-            MapName = MapName.ez_tower;
+            MapName = MapName.ez_square;
         }
     }
 }

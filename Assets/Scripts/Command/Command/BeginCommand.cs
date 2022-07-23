@@ -9,7 +9,7 @@ namespace MyGame
     {
         static readonly List<string> availables = new List<string>()
         {
-            TxtUtil.L(HostName.survival), TxtUtil.L(HostName.ez_tower), TxtUtil.L(HostName.ez_tower_ta),
+            TxtUtil.L(HostName.survival), TxtUtil.L(HostName.ez_tower), TxtUtil.L(HostName.ez_stream), TxtUtil.L(HostName.ez_square),
         };
 
         public BeginCommand(string commandName) : base(commandName)

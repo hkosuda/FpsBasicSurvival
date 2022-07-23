@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace MyGame
 {
-    public class MapTower : Map
+    public class Square_Map : HostComponent
     {
-        private void Awake()
+        public override void Begin()
         {
-            MapName = MapName.ez_tower;
+            MapSystem.SwitchMap(MapName.ez_square);
         }
     }
 }

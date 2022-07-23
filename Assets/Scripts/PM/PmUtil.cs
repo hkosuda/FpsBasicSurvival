@@ -14,7 +14,7 @@ namespace MyGame
         {
             // load settings 
             var draggingAccel = Params.pm_dragging_accel;
-            var maxSpeed = Params.pm_max_speed_on_ground;
+            var maxSpeed = Params.pm_max_speed_on_ground * SpeedRate();
             var accel = Params.pm_accel_on_ground;
 
             if (!onground)
@@ -59,6 +59,23 @@ namespace MyGame
                 if (val > maxVal) { return maxVal; }
                 return val;
             }
+        }
+
+        static float SpeedRate()
+        {
+            var weapon = WeaponSystem.CurrentWeapon.Weapon;
+
+            if (weapon == Weapon.ak)
+            {
+                return Const.ak_moving_speed_rate;
+            }
+
+            if (weapon == Weapon.de)
+            {
+                return Const.de_moving_speed_rate;
+            }
+
+            return Const.m9_moving_speed_rate;
         }
     }
 }

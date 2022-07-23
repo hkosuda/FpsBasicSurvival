@@ -38,6 +38,7 @@ namespace MyGame
 
             AK_Availability.MaxAmmoInMag = nextValue;
             AK_Availability.AmmoInMag = AK_Availability.MaxAmmoInMag;
+            DE_Availability.AmmoInMag = DE_Availability.MaxAmmoInMag;
         }
     }
 }
