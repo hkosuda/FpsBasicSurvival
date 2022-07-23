@@ -12,6 +12,7 @@ namespace MyGame
         static public int LandingIndicator { get; private set; }
         static public RaycastHit HitInfo { get; private set; }
         static public float DeltaY { get; private set; }
+        static public float FloorY { get; private set; }
 
         // constants
         static public readonly int landingFrameBuffer = 1;
@@ -84,7 +85,8 @@ namespace MyGame
                 if (layer == Const.enemyLayer) { return false; }
                 if (layer == Const.itemLayer) { return false; }
 
-                DeltaY = rbPosition.y - hitInfo.point.y;
+                FloorY = hitInfo.point.y;
+                DeltaY = rbPosition.y - FloorY;
 
                 if (DeltaY <= Player.PlayerHeight() + landingHeightEpsilon)
                 {

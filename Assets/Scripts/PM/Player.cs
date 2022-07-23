@@ -16,6 +16,7 @@ namespace MyGame
         static public GameObject Camera { get; private set; }
 
         static public Rigidbody Rb { get; private set; }
+        static public MeshCollider Collider { get; private set; }
 
         static Vector2 prevPos;
         static bool initialProcessing;
@@ -26,6 +27,7 @@ namespace MyGame
             Camera = GameObject.FindWithTag("MainCamera");
 
             Rb = gameObject.GetComponent<Rigidbody>();
+            Collider = gameObject.GetComponent<MeshCollider>();
         }
 
         private void Start()

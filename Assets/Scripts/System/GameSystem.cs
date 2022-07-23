@@ -45,9 +45,9 @@ namespace MyGame
             CurrentHost = HostList[hostName];
 
             GameHost.InitializeHost(CurrentHost);
-            GameHost.BeginHost(CurrentHost);
-
             HostSwitched?.Invoke(null, false);
+
+            GameHost.BeginHost(CurrentHost);
         }
     }
 }

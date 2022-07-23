@@ -20,6 +20,8 @@ namespace MyGame
         static public readonly float ak_firing_interval = 0.095f;
         static public readonly float de_firing_interval = 0.1f;
 
+        static public readonly float crouching_spread_rate = 0.7f;
+
         static public readonly float enemy_detect_range = 50.0f;
         static public readonly float enemy_active_range = 300.0f;
 

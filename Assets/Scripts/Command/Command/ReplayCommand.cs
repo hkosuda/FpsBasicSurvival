@@ -20,18 +20,15 @@ namespace MyGame
         {
             if (values.Count == 1)
             {
-
-            }
-
-            else if (values.Count == 2)
-            {
-                var fileName = values[1];
-                TimerSystem.Pause();
+                if (ReplaySystem.TryBeginReplay(RecordSystem.CachedData, tracer))
+                {
+                    Console.CloseConsole();
+                }
             }
 
             else
             {
-
+                ERROR_OverValues(tracer);
             }
         }
     }

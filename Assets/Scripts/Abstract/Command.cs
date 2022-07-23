@@ -35,6 +35,9 @@ namespace MyGame
 
         public virtual void Update(float dt) { return; }
 
+        public virtual void Initialize() { }
+        public virtual void Shutdown() { }
+
         //
         // UTILITY FUNCTIONS
 

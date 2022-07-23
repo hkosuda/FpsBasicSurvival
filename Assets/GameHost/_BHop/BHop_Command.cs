@@ -13,6 +13,9 @@ namespace MyGame
 
             new RecorderCommand(TxtUtil.L(CommandName.Recorder)),
             new ReplayCommand(TxtUtil.L(CommandName.Replay)),
+
+            new ObserverCommand(TxtUtil.L(CommandName.Observer)),
+            new GhostCommand(TxtUtil.L(CommandName.Ghost)),
         };
 
         public override void Initialize()

@@ -15,11 +15,11 @@ namespace MyGame
         static public float pm_dragging_accel = 45.0f;
 
         static public float pm_max_speed_in_crouching = 3.5f;
-        static public float pm_accel_in_crouching = 60.0f;
-        static public float pm_dragging_accel_in_crouching = 55.0f;
+        static public float pm_accel_in_crouching = 95.0f;
+        static public float pm_dragging_accel_in_crouching = 90.0f;
 
         static public float pm_jumping_velocity = 5.85f;
-        static public float pm_crouching_speed = 5.6f;
+        static public float pm_crouching_speed = 12.0f;
 
         //
         // sensitivity

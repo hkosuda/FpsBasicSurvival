@@ -8,10 +8,13 @@ namespace MyGame
     [RequireComponent(typeof(Rigidbody))]
     public class PM_Main : MonoBehaviour
     {
+        static public bool Interrupt { get; set; }
+
         static readonly List<Controller> controllerList = new List<Controller>()
         {
             new PM_Camera(),
             new PM_InputVector(),
+            new PM_Observer(),
 
             new PM_Landing(),
             new PM_Jumping(),
@@ -63,24 +66,33 @@ namespace MyGame
         {
             foreach (var controller in controllerList)
             {
+                if (Interrupt) { break; }
                 controller.Update(Time.deltaTime);
             }
+
+            Interrupt = false;
         }
 
         static void LateUpdate(object obj, bool mute)
         {
             foreach(var controller in controllerList)
             {
+                if (Interrupt) { break; }
                 controller.LateUpdate();
             }
+
+            Interrupt = false;
         }
 
         static void FixedUpdate(object obj, float dt)
         {
             foreach(var controller in controllerList)
             {
+                if (Interrupt) { break; }
                 controller.FixedUpdate(dt);
             }
+
+            Interrupt = false;
         }
     }
 }

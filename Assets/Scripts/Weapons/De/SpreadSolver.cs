@@ -20,10 +20,18 @@ namespace MyGame
 
             var isJumping = (PM_Landing.LandingIndicator <= 0) || PM_Jumping.JumpingBegin;
 
-            return _CalcSpread(radRotX, radRotY, vRate, isJumping, spreadParam);
+            if (PM_Crouching.IsCrouching)
+            {
+                return _CalcSpread(radRotX, radRotY, vRate, isJumping, spreadParam, Const.crouching_spread_rate, true);
+            }
+
+            else
+            {
+                return _CalcSpread(radRotX, radRotY, vRate, isJumping, spreadParam);
+            }
         }
 
-        static public Vector3 _CalcSpread(float radRotX, float radRotY, float vRate, bool isJumping, SpreadParam spreadParam)
+        static public Vector3 _CalcSpread(float radRotX, float radRotY, float vRate, bool isJumping, SpreadParam spreadParam, float spreadRate = 1.0f, bool isCrouching = false)
         {
             InitState(spreadParam);
 
@@ -32,9 +40,9 @@ namespace MyGame
 
             var pqr_vector = new float[3] { 10.0f, 0.0f, 0.0f };
 
-            pqr_vector = CalcLifting(pqr_vector, potentialRate, spreadParam);
-            pqr_vector = CalcRandomSpread(pqr_vector, potentialRate, spreadParam);
-            pqr_vector = CalcJumpingRunningSpread(pqr_vector, vRate, isJumping, spreadParam);
+            pqr_vector = CalcLifting(pqr_vector, potentialRate, spreadParam, spreadRate);
+            pqr_vector = CalcRandomSpread(pqr_vector, potentialRate, spreadParam, spreadRate);
+            pqr_vector = CalcJumpingRunningSpread(pqr_vector, vRate, isJumping, spreadParam, spreadRate, isCrouching);
 
             var zxy_vector = PQR2ZXY(pqr_vector, radRotX, radRotY);
 
@@ -59,26 +67,26 @@ namespace MyGame
             }
 
             // - inner functions
-            static float[] CalcLifting(float[] pqr_vector, float potentialRatio, SpreadParam spreadParam)
+            static float[] CalcLifting(float[] pqr_vector, float potentialRatio, SpreadParam spreadParam, float spreadRate)
             {
                 var p = pqr_vector[0];
                 var q = pqr_vector[1];
                 var r = pqr_vector[2];
 
-                r += spreadParam.lifting * Mathf.Pow(potentialRatio, spreadParam.liftingExpo);
+                r += spreadParam.lifting * Mathf.Pow(potentialRatio, spreadParam.liftingExpo) * spreadRate;
 
                 return new float[3] { p, q, r };
             }
 
             // - inner function
-            static float[] CalcRandomSpread(float[] pqr_vector, float potentialRatio, SpreadParam spreadParam)
+            static float[] CalcRandomSpread(float[] pqr_vector, float potentialRatio, SpreadParam spreadParam, float spreadRate)
             {
                 var p = pqr_vector[0];
                 var q = pqr_vector[1];
                 var r = pqr_vector[2];
 
                 var rate = Mathf.Pow(potentialRatio, spreadParam.randomExpo);
-                var qr_spread = GetEllipseRandomSpread(spreadParam.h_random, spreadParam.v_random, rate, spreadParam, true);
+                var qr_spread = GetEllipseRandomSpread(spreadParam.h_random * spreadRate, spreadParam.v_random * spreadRate, rate, spreadParam, true);
 
                 q += GetOffset(spreadParam) + Mathf.Abs(qr_spread[0]) * FixedPattern(spreadParam);
                 r += qr_spread[1];
@@ -109,8 +117,10 @@ namespace MyGame
                 }
             }
 
-            static float[] CalcJumpingRunningSpread(float[] pqr_vector, float vRate, bool isJumping, SpreadParam spreadParam)
+            static float[] CalcJumpingRunningSpread(float[] pqr_vector, float vRate, bool isJumping, SpreadParam spreadParam, float spreadRate, bool isCrouching)
             {
+                if (isCrouching) { return pqr_vector; }
+
                 UnityEngine.Random.InitState(DateTime.Now.Millisecond);
 
                 var p = pqr_vector[0];
@@ -124,7 +134,7 @@ namespace MyGame
                 var jRate = 0.0f;
                 if (isJumping) { jRate = 1.0f; }
 
-                var rate = vRate + jRate;
+                var rate = (vRate + jRate) * spreadRate;
 
                 var qr_spread = GetEllipseRandomSpread(spreadParam.h_running, spreadParam.v_running, rate, spreadParam, false);
 

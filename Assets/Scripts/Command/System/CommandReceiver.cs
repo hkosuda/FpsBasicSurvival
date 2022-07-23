@@ -9,7 +9,7 @@ namespace MyGame
 {
     public enum CommandName
     {
-        Invoke, Bind, Toggle, Exit, Back, Next, Local, Quit, Begin, Save, Load, Info, Recorder, Replay, Demo
+        Invoke, Bind, Toggle, Exit, Back, Next, Local, Quit, Begin, Save, Load, Info, Recorder, Replay, Demo, Observer, Ghost,
     }
 
     public class CommandReceiver : MonoBehaviour
@@ -33,11 +33,27 @@ namespace MyGame
 
         private void Start()
         {
+            if (CommandList != null)
+            {
+                foreach (var command in CommandList)
+                {
+                    command.Initialize();
+                }
+            }
+
             SetEvent(1);
         }
 
         private void OnDestroy()
         {
+            if (CommandList != null)
+            {
+                foreach (var command in CommandList)
+                {
+                    command.Shutdown();
+                }
+            }
+
             SetEvent(-1);
         }
 
@@ -75,6 +91,7 @@ namespace MyGame
             }
 
             CommandList.Add(command);
+            command.Initialize();
         }
 
         static public void SubCommand(string commandName)
@@ -87,6 +104,7 @@ namespace MyGame
 
                 if (command.commandName == commandName)
                 {
+                    CommandList[n].Shutdown();
                     CommandList.RemoveAt(n);
                 }
             }

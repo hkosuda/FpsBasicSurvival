@@ -6,7 +6,7 @@ namespace MyGame
 {
     public class PM_Crouching : Controller
     {
-        static readonly float playerMinSize = 0.5f;
+        static readonly float playerMinSize = 0.7f;
 
         static public bool IsCrouching { get; private set; }
 
@@ -16,10 +16,13 @@ namespace MyGame
         {
             if (Keyconfig.CheckInput(KeyAction.crouch, false))
             {
-                IsCrouching = true;
-
                 PlayerSize -= Params.pm_crouching_speed * dt;
                 if (PlayerSize < playerMinSize) { PlayerSize = playerMinSize; }
+
+                if (PM_Landing.LandingIndicator >= 0)
+                {
+                    IsCrouching = true;
+                }
             }
 
             else

@@ -166,7 +166,6 @@ namespace MyGame
             var z = d[3];
 
             var position = new Vector3(x, y, z);
-            Debug.Log(position.ToString() + ", " + PastTime.ToString());
 
             var rx = d[4];
             var ry = d[5];
@@ -174,7 +173,7 @@ namespace MyGame
 
             var eulerAngle = new Vector3(rx, ry, rz);
             Player.SetPosition(position, eulerAngle);
-            Debug.Log("Set Position");
+
             Updated?.Invoke(null, InterpolatedData);
         }
     }
