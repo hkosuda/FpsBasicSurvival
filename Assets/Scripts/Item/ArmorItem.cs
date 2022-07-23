@@ -20,7 +20,7 @@ namespace MyGame
 
             else
             {
-                SV_Status.RepairArmor(100);
+                SV_Status.RepairArmor(SvParams.GetInt(SvParam.field_armor_amount));
                 return true;
             }
         }

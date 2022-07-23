@@ -8,7 +8,10 @@ namespace MyGame
     {
         private void Awake()
         {
-            Initialize(ShopItem.armor);
+            Initialize(ShopItem.armor,
+                SvParams.GetInt(SvParam.shop_armor_amount),
+                SvParams.GetInt(SvParam.shop_armor_cost_default),
+                SvParams.GetInt(SvParam.shop_armor_cost_increase));
         }
 
         protected override string CalcCurrentValue()
@@ -26,7 +29,7 @@ namespace MyGame
 
             if (nextValue > ShItemMaxArmor.NextMaxArmor)
             {
-                nextValue = SV_Status.CurrentMaxArmor;
+                nextValue = ShItemMaxArmor.NextMaxArmor;
             }
 
             return nextValue.ToString();
@@ -53,7 +56,6 @@ namespace MyGame
 
         protected override void Apply()
         {
-            CalcNextValue();
             SV_Status.SetArmor(nextValue);
         }
     }

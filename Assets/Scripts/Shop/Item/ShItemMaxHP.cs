@@ -10,7 +10,10 @@ namespace MyGame
 
         private void Awake()
         {
-            Initialize(ShopItem.max_hp);
+            Initialize(ShopItem.max_hp,
+                SvParams.GetInt(SvParam.shop_max_hp_amount),
+                SvParams.GetInt(SvParam.shop_max_hp_cost_default),
+                SvParams.GetInt(SvParam.shop_max_hp_cost_increase));
         }
 
         protected override string CalcCurrentValue()
@@ -37,7 +40,6 @@ namespace MyGame
 
         protected override void Apply()
         {
-            CalcNextValue();
             SV_Status.SetMaxHP(nextValue);
         }
     }

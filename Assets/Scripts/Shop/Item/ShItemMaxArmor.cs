@@ -10,7 +10,10 @@ namespace MyGame
 
         private void Awake()
         {
-            Initialize(ShopItem.max_armor);
+            Initialize(ShopItem.max_armor,
+                SvParams.GetInt(SvParam.shop_max_armor_amount),
+                SvParams.GetInt(SvParam.shop_max_armor_cost_default),
+                SvParams.GetInt(SvParam.shop_max_armor_cost_increase));
         }
 
         protected override string CalcCurrentValue()
@@ -37,7 +40,6 @@ namespace MyGame
 
         protected override void Apply()
         {
-            CalcNextValue();
             SV_Status.SetMaxArmor(nextValue);
         }
     }

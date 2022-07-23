@@ -22,13 +22,13 @@ namespace MyGame
             {
                 pastTime += dt;
 
-                if (pastTime > replenishTime && !replenishEnd)
+                if (pastTime > replenishTime / SV_Status.WeaponSpeed() && !replenishEnd)
                 {
                     replenishEnd = true;
                     Reload();
                 }
 
-                if (pastTime > reloadingTime)
+                if (pastTime > reloadingTime / SV_Status.WeaponSpeed())
                 {
                     IsReloading = false;
                 }

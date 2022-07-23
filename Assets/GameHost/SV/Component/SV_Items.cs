@@ -13,11 +13,6 @@ namespace MyGame
     {
         static readonly int offsetSize = 3;
 
-        static readonly int keyNumber = 6;
-        //static readonly int compassNumber = 3;
-        static readonly int compassNumber = 10;
-        static readonly int normalItemNumber = 30;
-
         static readonly Dictionary<Item, float> keyDropRateList = new Dictionary<Item, float>() { { Item.key, 1.0f } };
         static readonly Dictionary<Item, float> compassDropRateList = new Dictionary<Item, float>() { { Item.compass, 1.0f } };
         static readonly Dictionary<Item, float> normalItemDropRateList = new Dictionary<Item, float>()
@@ -66,15 +61,14 @@ namespace MyGame
             var passable = ShareSystem.Passable;
 
             var cornerPoints = SvUtil_DropSystem.GetCornerPoints(startGoal, passable, offsetSize);
-            Debug.Log(cornerPoints.Count);
 
-            var keyDropInfo = SvUtil_DropSystem.RandomDrop(cornerPoints, keyPrefabList, keyDropRateList, keyNumber, root);
+            var keyDropInfo = SvUtil_DropSystem.RandomDrop(cornerPoints, keyPrefabList, keyDropRateList, SvParams.GetInt(SvParam.drop_keys), root);
             RemovePoints(cornerPoints, keyDropInfo);
 
-            var compassDropInfo = SvUtil_DropSystem.RandomDrop(cornerPoints, compassPrefabList, compassDropRateList, compassNumber, root);
+            var compassDropInfo = SvUtil_DropSystem.RandomDrop(cornerPoints, compassPrefabList, compassDropRateList, SvParams.GetInt(SvParam.drop_compass), root);
             RemovePoints(cornerPoints, compassDropInfo);
 
-            SvUtil_DropSystem.RandomDrop(cornerPoints, normalItemPrefabList, normalItemDropRateList, normalItemNumber, root);
+            SvUtil_DropSystem.RandomDrop(cornerPoints, normalItemPrefabList, normalItemDropRateList, SvParams.GetInt(SvParam.drop_items), root);
 
             // - inner function
             static void RemovePoints(List<int[]> points, List<SvUtil_DropSystem.DropInfo> dropInfoList)
@@ -90,8 +84,6 @@ namespace MyGame
         {
 
         }
-
-        
     }
 }
 

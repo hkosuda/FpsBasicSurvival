@@ -19,45 +19,9 @@ namespace MyGame
             { ShopItem.ammo_in_mag, "装弾数" },
             { ShopItem.ammo_in_bag, "携帯弾数" },
             { ShopItem.time_remain, "残り時間" },
-        };
-
-        static readonly public Dictionary<ShopItem, int> increaseList = new Dictionary<ShopItem, int>()
-        {
-            { ShopItem.hp, 100 },
-            { ShopItem.armor, 100 },
-            { ShopItem.max_hp, 50 },
-            { ShopItem.max_armor, 50 },
-            { ShopItem.damage_rate, 15 },
-            { ShopItem.money_rate, 15 },
-            { ShopItem.ammo_in_mag, 3 },
-            { ShopItem.ammo_in_bag, 15 },
-            { ShopItem.time_remain, 15 },
-        };
-
-        static readonly public Dictionary<ShopItem, int> costDefaultList = new Dictionary<ShopItem, int>()
-        {
-            { ShopItem.hp, 100 },
-            { ShopItem.armor, 100 },
-            { ShopItem.max_hp, 1000 },
-            { ShopItem.max_armor, 1500 },
-            { ShopItem.damage_rate, 2000 },
-            { ShopItem.money_rate, 2500 },
-            { ShopItem.ammo_in_mag, 1000 },
-            { ShopItem.ammo_in_bag, 1500 },
-            { ShopItem.time_remain, 1000 },
-        };
-
-        static readonly public Dictionary<ShopItem, int> costIncreaseList = new Dictionary<ShopItem, int>()
-        {
-            { ShopItem.hp, 50 },
-            { ShopItem.armor, 100 },
-            { ShopItem.max_hp, 800 },
-            { ShopItem.max_armor, 1000 },
-            { ShopItem.damage_rate, 1200 },
-            { ShopItem.money_rate, 1800 },
-            { ShopItem.ammo_in_mag, 1000 },
-            { ShopItem.ammo_in_bag, 1500 },
-            { ShopItem.time_remain, 1000 },
+            { ShopItem.moving_speed, "移動スピード" },
+            { ShopItem.weapon_speed, "武器操作スピード" },
+            { ShopItem.firing_speed, "連射速度" },
         };
 
         // ui components
@@ -82,12 +46,12 @@ namespace MyGame
         protected int currentValue;
         protected int nextValue;
 
-        protected void Initialize(ShopItem item)
+        protected void Initialize(ShopItem item, int increase, int costDefault, int costIncrease)
         {
             Item = item;
-            increase = increaseList[item];
-            costDefault = costDefaultList[item];
-            costIncrease = costIncreaseList[item];
+            this.increase = increase;
+            this.costDefault = costDefault;
+            this.costIncrease = costIncrease;
 
             var mainButton = gameObject.GetComponent<Button>();
             mainButton.onClick.AddListener(UpdateDesctiption);
@@ -123,7 +87,7 @@ namespace MyGame
             }
         }
 
-        public void OnDestroy()
+        private void OnDestroy()
         {
             Apply();
         }

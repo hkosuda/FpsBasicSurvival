@@ -13,6 +13,18 @@ namespace MyGame
 
         public override void Initialize()
         {
+            InitializeParams();
+            SetEvent(1);
+        }
+
+        public override void Shutdown()
+        {
+            InitializeParams();
+            SetEvent(-1);
+        }
+
+        static void InitializeParams()
+        {
             SpreadParam = new SpreadParam(
                 maxPotential: 0.6f,
                 potentialIncrease: 0.06f,
@@ -25,8 +37,8 @@ namespace MyGame
                 v_running: 1.8f,
                 liftingExpo: 2.5f,
                 randomExpo: 2.5f,
-                runningExpo: 1.2f, 
-                spreadPattern: new List<float>() 
+                runningExpo: 1.2f,
+                spreadPattern: new List<float>()
                 {
                     1, 1, // 1 - 2
                     -1, -1, -1, // 3 - 5
@@ -34,13 +46,6 @@ namespace MyGame
                     -1, -1, -1, -1, -1, -1, // 10 - 14
                 }
                 );
-
-            SetEvent(1);
-        }
-
-        public override void Shutdown()
-        {
-            SetEvent(-1);
         }
 
         static void SetEvent(int indicator)
@@ -63,7 +68,12 @@ namespace MyGame
 
         public override void Update(float dt)
         {
-            SpreadParam.DecreasePotential(dt);
+            SpreadParam.DecreasePotential(dt * SV_Status.FiringSpeed());
+        }
+
+        static public void UpdateShootingInterval(float interval)
+        {
+            SpreadParam.shootingInterval = interval;
         }
     }
 }

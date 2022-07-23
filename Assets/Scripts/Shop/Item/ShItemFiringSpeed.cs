@@ -4,21 +4,21 @@ using UnityEngine;
 
 namespace MyGame
 {
-    public class ShItemDamageRate : ShopItemButton
+    public class ShItemFiringSpeed : ShopItemButton
     {
         static readonly string extension = " [%]";
 
         private void Awake()
         {
-            Initialize(ShopItem.damage_rate,
-                SvParams.GetInt(SvParam.shop_damage_rate_amount),
-                SvParams.GetInt(SvParam.shop_damage_rate_cost_default),
-                SvParams.GetInt(SvParam.shop_damage_rate_cost_increase));
+            Initialize(ShopItem.firing_speed,
+                SvParams.GetInt(SvParam.shop_firing_speed_amount),
+                SvParams.GetInt(SvParam.shop_firing_speed_cost_default),
+                SvParams.GetInt(SvParam.shop_firing_speed_cost_increase));
         }
 
         protected override string CalcCurrentValue()
         {
-            currentValue = SV_Status.CurrentDamageRate;
+            currentValue = SV_Status.FiringSpeedRate;
             return currentValue.ToString() + extension;
         }
 
@@ -34,13 +34,15 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "ó^É_ÉÅÅ[ÉWó¶Çëùâ¡Ç≥ÇπÇ‹Ç∑ÅD";
+            return "éÀåÇä‘äuÇíZèkÇ≥ÇπÇ‹Ç∑ÅD";
         }
 
         protected override void Apply()
         {
-            SV_Status.SetDamageRate(nextValue);
+            SV_Status.SetFiringSpeedRate(nextValue);
+
+            var interval = Const.ak_firing_interval / SV_Status.FiringSpeed();
+            AK_Potential.UpdateShootingInterval(interval);
         }
     }
 }
-

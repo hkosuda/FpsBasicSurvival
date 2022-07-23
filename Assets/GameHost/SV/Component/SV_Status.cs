@@ -16,27 +16,34 @@ namespace MyGame
     {
         static public readonly int defaultMaxHP = 1000;
         static public readonly int defaultMaxArmor = 1000;
-        //static public readonly int defaultMaxHP = 10;
-        //static public readonly int defaultMaxArmor = 10;
         static public readonly int defaultDamageRate = 100;
         static public readonly int defaultMomeyRate = 100;
+        static public readonly int defaultMovingSpeedRate = 100;
+        static public readonly int defaultWeaponSpeedRate = 100;
+        static public readonly int defaultFiringSpeedRate = 100;
 
         static public EventHandler<int> PlayerDamageTaken { get; set; }
         static public EventHandler<bool> PlayerDead { get; set; }
         static public EventHandler<int> PlayerGotMoney { get; set; }
 
-        static public int CurrentHP { get; private set; }
-        static public int CurrentArmor { get; private set; }
-        static public int CurrentMoney { get; private set; }
-        
-        static public int CurrentMaxHP { get; private set; }
-        static public int CurrentMaxArmor { get; private set; }
+        static public int CurrentHP { get; private set; } = defaultMaxHP;
+        static public int CurrentArmor { get; private set; } = defaultMaxArmor;
+        static public int CurrentMoney { get; private set; } = 0;
 
-        static public int CurrentDamageRate { get; private set; }
-        static public int CurrentMoneyRate { get; private set; }
+        static public int CurrentMaxHP { get; private set; } = defaultMaxHP;
+        static public int CurrentMaxArmor { get; private set; } = defaultMaxArmor;
+
+        static public int CurrentDamageRate { get; private set; } = defaultDamageRate;
+        static public int CurrentMoneyRate { get; private set; } = defaultMomeyRate;
+
+        static public int MovingSpeedRate { get; private set; } = defaultMovingSpeedRate;
+        static public int WeaponSpeedRate { get; private set; } = defaultWeaponSpeedRate;
+        static public int FiringSpeedRate { get; private set; } = defaultFiringSpeedRate;
 
         public override void Initialize()
         {
+            SetEvent(1);
+
             CurrentHP = defaultMaxHP;
             CurrentArmor = defaultMaxArmor;
             CurrentMoney = SvParams.GetInt(SvParam.initial_money);
@@ -47,12 +54,30 @@ namespace MyGame
             CurrentDamageRate = defaultDamageRate;
             CurrentMoneyRate = defaultMomeyRate;
 
-            SetEvent(1);
+            MovingSpeedRate = defaultMovingSpeedRate;
+            WeaponSpeedRate = defaultWeaponSpeedRate;
+            FiringSpeedRate = defaultFiringSpeedRate;
         }
 
         public override void Shutdown()
         {
             SetEvent(-1);
+
+            CurrentHP = defaultMaxHP;
+            CurrentArmor = defaultMaxArmor;
+            CurrentMoney = 0;
+
+            // set values
+            CurrentMaxHP = defaultMaxHP;
+            CurrentMaxArmor = defaultMaxArmor;
+            CurrentDamageRate = defaultDamageRate;
+            CurrentMoneyRate = defaultMomeyRate;
+
+            MovingSpeedRate = defaultMovingSpeedRate;
+            WeaponSpeedRate = defaultWeaponSpeedRate;
+            FiringSpeedRate = defaultFiringSpeedRate;
+
+            Debug.Log(WeaponSpeedRate);
         }
 
         public override void Begin()
@@ -182,6 +207,21 @@ namespace MyGame
             return deDamage * (float)CurrentDamageRate / (float)defaultDamageRate;
         }
 
+        static public float MovingSpeed()
+        {
+            return (float)MovingSpeedRate / (float)defaultMovingSpeedRate;
+        }
+
+        static public float WeaponSpeed()
+        {
+            return (float)WeaponSpeedRate / (float)defaultWeaponSpeedRate;
+        }
+
+        static public float FiringSpeed()
+        {
+            return (float)FiringSpeedRate / (float)defaultFiringSpeedRate;
+        }
+
         //
         // set method
 
@@ -218,6 +258,22 @@ namespace MyGame
         static public void SetMoneyRate(int moneyRate)
         {
             CurrentMoneyRate = moneyRate;
+        }
+
+        static public void SetMovingSpeedRate (int speedRate)
+        {
+            MovingSpeedRate = speedRate;
+        }
+
+        static public void SetWeaponSpeedRate(int speedRate)
+        {
+            WeaponSpeedRate = speedRate;
+            Debug.Log(WeaponSpeedRate);
+        }
+
+        static public void SetFiringSpeedRate(int speedRate)
+        {
+            FiringSpeedRate = speedRate;
         }
     }
 }

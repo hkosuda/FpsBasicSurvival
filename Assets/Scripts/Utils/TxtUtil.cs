@@ -118,6 +118,15 @@ namespace MyGame
                 return PaddingZero2(min) + separator + PaddingZero2(sec);
             }
         }
+
+        static public string SecMSec(float time, string separator = ":")
+        {
+            var min = (int)(time / 60.0f);
+            var sec = (int)(time - min * 60.0f);
+            var ms = (int)((time - min * 60.0f - sec) * 100.0f);
+
+            return PaddingZero2(sec) + separator + PaddingZero2(ms);
+        }
     }
 }
 

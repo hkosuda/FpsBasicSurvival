@@ -27,6 +27,9 @@ namespace MyGame
 
         public EnemyType EnemyType { get; protected set; }
         public float HP { get; protected set; }
+        
+
+        public EnemyBrain brain;
 
         protected void Init(EnemyType enemyType, InteractiveObject.OnShotReaction onShot)
         {
@@ -47,10 +50,11 @@ namespace MyGame
 
                 HP = defaultHP * (1.0f + rate * SV_Round.RoundNumber);
             }
-            
 
             var interactive = gameObject.GetComponent<InteractiveObject>();
             interactive.SetOnShotReaction(onShot);
+
+            brain = gameObject.GetComponent<EnemyBrain>();
         }
 
         protected virtual void OnShot()

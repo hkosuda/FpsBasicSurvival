@@ -9,7 +9,7 @@ namespace MyGame
         //
         // speed 
         static public readonly float bhop_max_speed_in_air = 1.4f;
-        static public readonly float survival_max_speed_in_air = 1.4f;
+        static public readonly float survival_max_speed_in_air = 1.0f;
         //
         // layer
 
@@ -26,7 +26,9 @@ namespace MyGame
 
         static public readonly float crouching_spread_rate = 0.7f;
 
-        static public readonly float enemy_detect_range = 50.0f;
+        static public readonly float enemy_detect_range = 40.0f;
+        static public readonly float enemy_detect_angle = 60.0f;
+
         static public readonly float enemy_active_range = 300.0f;
 
         static public readonly float damage_reduction_const = 1000.0f;

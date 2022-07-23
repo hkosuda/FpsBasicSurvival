@@ -10,7 +10,10 @@ namespace MyGame
 
         private void Awake()
         {
-            Initialize(ShopItem.money_rate);
+            Initialize(ShopItem.money_rate,
+                SvParams.GetInt(SvParam.shop_money_rate_amount),
+                SvParams.GetInt(SvParam.shop_money_rate_cost_default),
+                SvParams.GetInt(SvParam.shop_money_rate_cost_increase));
         }
 
         protected override string CalcCurrentValue()
@@ -36,7 +39,6 @@ namespace MyGame
 
         protected override void Apply()
         {
-            CalcNextValue();
             SV_Status.SetMoneyRate(nextValue);
         }
     }

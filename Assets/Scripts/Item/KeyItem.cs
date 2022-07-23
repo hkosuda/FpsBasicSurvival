@@ -13,7 +13,9 @@ namespace MyGame
 
         protected override bool ItemMethod()
         {
+            SV_Status.AddMoney(SvParams.GetInt(SvParam.field_key_money_amount));
             SV_Round.CurrentKey++;
+
             return true;
         }
     }

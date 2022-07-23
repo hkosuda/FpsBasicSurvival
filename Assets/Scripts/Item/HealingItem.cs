@@ -20,7 +20,7 @@ namespace MyGame
 
             else
             {
-                SV_Status.Heal(100);
+                SV_Status.Heal(SvParams.GetInt(SvParam.field_hp_amount));
                 return true;
             }
         }

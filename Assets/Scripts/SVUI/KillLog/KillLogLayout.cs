@@ -56,7 +56,7 @@ namespace MyGame
             {
                 var rect = gameObject.GetComponent<RectTransform>();
                 var contentRect = contentGroup.GetComponent<RectTransform>();
-                Debug.Log(contentRect.sizeDelta.ToString());
+
                 rect.sizeDelta = new Vector2(contentRect.sizeDelta.x, height);
             }
         }

@@ -120,7 +120,7 @@ namespace MyGame
 
         static string DeadName(EnemyMain enemyMain)
         {
-            return enemyMain.EnemyType.ToString();
+            return enemyMain.EnemyType.ToString() + "_" + TxtUtil.PaddingZero3(enemyMain.brain.ID);
         }
     }
 }

@@ -237,9 +237,10 @@ namespace MyGame
         public float prevRandomQ;
         public float prevPotential;
 
+        public float shootingInterval;
+
         public readonly float maxPotential;
         public readonly float potentialIncrease;
-        public readonly float shootingInterval;
         public readonly float resetTime;
 
         public readonly float lifting;

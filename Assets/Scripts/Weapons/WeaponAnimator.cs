@@ -6,8 +6,8 @@ namespace MyGame
 {
     public class WeaponAnimator : MonoBehaviour
     {
-        static float switchIntervalThresh = 0.05f;
-        static float crowbarProbability = 0.5f;
+        static readonly float switchIntervalThresh = 2.0f;
+        static readonly float crowbarProbability = 0.05f;
 
         public enum AnimationWeapon
         {
@@ -61,6 +61,8 @@ namespace MyGame
 
         static void BeginTakingoutAnimation(object obj, Weapon weapon)
         {
+            animator.speed = SV_Status.WeaponSpeed();
+
             if (weapon == Weapon.ak)
             {
                 animator.SetTrigger("SwitchAk");
@@ -75,6 +77,8 @@ namespace MyGame
 
             else if (weapon == Weapon.m9)
             {
+                animator.speed = 1.0f;
+
                 if (switchInterval < switchIntervalThresh)
                 {
                     animator.SetTrigger("SwitchM9");
@@ -104,21 +108,26 @@ namespace MyGame
 
         static void BeginShotAnimation(object obj, Vector3 direction)
         {
+            animator.speed = 1.0f;
+
             var weapon = WeaponSystem.CurrentWeapon.Weapon;
 
             if (weapon == Weapon.ak)
             {
+                animator.speed = SV_Status.FiringSpeed();
                 animator.SetTrigger("ShotAk");
             }
 
             else if (weapon == Weapon.de)
             {
+                animator.speed = 1.0f;
                 animator.SetTrigger("ShotDe");
             }
         }
 
         static void BeginReloadingAnimation(object obj, bool mute)
         {
+            animator.speed = SV_Status.WeaponSpeed();
             animator.SetTrigger("ReloadAk");
         }
     }

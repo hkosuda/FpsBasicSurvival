@@ -55,7 +55,7 @@ namespace MyGame
 
                 else
                 {
-                    UpdateMethodInRoaming(dt, SvParams.Get(SvParam.turret_roaming_speed));
+                    UpdateMethodInRoaming(dt);
                 }
             }
 
@@ -66,7 +66,7 @@ namespace MyGame
                 if (SearchPlayerInShootingMode(Const.enemy_detect_range))
                 {
                     missingTime = 0.0f;
-                    shootingSystem.Shoot();
+                    shootingSystem.Shoot(dt);
 
                     Face2Target();
                 }
@@ -86,6 +86,8 @@ namespace MyGame
                     missingTime = 0.0f;
                     mode = Mode.shooting;
 
+                    shootingSystem.ResetCooldownTime();
+
                     Face2Target();
                 }
 
@@ -101,12 +103,12 @@ namespace MyGame
 
                     else if (movingSystem.PathLength() == 0)
                     {
-                        TrackingUpdateMethod(Player.Myself, dt, true, SvParams.Get(SvParam.turret_tracking_speed));
+                        TrackingUpdateMethod(Player.Myself, dt, true);
                     }
 
                     else
                     {
-                        TrackingUpdateMethod(Player.Myself, dt, false, SvParams.Get(SvParam.turret_tracking_speed));
+                        TrackingUpdateMethod(Player.Myself, dt, false);
                     }
                 }
             }

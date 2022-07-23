@@ -7,55 +7,34 @@ namespace MyGame
 {
     public class TurretShooter : MonoBehaviour
     {
+        static readonly float preparingTime = 0.2f;
+
         public EventHandler<bool> Shot { get; set; }
 
         static float CannonHeight { get; } = 1.1f;
 
-        float cooldownRemain = 1.0f;
+        float shootingIntervalRemain;
+        float preparingTimeRemain;
+
         GameObject cannon;
 
         private void Awake()
         {
-            cooldownRemain = 0.0f;
+            shootingIntervalRemain = 0.0f;
+            preparingTimeRemain = preparingTime;
+
             cannon = gameObject.transform.GetChild(0).gameObject;
         }
 
-        void Start()
+        public void Shoot(float dt)
         {
-            SetEvent(1);
-        }
+            preparingTimeRemain -= dt;
+            if (preparingTimeRemain > 0.0f) { return; }
 
-        private void OnDestroy()
-        {
-            SetEvent(-1);
-        }
+            preparingTimeRemain = 0.0f;
 
-        void SetEvent(int indicator)
-        {
-            if (indicator > 0)
-            {
-                TimerSystem.Updated += UpdateMethod;
-            }
-
-            else
-            {
-                TimerSystem.Updated -= UpdateMethod;
-            }
-        }
-
-        void UpdateMethod(object obj, float dt)
-        {
-            cooldownRemain -= dt;
-
-            if (cooldownRemain <= 0.0f)
-            {
-                cooldownRemain = -1.0f;
-            }
-        }
-
-        public void Shoot()
-        {
-            if (cooldownRemain > 0.0f) { return; }
+            shootingIntervalRemain -= dt;
+            if (shootingIntervalRemain > 0.0f) { return; }
 
             ResetCooldownTime();
 
@@ -86,7 +65,7 @@ namespace MyGame
 
         public void ResetCooldownTime()
         {
-            cooldownRemain = SvParams.Get(SvParam.turret_shooting_interval);
+            shootingIntervalRemain = SvParams.Get(SvParam.turret_shooting_interval);
         }
     }
 

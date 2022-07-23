@@ -12,10 +12,12 @@ namespace MyGame
 
         static public Vector2 CalcVector(Vector2 inputVector, Vector2 currentVector, float dt, bool onground, bool crouching)
         {
+            var speedRate = SpeedRate();
+
             // load settings 
-            var draggingAccel = Params.pm_dragging_accel;
-            var maxSpeed = Params.pm_max_speed_on_ground * SpeedRate();
-            var accel = Params.pm_accel_on_ground;
+            var draggingAccel = Params.pm_dragging_accel * speedRate;
+            var maxSpeed = Params.pm_max_speed_on_ground * speedRate;
+            var accel = Params.pm_accel_on_ground * speedRate;
 
             if (!onground)
             {
@@ -67,15 +69,15 @@ namespace MyGame
 
             if (weapon == Weapon.ak)
             {
-                return Const.ak_moving_speed_rate;
+                return Const.ak_moving_speed_rate * SV_Status.MovingSpeed();
             }
 
             if (weapon == Weapon.de)
             {
-                return Const.de_moving_speed_rate;
+                return Const.de_moving_speed_rate * SV_Status.MovingSpeed();
             }
 
-            return Const.m9_moving_speed_rate;
+            return Const.m9_moving_speed_rate * SV_Status.MovingSpeed();
         }
     }
 }

@@ -8,7 +8,10 @@ namespace MyGame
     {
         private void Awake()
         {
-            Initialize(ShopItem.hp);
+            Initialize(ShopItem.hp,
+                SvParams.GetInt(SvParam.shop_hp_amount),
+                SvParams.GetInt(SvParam.shop_hp_cost_default),
+                SvParams.GetInt(SvParam.shop_hp_cost_increase));
         }
 
         protected override string CalcCurrentValue()
@@ -26,7 +29,7 @@ namespace MyGame
 
             if (nextValue > ShItemMaxHP.NextMaxHP)
             {
-                nextValue = SV_Status.CurrentMaxHP;
+                nextValue = ShItemMaxHP.NextMaxHP;
             }
 
             return nextValue.ToString();
@@ -53,7 +56,6 @@ namespace MyGame
 
         protected override void Apply()
         {
-            CalcNextValue();
             SV_Status.SetHP(nextValue);
         }
     }

@@ -9,9 +9,14 @@ namespace MyGame
         float _currentValue;
         float _nextValue;
 
+        float additional;
+
         private void Awake()
         {
-            Initialize(ShopItem.time_remain);
+            Initialize(ShopItem.time_remain,
+                SvParams.GetInt(SvParam.shop_time_remain_amount),
+                SvParams.GetInt(SvParam.shop_time_remain_cost_default),
+                SvParams.GetInt(SvParam.shop_time_remain_cost_increase));
         }
 
         protected override string CalcCurrentValue()
@@ -25,8 +30,9 @@ namespace MyGame
             CalcCurrentValue();
 
             var nCart = SV_ShopItem.CartList[Item];
-            _nextValue = _currentValue + nCart * increase;
+            additional = nCart * increase;
 
+            _nextValue = _currentValue + additional;
             return TxtUtil.Time(_nextValue, true, ".");
         }
 
@@ -37,10 +43,7 @@ namespace MyGame
 
         protected override void Apply()
         {
-            var nCart = SV_ShopItem.CartList[Item];
-            var additional = nCart * increase;
-
-            SV_Time.SetAdditionalTime(additional);
+            SV_Time.AdditionalTime(additional);
         }
     }
 }

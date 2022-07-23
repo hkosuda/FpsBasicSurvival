@@ -58,7 +58,6 @@ namespace MyGame
 
         public override void Shutdown()
         {
-            Active = false;
             Inactivate();
         }
 

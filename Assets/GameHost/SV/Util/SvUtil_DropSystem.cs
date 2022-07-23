@@ -95,6 +95,7 @@ namespace MyGame
 
         static public List<DropInfo> RandomDrop<T>(List<int[]> _pointList, Dictionary<T, GameObject> prefabList, Dictionary<T, float> dropRateList, int maxDrops, GameObject root = null)
         {
+            SV_Seed.Init();
             var pointList = new List<int[]>(_pointList);
 
             var sortedPointList = RandomSort(pointList);
@@ -113,7 +114,7 @@ namespace MyGame
                 {
                     if (list.Count == 0) { break; }
                     var index = UnityEngine.Random.Range(0, list.Count);
-
+                    Debug.Log("INdex : " + index.ToString());
                     sorted.Add(list[index]);
                     list.RemoveAt(index);
                 }

@@ -4,21 +4,21 @@ using UnityEngine;
 
 namespace MyGame
 {
-    public class ShItemDamageRate : ShopItemButton
+    public class ShItemWeaponSpeed : ShopItemButton
     {
         static readonly string extension = " [%]";
 
         private void Awake()
         {
-            Initialize(ShopItem.damage_rate,
-                SvParams.GetInt(SvParam.shop_damage_rate_amount),
-                SvParams.GetInt(SvParam.shop_damage_rate_cost_default),
-                SvParams.GetInt(SvParam.shop_damage_rate_cost_increase));
+            Initialize(ShopItem.weapon_speed,
+                SvParams.GetInt(SvParam.shop_weapon_speed_amount),
+                SvParams.GetInt(SvParam.shop_weapon_speed_cost_default),
+                SvParams.GetInt(SvParam.shop_weapon_speed_cost_increase));
         }
 
         protected override string CalcCurrentValue()
         {
-            currentValue = SV_Status.CurrentDamageRate;
+            currentValue = SV_Status.WeaponSpeedRate;
             return currentValue.ToString() + extension;
         }
 
@@ -34,13 +34,12 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "与ダメージ率を増加させます．";
+            return "武器の持ち替えや，リロードのスピードを上昇させます．";
         }
 
         protected override void Apply()
         {
-            SV_Status.SetDamageRate(nextValue);
+            SV_Status.SetWeaponSpeedRate(nextValue);
         }
     }
 }
-

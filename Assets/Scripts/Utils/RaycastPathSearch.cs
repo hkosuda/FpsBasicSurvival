@@ -67,7 +67,7 @@ namespace MyGame
                 };
 
                 Physics.Raycast(rayA, out RaycastHit hitA, dxA.magnitude, layerMask);
-                Debug.DrawRay(rayA.origin, rayA.direction * dxA.magnitude, Color.red, 60.0f, false);
+                //Debug.DrawRay(rayA.origin, rayA.direction * dxA.magnitude, Color.red, 60.0f, false);
 
                 if (hitA.collider == null)
                 {
@@ -110,7 +110,7 @@ namespace MyGame
                     };
 
                     Physics.Raycast(rayB, out RaycastHit hitB, dxB.magnitude, layerMask);
-                    Debug.DrawRay(rayB.origin, rayB.direction * dxB.magnitude, Color.blue, 60.0f, false);
+                    //Debug.DrawRay(rayB.origin, rayB.direction * dxB.magnitude, Color.blue, 60.0f, false);
 
                     // no hit
                     if (hitB.collider == null)

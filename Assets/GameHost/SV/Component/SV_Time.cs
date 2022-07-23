@@ -8,13 +8,10 @@ namespace MyGame
     public class SV_Time : HostComponent
     {
         static public EventHandler<bool> TimeOut { get; set; }
-
         static public float TimeRemain { get; private set; }
-        static public float AdditionalTime { get; private set; }
 
         public override void Initialize()
         {
-            AdditionalTime = 0.0f;
             SetEvent(1);
         }
 
@@ -27,8 +24,7 @@ namespace MyGame
 
             else
             {
-                TimeRemain += SvParams.Get(SvParam.additional_time_after_round) + AdditionalTime; Debug.Log(TimeRemain);
-                AdditionalTime = 0.0f;
+                TimeRemain += SvParams.Get(SvParam.additional_time_after_round);
             }
         }
 
@@ -61,17 +57,40 @@ namespace MyGame
             {
                 TimeRemain -= dt;
 
+                if (TimeRemain > 60.0f)
+                {
+                    var text = TxtUtil.C(TxtUtil.Time(TimeRemain, false), Clr.lime);
+                    SVUI_Time.UpdateText(text);
+                }
+
+                else
+                {
+                    if (TimeRemain < 30.0f)
+                    {
+                        var text = TxtUtil.C(TxtUtil.SecMSec(TimeRemain), Clr.red);
+                        SVUI_Time.UpdateText(text);
+                    }
+
+                    else
+                    {
+                        var text = TxtUtil.C(TxtUtil.SecMSec(TimeRemain), Clr.orange);
+                        SVUI_Time.UpdateText(text);
+                    }
+                }
+
                 if (TimeRemain <= 0.0f)
                 {
-                    Debug.Log(TimeRemain);
+                    var text = TxtUtil.C(TxtUtil.SecMSec(0.0f), Clr.red);
+                    SVUI_Time.UpdateText(text);
+
                     TimeOut?.Invoke(null, false);
                 }
             }
         }
 
-        static public void SetAdditionalTime(float additionalTime)
+        static public void AdditionalTime(float additionalTime)
         {
-            AdditionalTime = additionalTime;
+            TimeRemain += additionalTime;
         }
     }
 }

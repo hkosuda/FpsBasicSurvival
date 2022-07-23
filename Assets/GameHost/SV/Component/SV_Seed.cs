@@ -7,16 +7,22 @@ namespace MyGame
 {
     public class SV_Seed : HostComponent
     {
+        static public int BaseSeed { get; private set; } = 3000;
         static public int Seed { get; private set; }
 
         public override void Initialize()
         {
-            Seed = -1;
+            Seed = BaseSeed;
         }
 
         public override void Shutdown()
         {
 
+        }
+
+        public override void Begin()
+        {
+            Seed = BaseSeed + SV_Round.RoundNumber;
         }
 
         static public void Init(int seed = 0)

@@ -30,7 +30,7 @@ namespace MyGame
 
         public override void Activate()
         {
-            preparingTimeRemain = preparingTime;
+            preparingTimeRemain = preparingTime / SV_Status.WeaponSpeed();
             shootingIntervalRemain = 0.0f;
         }
 

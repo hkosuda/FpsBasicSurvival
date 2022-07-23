@@ -8,7 +8,10 @@ namespace MyGame
     {
         private void Awake()
         {
-            Initialize(ShopItem.ammo_in_bag);
+            Initialize(ShopItem.ammo_in_bag, 
+                SvParams.GetInt(SvParam.shop_bag_extension_amount), 
+                SvParams.GetInt(SvParam.shop_bag_extension_cost_default), 
+                SvParams.GetInt(SvParam.shop_bag_extension_cost_increase));
         }
 
         protected override string CalcCurrentValue()
@@ -34,8 +37,6 @@ namespace MyGame
 
         protected override void Apply()
         {
-            CalcNextValue();
-
             AK_Availability.MaxAmmoInBag = nextValue;
             AK_Availability.AmmoInBag = AK_Availability.MaxAmmoInBag;
         }

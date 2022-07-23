@@ -6,7 +6,7 @@ namespace MyGame
 {
     public class SV_Map : HostComponent
     {
-        static public readonly float wall_width = 8.0f;
+        static public readonly float wall_width = 6.0f;
         static public readonly float wall_depth = 2.0f;
         static public readonly float wall_height = 5.0f;
 

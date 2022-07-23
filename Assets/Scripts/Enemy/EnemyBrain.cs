@@ -15,6 +15,8 @@ namespace MyGame
         public int ID { get; set; } = 0;
         public bool IsTracking { get; protected set; }
         public EnemyType EnemyType { get; protected set; }
+        public float RoamingSpeed { get; protected set; }
+        public float TrackingSpeed { get; protected set; }
 
         protected MovingSystem movingSystem;
         protected int roamingCounter;
@@ -53,6 +55,18 @@ namespace MyGame
             movingSystem = gameObject.GetComponent<MovingSystem>();
             roamingCounter = Mathf.RoundToInt(Mathf.Pow(ID, 3));
             updateCounter = roamingCounter % updateCycle;
+
+            if (enemyType == EnemyType.mine)
+            {
+                RoamingSpeed = SvParams.Get(SvParam.mine_default_roaming_speed) + SvParams.Get(SvParam.mine_roaming_speed_increase) * SV_Round.RoundNumber;
+                TrackingSpeed = SvParams.Get(SvParam.mine_default_tracking_speed) + SvParams.Get(SvParam.mine_tracking_speed_increase) * SV_Round.RoundNumber;
+            }
+
+            else
+            {
+                RoamingSpeed = SvParams.Get(SvParam.turret_default_roaming_speed) + SvParams.Get(SvParam.turret_roaming_speed_increase) * SV_Round.RoundNumber;
+                TrackingSpeed = SvParams.Get(SvParam.turret_default_tracking_speed) + SvParams.Get(SvParam.turret_tracking_speed_increase) * SV_Round.RoundNumber;
+            }
         }
 
         protected void IncrementCounter()
@@ -73,7 +87,7 @@ namespace MyGame
         {
             if (updateCounter != 0) { return false; }
 
-            var sightAngle = 90.0f;
+            var sightAngle = Const.enemy_detect_angle;
 
             var originPosition = new Vector3(gameObject.transform.position.x, yOffset, gameObject.transform.position.z);
             var targetPosition = new Vector3(Player.Myself.transform.position.x, yOffset, Player.Myself.transform.position.z);
@@ -95,27 +109,20 @@ namespace MyGame
 
         protected bool SearchStrikerInTrackingMode()
         {
-            if (updateCounter == 0)
-            {
-                var originPosition = new Vector3(gameObject.transform.position.x, yOffset, gameObject.transform.position.z);
-                var targetPosition = new Vector3(Player.Myself.transform.position.x, yOffset, Player.Myself.transform.position.z);
+            var originPosition = new Vector3(gameObject.transform.position.x, yOffset, gameObject.transform.position.z);
+            var targetPosition = new Vector3(Player.Myself.transform.position.x, yOffset, Player.Myself.transform.position.z);
 
-                var dX = targetPosition - originPosition;
+            var dX = targetPosition - originPosition;
 
-                // raycast test
-                Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, Const.bounceLayer);
-                if (hit.collider != null) { return false; }
+            // raycast test
+            var layerMask = 1 << Const.bounceLayer;
+            Physics.Raycast(originPosition, dX.normalized, out RaycastHit hit, dX.magnitude, layerMask);
 
-                return true;
-            }
-
-            else
-            {
-                return false;
-            }
+            if (hit.collider != null) { return false; }
+            return true;
         }
 
-        protected void UpdateMethodInRoaming(float dt, float speed)
+        protected void UpdateMethodInRoaming(float dt)
         {
             if (movingSystem.PathLength() == 0)
             {
@@ -128,7 +135,7 @@ namespace MyGame
                 movingSystem.SetPath(AStar.GetPath(field, startPosition, goalPosition));
             }
 
-            movingSystem.MoveOn(dt, speed);
+            movingSystem.MoveOn(dt, RoamingSpeed);
 
             // - inner function
             static Vector3 GetRandomPosition()
@@ -158,7 +165,7 @@ namespace MyGame
             }
         }
 
-        protected void TrackingUpdateMethod(GameObject target, float dt, bool updatePath, float speed)
+        protected void TrackingUpdateMethod(GameObject target, float dt, bool updatePath)
         {
             if (updateCounter == 0)
             {
@@ -173,7 +180,7 @@ namespace MyGame
                 }
             }
 
-            movingSystem.MoveOn(dt, speed);
+            movingSystem.MoveOn(dt, TrackingSpeed);
         }
 
         protected bool InTheActiveRange()

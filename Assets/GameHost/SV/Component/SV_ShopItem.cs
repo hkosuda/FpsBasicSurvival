@@ -11,7 +11,8 @@ namespace MyGame
         max_hp, max_armor,
         damage_rate, money_rate,
         ammo_in_mag, ammo_in_bag,
-        time_remain
+        time_remain,
+        moving_speed, weapon_speed, firing_speed,
     }
 
     public class SV_ShopItem : HostComponent
@@ -64,9 +65,6 @@ namespace MyGame
             }
 
             itemList = new Dictionary<ShopItem, ShopItemButton>();
-
-            shop = GameHost.Instantiate(_shop);
-            shop.SetActive(false);
         }
 
         public override void Stop()
@@ -83,7 +81,7 @@ namespace MyGame
 
         static public void BeginShopping()
         {
-            shop.SetActive(true);
+            shop = GameHost.Instantiate(_shop);
             UpdateCart();
         }
 
@@ -128,13 +126,12 @@ namespace MyGame
                 // must be run in order (do not use 'foreach'. dictionary's order is unkown)
                 itemList[ShopItem.max_hp].UpdateContent();
                 itemList[ShopItem.max_armor].UpdateContent();
-                itemList[ShopItem.hp].UpdateContent();
-                itemList[ShopItem.armor].UpdateContent();
-                itemList[ShopItem.damage_rate].UpdateContent();
-                itemList[ShopItem.money_rate].UpdateContent();
-                itemList[ShopItem.ammo_in_mag].UpdateContent();
-                itemList[ShopItem.ammo_in_bag].UpdateContent();
-                itemList[ShopItem.time_remain].UpdateContent();
+
+                foreach(var item in itemList)
+                {
+                    if (item.Key == ShopItem.max_hp || item.Key == ShopItem.max_armor) { continue; }
+                    item.Value.UpdateContent();
+                }
             }
         }
 

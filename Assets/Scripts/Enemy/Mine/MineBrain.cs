@@ -49,7 +49,7 @@ namespace MyGame
 
                 else
                 {
-                    UpdateMethodInRoaming(dt, SvParams.Get(SvParam.mine_roaming_speed));
+                    UpdateMethodInRoaming(dt);
                 }
             }
 
@@ -60,7 +60,7 @@ namespace MyGame
                 if (SearchStrikerInTrackingMode())
                 {
                     missingTime = 0.0f;
-                    TrackingUpdateMethod(Player.Myself, dt, true, SvParams.Get(SvParam.mine_tracking_speed));
+                    TrackingUpdateMethod(Player.Myself, dt, true);
 
                     Face2Target();
                 }
@@ -77,12 +77,12 @@ namespace MyGame
 
                     else if (movingSystem.PathLength() == 0)
                     {
-                        TrackingUpdateMethod(Player.Myself, dt, true, SvParams.Get(SvParam.mine_tracking_speed));
+                        TrackingUpdateMethod(Player.Myself, dt, true);
                     }
 
                     else
                     {
-                        TrackingUpdateMethod(Player.Myself, dt, false, SvParams.Get(SvParam.mine_tracking_speed));
+                        TrackingUpdateMethod(Player.Myself, dt, false);
                     }
                 }
             }

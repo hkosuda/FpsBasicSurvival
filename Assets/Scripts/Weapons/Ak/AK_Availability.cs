@@ -31,7 +31,7 @@ namespace MyGame
 
         public override void Activate()
         {
-            PreparingTimeRemain = preparingTime;
+            PreparingTimeRemain = preparingTime / SV_Status.WeaponSpeed();
             shootingIntervalRemain = 0.0f;
         }
 
@@ -55,7 +55,7 @@ namespace MyGame
 
         static void BeginCooldown(object obj, Vector3 direction)
         {
-            shootingIntervalRemain = Const.ak_firing_interval;
+            shootingIntervalRemain = Const.ak_firing_interval / SV_Status.FiringSpeed();
         }
 
         public override void Update(float dt)
