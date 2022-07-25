@@ -15,6 +15,7 @@ namespace MyGame
         {
             if (SV_Status.CurrentArmor >= SV_Status.CurrentMaxArmor)
             {
+                SVUI_Message.ShowAlert("アーマーが最大のため，取得できません");
                 return false;
             }
 

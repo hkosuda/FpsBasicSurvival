@@ -11,8 +11,9 @@ namespace MyGame
         static public bool Active { get; private set; }
 
         static public GameObject ConsoleLogContent { get; private set; }
+
         static GameObject canvas;
-        
+
         private void Awake()
         {
             canvas = gameObject.transform.GetChild(0).gameObject;
@@ -32,6 +33,8 @@ namespace MyGame
             {
                 OpenConsole();
             }
+
+            if (Active) { TimerSystem.Pause(); }
         }
 
         static public void OpenConsole()

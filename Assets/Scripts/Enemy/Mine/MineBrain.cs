@@ -36,15 +36,7 @@ namespace MyGame
 
                 if (SearchStrikerInRoamingMode(Const.enemy_detect_range))
                 {
-                    mode = Mode.tracking;
-                    missingTime = 0.0f;
-
-                    IsTracking = true;
-                    movingSystem.SetPath(new List<Vector3>());
-                    Face2Target();
-
-                    PlayerDetected?.Invoke(null, this);
-                    Detected?.Invoke(null, false);
+                    BeginTracking();
                 }
 
                 else
@@ -85,6 +77,27 @@ namespace MyGame
                         TrackingUpdateMethod(Player.Myself, dt, false);
                     }
                 }
+            }
+        }
+
+        void BeginTracking()
+        {
+            mode = Mode.tracking;
+            missingTime = 0.0f;
+
+            IsTracking = true;
+            movingSystem.SetPath(new List<Vector3>());
+            Face2Target();
+
+            PlayerDetected?.Invoke(null, this);
+            Detected?.Invoke(null, false);
+        }
+
+        public override void ForceDetection()
+        {
+            if (mode == Mode.roaming)
+            {
+                BeginTracking();
             }
         }
     }

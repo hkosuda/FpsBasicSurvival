@@ -76,8 +76,6 @@ namespace MyGame
             MovingSpeedRate = defaultMovingSpeedRate;
             WeaponSpeedRate = defaultWeaponSpeedRate;
             FiringSpeedRate = defaultFiringSpeedRate;
-
-            Debug.Log(WeaponSpeedRate);
         }
 
         public override void Begin()
@@ -268,7 +266,6 @@ namespace MyGame
         static public void SetWeaponSpeedRate(int speedRate)
         {
             WeaponSpeedRate = speedRate;
-            Debug.Log(WeaponSpeedRate);
         }
 
         static public void SetFiringSpeedRate(int speedRate)

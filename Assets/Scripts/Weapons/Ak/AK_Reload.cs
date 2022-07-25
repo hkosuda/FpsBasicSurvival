@@ -37,18 +37,30 @@ namespace MyGame
             else
             {
                 if (AK_Availability.PreparingTimeRemain > 0.0f) { return; }
+                if (AK_Availability.ShootingIntervalRemain > 0.0f) { return; }
+
+                if (AK_Availability.AmmoInMag == 0 && AK_Availability.AmmoInBag > 0)
+                {
+                    BeginReloading();
+                }
 
                 if (AK_Availability.AmmoInBag > 0 && AK_Availability.AmmoInMag < AK_Availability.MaxAmmoInMag)
                 {
                     if (Keyconfig.CheckInput(KeyAction.reload, true))
                     {
-                        ReloadingBegin?.Invoke(null, false);
-                        IsReloading = true;
-
-                        pastTime = 0.0f;
-                        replenishEnd = false;
+                        BeginReloading();
                     }
                 }
+            }
+
+            // - inner function
+            static void BeginReloading()
+            {
+                ReloadingBegin?.Invoke(null, false);
+                IsReloading = true;
+
+                pastTime = 0.0f;
+                replenishEnd = false;
             }
         }
 
@@ -66,7 +78,7 @@ namespace MyGame
 
             if (require > inBag)
             {
-                AK_Availability.AmmoInMag = inBag;
+                AK_Availability.AmmoInMag += inBag;
                 AK_Availability.AmmoInBag = 0;
             }
 

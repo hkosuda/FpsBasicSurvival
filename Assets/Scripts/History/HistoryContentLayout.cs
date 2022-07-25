@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HistoryContentLayout : MonoBehaviour
+namespace MyGame
 {
-    // Start is called before the first frame update
-    void Start()
+    public class HistoryContentLayout : MonoBehaviour
     {
-        
-    }
+        static VerticalLayoutGroup verticalLayoutGroup;
+        static int counter = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        void Start()
+        {
+            verticalLayoutGroup = gameObject.GetComponent<VerticalLayoutGroup>();
+            counter = 0;
+        }
+
+        void Update()
+        {
+            counter++;
+            
+            if (counter == 2)
+            {
+                verticalLayoutGroup.CalculateLayoutInputHorizontal();
+                verticalLayoutGroup.CalculateLayoutInputVertical();
+
+                verticalLayoutGroup.SetLayoutHorizontal();
+                verticalLayoutGroup.SetLayoutVertical();
+            }
+        }
     }
 }
+

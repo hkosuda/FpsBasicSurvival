@@ -11,7 +11,7 @@ namespace MyGame
 
         jump, autoJump, shot, reload, crouch, check,
         forward, backward, right, left,
-        menu, console,
+        menu, console, information,
         ak, de, m9,
     }
 
@@ -33,6 +33,7 @@ namespace MyGame
             { KeyAction.check, new Key(KeyCode.F) },
             { KeyAction.menu, new Key(KeyCode.M) },
             { KeyAction.console, new Key(KeyCode.K) },
+            { KeyAction.information, new Key(KeyCode.Tab) },
             { KeyAction.ak, new Key(KeyCode.None, 1) },
             { KeyAction.de, new Key(KeyCode.None, -1) },
             { KeyAction.m9, new Key(KeyCode.Q) },

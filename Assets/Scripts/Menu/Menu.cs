@@ -8,6 +8,7 @@ namespace MyGame
     public class Menu : MonoBehaviour
     {
         static GameObject canvas;
+        static bool active;
 
         void Awake()
         {
@@ -17,6 +18,7 @@ namespace MyGame
             closeButton.onClick.AddListener(CloseMenu);
 
             canvas.SetActive(false);
+            active = false;
         }
 
         private void Start()
@@ -50,16 +52,25 @@ namespace MyGame
             }
         }
 
+        private void Update()
+        {
+            if (active) { TimerSystem.Pause(); }
+        }
+
         static void OpenMenu()
         {
             canvas.SetActive(true);
             TimerSystem.Pause();
+
+            active = true;
         }
 
         static void CloseMenu()
         {
             canvas.SetActive(false);
             TimerSystem.Resume();
+
+            active = false;
         }
     }
 }

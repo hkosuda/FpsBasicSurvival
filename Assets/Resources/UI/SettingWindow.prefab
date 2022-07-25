@@ -1049,6 +1049,7 @@ GameObject:
   - component: {fileID: 6357025365934254409}
   - component: {fileID: 6357025365934254410}
   - component: {fileID: 6357025365934254411}
+  - component: {fileID: 5459218359108399883}
   m_Layer: 0
   m_Name: VScrollbar
   m_TagString: Untagged
@@ -1163,6 +1164,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5459218359108399883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357025365934254421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02af35978b5a85f4fa56b2d95b7af718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6357025365999573496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1753,7 +1766,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!114 &6357025366493971842
 MonoBehaviour:
@@ -2544,6 +2557,7 @@ GameObject:
   - component: {fileID: 6357025366984335777}
   - component: {fileID: 6357025366984335778}
   - component: {fileID: 6744937242718287123}
+  - component: {fileID: 6046121087375630086}
   m_Layer: 0
   m_Name: CloseButton
   m_TagString: Untagged
@@ -2677,6 +2691,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b0fc3891010174fb94cd4471af250c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6046121087375630086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357025366984335788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3255dab17300d994398f0404cd2c07ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6357025367019705139
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,7 +2715,7 @@ GameObject:
   - component: {fileID: 6357025367019705137}
   m_Layer: 0
   m_Name: SettingWindow
-  m_TagString: Untagged
+  m_TagString: Window
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -10,11 +10,14 @@ namespace MyGame
         static int currentKey;
         static int currentRequireKey;
 
+        static HostName currentHost;
+
         static TextMeshProUGUI text;
 
         void Start()
         {
             text = gameObject.GetComponent<TextMeshProUGUI>();
+            UpdateText();
         }
 
         void Update()
@@ -26,10 +29,21 @@ namespace MyGame
 
                 UpdateText();
             }
+
+            if (currentHost != GameSystem.CurrentHost.HostName)
+            {
+                currentHost = GameSystem.CurrentHost.HostName;
+                UpdateText();
+            }
         }
 
         static void UpdateText()
         {
+            if (currentHost != HostName.survival)
+            {
+                text.text = "";
+            }
+
             var info = "Key : " + currentKey.ToString() + " / " + currentRequireKey.ToString();
 
             if (currentKey < currentRequireKey)

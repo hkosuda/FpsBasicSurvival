@@ -66,7 +66,7 @@ namespace MyGame
                 var dr = Mathf.Abs(point1[0] - point2[0]);
                 var dc = Mathf.Abs(point1[1] - point2[1]);
 
-                if (dr > offset && dc > offset)
+                if (dr > offset || dc > offset)
                 {
                     return true;
                 }
@@ -114,7 +114,7 @@ namespace MyGame
                 {
                     if (list.Count == 0) { break; }
                     var index = UnityEngine.Random.Range(0, list.Count);
-                    Debug.Log("INdex : " + index.ToString());
+
                     sorted.Add(list[index]);
                     list.RemoveAt(index);
                 }

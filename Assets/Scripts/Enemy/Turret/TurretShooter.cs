@@ -7,7 +7,7 @@ namespace MyGame
 {
     public class TurretShooter : MonoBehaviour
     {
-        static readonly float preparingTime = 0.2f;
+        static readonly float preparingTime = -0.1f;
 
         public EventHandler<bool> Shot { get; set; }
 

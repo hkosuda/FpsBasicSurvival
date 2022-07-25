@@ -49,6 +49,7 @@ namespace MyGame
             HostSwitched?.Invoke(null, false);
 
             GameHost.BeginHost(CurrentHost);
+            TimerSystem.Resume();
         }
     }
 }

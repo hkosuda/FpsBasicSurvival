@@ -74,7 +74,10 @@ namespace MyGame
 
                 EnemyDestroyed?.Invoke(null, this);
                 Destroy(gameObject);
+                return;
             }
+
+            ForceDetection();
         }
 
         static protected float GetDamage()
@@ -92,6 +95,14 @@ namespace MyGame
             }
 
             return 0.0f;
+        }
+
+        void ForceDetection()
+        {
+            var distance = (Player.Myself.transform.position - gameObject.transform.position).magnitude;
+            if (distance > Const.enemy_detect_range) { return; }
+
+            brain.ForceDetection();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MyGame
 {
     public enum Difficulty
     {
-        eazy, normal, hard, inferno,
+        eazy = 0, normal = 1, hard = 2, inferno = 3,
     }
 
     public enum SvParam
@@ -251,23 +251,23 @@ namespace MyGame
             { SvParam.shop_damage_rate_cost_default, 1000 },
             { SvParam.shop_damage_rate_cost_increase, 1500 },
 
-            { SvParam.shop_money_rate_amount, 25 },
+            { SvParam.shop_money_rate_amount, 20 },
             { SvParam.shop_money_rate_cost_default, 1000 },
             { SvParam.shop_money_rate_cost_increase, 1500 },
 
             { SvParam.shop_mag_extension_amount, 3 },
             { SvParam.shop_mag_extension_cost_default, 800 },
-            { SvParam.shop_mag_extension_cost_increase, 600 },
+            { SvParam.shop_mag_extension_cost_increase, 1000 },
 
             { SvParam.shop_bag_extension_amount, 15 },
             { SvParam.shop_bag_extension_cost_default, 1000 },
-            { SvParam.shop_bag_extension_cost_increase, 1000 },
+            { SvParam.shop_bag_extension_cost_increase, 1500 },
 
             { SvParam.shop_time_remain_amount, 20 },
             { SvParam.shop_time_remain_cost_default, 1000 },
             { SvParam.shop_time_remain_cost_increase, 1000 },
 
-            { SvParam.shop_moving_speed_amount, 5 },
+            { SvParam.shop_moving_speed_amount, 3 },
             { SvParam.shop_moving_speed_cost_default, 1000 },
             { SvParam.shop_moving_speed_cost_increase, 1000 },
 
@@ -275,9 +275,9 @@ namespace MyGame
             { SvParam.shop_weapon_speed_cost_default, 1000 },
             { SvParam.shop_weapon_speed_cost_increase, 1000 },
 
-            { SvParam.shop_firing_speed_amount, 5 },
+            { SvParam.shop_firing_speed_amount, 3 },
             { SvParam.shop_firing_speed_cost_default, 1000 },
-            { SvParam.shop_firing_speed_cost_increase, 1000 },
+            { SvParam.shop_firing_speed_cost_increase, 1500 },
 
             //
             // field item
@@ -299,7 +299,6 @@ namespace MyGame
             
             { SvParam.money_increase_after_round, 1.0f },
             { SvParam.additional_time_after_round, 180.0f },
-            //{ SvParam.additional_time_after_round, 80.0f },
             
             //
             // weapon damage
@@ -324,16 +323,16 @@ namespace MyGame
             // enemy's movement
             
             { SvParam.mine_default_roaming_speed, 5.0f },
-            { SvParam.mine_roaming_speed_increase, 0.2f },
+            { SvParam.mine_roaming_speed_increase, 0.3f },
 
             { SvParam.mine_default_tracking_speed, 8.2f },
-            { SvParam.mine_tracking_speed_increase, 0.3f },
+            { SvParam.mine_tracking_speed_increase, 0.4f },
 
             { SvParam.turret_default_roaming_speed, 4.0f },
             { SvParam.turret_roaming_speed_increase, 0.2f },
 
             { SvParam.turret_default_tracking_speed, 4.0f },
-            { SvParam.turret_tracking_speed_increase, 0.2f },
+            { SvParam.turret_tracking_speed_increase, 0.4f },
 
             { SvParam.mine_tracking_duration, 3.0f },
             { SvParam.turret_tracking_duration, 3.0f },
@@ -352,9 +351,8 @@ namespace MyGame
 
             { SvParam.n_enemies, 25 },
             { SvParam.mine_spawn_rate, 0.7f },
-            { SvParam.min_enemies_rate, 0.3f },
+            { SvParam.min_enemies_rate, 0.5f },
             { SvParam.enemy_respawn_probability, 0.5f },
-            
             
             //
             // system
@@ -373,7 +371,7 @@ namespace MyGame
             
             { SvParam.drop_keys, 6 },
             { SvParam.drop_compass, 3 },
-            { SvParam.drop_items, 30 },
+            { SvParam.drop_items, 24 },
 
             { SvParam.require_keys, 3 },
         };

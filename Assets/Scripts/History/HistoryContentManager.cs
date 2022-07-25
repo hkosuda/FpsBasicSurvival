@@ -13,8 +13,11 @@ namespace MyGame
         static readonly Dictionary<SV_History.HistoryValue, string> titleList = new Dictionary<SV_History.HistoryValue, string>()
         {
             { SV_History.HistoryValue.movingDistance, "移動距離" },
-            { SV_History.HistoryValue.shotAmmo, "消費弾数" },
+            { SV_History.HistoryValue.destroyed, "撃破" },
             { SV_History.HistoryValue.takenDamage, "被ダメージ" },
+            { SV_History.HistoryValue.givenDamage, "与ダメージ" },
+            { SV_History.HistoryValue.gotMoney, "獲得マネー" },
+            { SV_History.HistoryValue.shotAmmo, "消費弾数" },
         };
 
         static readonly List<SV_History.HistoryValue> floatValues = new List<SV_History.HistoryValue>() 
@@ -46,44 +49,61 @@ namespace MyGame
 
             var total = TotalValue(historyList);
 
-            if (SV_History.CurrentCondition != SV_History.Condition.clear)
+            if (total == null)
             {
-                WriteInfo("クリアしたラウンド数", 0);
-                WriteInfo((SV_Round.RoundNumber - 1).ToString(), 1);
+                WriteInfo("情報はありません", 0);
             }
 
-            WriteInfo(separator + " 累計情報 " + separator, 0, Clr.lime);
-            WriteAllInfo(total, 1, true, true);
-            
-            for(var n = 0; n < historyList.Count; n++)
+            else
             {
-                WriteInfo(separator + " Round " + n.ToString() + " " + separator, 0, Clr.lime);
-
-                if (n == 0)
+                if (SV_History.CurrentCondition != SV_History.Condition.clear)
                 {
-                    WriteAllInfo(historyList[n], 1, false, true);
+                    WriteInfo("クリアしたラウンド数", 0);
+                    WriteInfo((SV_Round.RoundNumber - 1).ToString(), 1);
                 }
 
-                else if (n == historyList.Count - 1)
+                WriteInfo(separator + " 累計情報 " + separator, 0, Clr.lime);
+                WriteAllInfo(total, 1, true, true);
+
+                for (var n = 0; n < historyList.Count; n++)
                 {
-                    WriteAllInfo(historyList[n], 1, true, false);
+                    WriteInfo(separator + " Round " + n.ToString() + " " + separator, 0, Clr.lime);
+
+                    if (n == 0)
+                    {
+                        WriteAllInfo(historyList[n], 1, false, true);
+                    }
+
+                    else if (n == historyList.Count - 1)
+                    {
+                        WriteAllInfo(historyList[n], 1, true, false);
+                    }
+
+                    else
+                    {
+                        WriteAllInfo(historyList[n], 1, true, true);
+                    }
                 }
 
-                else
+                if (SV_History.CurrentCondition == SV_History.Condition.clear)
                 {
-                    WriteAllInfo(historyList[n], 1, true, true);
+                    var credit = Instantiate(_credit);
+                    credit.transform.SetParent(myself);
                 }
             }
         }
 
-        static SV_History.History TotalValue(List<SV_History.History> historyList)
+        static public SV_History.History TotalValue(List<SV_History.History> historyList)
         {
             var totalValue = new SV_History.History();
 
             if (historyList != null)
             {
-                foreach(var history in historyList)
+                for(var n = 0; n < historyList.Count; n++)
                 {
+                    if (n == 0) { continue; }
+                    var history = historyList[n];
+
                     foreach(var v in history.valueList)
                     {
                         totalValue.valueList[v.Key] += v.Value;
@@ -105,7 +125,7 @@ namespace MyGame
             {
                 foreach (var title in titleList)
                 {
-                    WriteInfo(title.Value, indent);
+                    WriteInfo("【" + title.Value + "】", indent);
 
                     if (floatValues.Contains(title.Key))
                     {
@@ -121,7 +141,7 @@ namespace MyGame
             
             if (writeBuy)
             {
-                WriteInfo("購入情報", indent);
+                WriteInfo("【購入情報】", indent);
 
                 var buyInfo = "";
 
@@ -129,7 +149,7 @@ namespace MyGame
                 {
                     if (buy.Value > 0)
                     {
-                        buyInfo += ShopItemButton.itemNames[buy.Key] + "\t : " + buy.ToString() + "\n";
+                        buyInfo += ShopItemButton.itemNames[buy.Key] + "\t : " + buy.Value.ToString() + "\n";
                     }
                 }
 

@@ -82,6 +82,7 @@ Shader "Custom/Checkpoint"
 
                 o.Albedo = _Color;
                 o.Alpha = value * 0.5;
+                o.Emission = value;
             }
         ENDCG
         }

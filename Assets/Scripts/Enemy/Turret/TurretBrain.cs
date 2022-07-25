@@ -23,7 +23,7 @@ namespace MyGame
 
         private void Awake()
         {
-            Init(EnemyType.mine);
+            Init(EnemyType.turret);
 
             mode = Mode.roaming;
             shootingSystem = gameObject.GetComponent<TurretShooter>();
@@ -41,16 +41,7 @@ namespace MyGame
 
                 if (SearchStrikerInRoamingMode(Const.enemy_detect_range))
                 {
-                    mode = Mode.shooting;
-                    missingTime = 0.0f;
-                    movingSystem.SetPath(new List<Vector3>());
-
-                    shootingSystem.ResetCooldownTime();
-
-                    IsTracking = true;
-
-                    PlayerDetected?.Invoke(null, this);
-                    Face2Target();
+                    BeginTracking();
                 }
 
                 else
@@ -134,6 +125,30 @@ namespace MyGame
             if (hit.collider == null) { return false; }
 
             return hit.collider.gameObject.layer == Const.playerLayer;
+        }
+
+        public void BeginTracking()
+        {
+            mode = Mode.shooting;
+            missingTime = 0.0f;
+            movingSystem.SetPath(new List<Vector3>());
+
+            shootingSystem.ResetCooldownTime();
+
+            IsTracking = true;
+
+            Detected?.Invoke(null, this);
+            PlayerDetected?.Invoke(null, this);
+
+            Face2Target();
+        }
+
+        public override void ForceDetection()
+        {
+            if (mode == Mode.roaming)
+            {
+                BeginTracking();
+            }
         }
     }
 }

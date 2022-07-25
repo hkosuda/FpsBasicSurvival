@@ -26,6 +26,8 @@ namespace MyGame
         static Dictionary<Item, GameObject> compassPrefabList;
         static Dictionary<Item, GameObject> normalItemPrefabList;
 
+        static public List<int[]> CornerPoints;
+
         public override void Initialize()
         {
             keyPrefabList = new Dictionary<Item, GameObject>() { { Item.key, Load("Key") } };
@@ -61,6 +63,7 @@ namespace MyGame
             var passable = ShareSystem.Passable;
 
             var cornerPoints = SvUtil_DropSystem.GetCornerPoints(startGoal, passable, offsetSize);
+            CornerPoints = new List<int[]>(cornerPoints);
 
             var keyDropInfo = SvUtil_DropSystem.RandomDrop(cornerPoints, keyPrefabList, keyDropRateList, SvParams.GetInt(SvParam.drop_keys), root);
             RemovePoints(cornerPoints, keyDropInfo);

@@ -21,6 +21,11 @@ namespace MyGame
                 new SV_Time(),
                 new SV_ShopItem(),
                 new SV_History(),
+                new SV_Weapon(),
+
+#if UNITY_EDITOR
+                //new SV_ItemDebug(),
+#endif
             };
         }
 

@@ -188,6 +188,8 @@ namespace MyGame
             var distance = (Player.Myself.transform.position - gameObject.transform.position).magnitude;
             return distance < Const.enemy_active_range;
         }
+
+        public abstract void ForceDetection();
     }
 }
 

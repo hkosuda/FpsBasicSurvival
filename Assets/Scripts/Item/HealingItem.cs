@@ -15,6 +15,7 @@ namespace MyGame
         {
             if (SV_Status.CurrentHP >= SV_Status.CurrentMaxHP)
             {
+                SVUI_Message.ShowAlert("‘Ì—Í‚ªÅ‘å‚Ì‚½‚ßCæ“¾‚Å‚«‚Ü‚¹‚ñ");
                 return false;
             }
 

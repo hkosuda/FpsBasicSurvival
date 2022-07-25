@@ -23,6 +23,7 @@ namespace MyGame
             { KeyAction.left, "左に移動" },
             { KeyAction.menu, "メニューを開く" },
             { KeyAction.console, "コンソールを開く" },
+            { KeyAction.information, "情報を見る" },
             { KeyAction.ak, "メインウェポン" },
             { KeyAction.de, "サブウェポン" },
             { KeyAction.m9, "近接武器" },

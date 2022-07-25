@@ -69,6 +69,8 @@ namespace MyGame
 
         public override void Stop()
         {
+            SV_History.UpdateBuyList(CartList);
+
             foreach (var item in CartList)
             {
                 if (item.Key == ShopItem.hp || item.Key == ShopItem.armor) { continue; }

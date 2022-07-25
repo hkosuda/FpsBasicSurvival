@@ -7,7 +7,7 @@ namespace MyGame
 {
     public class FocusSystem : MonoBehaviour
     {
-        static readonly float searchDistance = 5.0f;
+        static readonly float searchDistance = 4.0f;
         static readonly int itemLayer = 1 << Const.itemLayer;
 
         static public EventHandler<GameObject> Focused { get; set; }
@@ -45,6 +45,7 @@ namespace MyGame
             if (Physics.Raycast(ray, out var hit, searchDistance, itemLayer))
             {
                 var focusedObject = hit.collider.gameObject;
+                SVUI_Message.ShowMessage("Žæ“¾ [" + Keyconfig.KeybindList[KeyAction.check].GetKeyString() + "]");
                 
                 if (CurrentFocusedObject == null)
                 {
@@ -61,6 +62,7 @@ namespace MyGame
 
             else
             {
+                SVUI_Message.ShowMessage("");
                 CurrentFocusedObject = null;
             }
 

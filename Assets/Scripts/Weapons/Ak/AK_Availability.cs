@@ -10,7 +10,7 @@ namespace MyGame
 
         static public bool Available { get; private set; }
 
-        static float shootingIntervalRemain;
+        static public float ShootingIntervalRemain { get; private set; }
         static public float PreparingTimeRemain { get; private set; }
 
         static public int AmmoInMag { get; set; } = 30;
@@ -32,7 +32,7 @@ namespace MyGame
         public override void Activate()
         {
             PreparingTimeRemain = preparingTime / SV_Status.WeaponSpeed();
-            shootingIntervalRemain = 0.0f;
+            ShootingIntervalRemain = 0.0f;
         }
 
         public override void Inactivate()
@@ -55,20 +55,20 @@ namespace MyGame
 
         static void BeginCooldown(object obj, Vector3 direction)
         {
-            shootingIntervalRemain = Const.ak_firing_interval / SV_Status.FiringSpeed();
+            ShootingIntervalRemain = Const.ak_firing_interval / SV_Status.FiringSpeed();
         }
 
         public override void Update(float dt)
         {
             PreparingTimeRemain -= dt;
-            shootingIntervalRemain -= dt;
+            ShootingIntervalRemain -= dt;
 
             if (PreparingTimeRemain < 0.0f) { PreparingTimeRemain = 0.0f; }
-            if (shootingIntervalRemain < 0.0f) { shootingIntervalRemain = 0.0f; }
+            if (ShootingIntervalRemain < 0.0f) { ShootingIntervalRemain = 0.0f; }
 
             if (AmmoInMag <= 0) { Available = false; return; }
 
-            if (PreparingTimeRemain > 0.0f || shootingIntervalRemain > 0.0f)
+            if (PreparingTimeRemain > 0.0f || ShootingIntervalRemain > 0.0f)
             {
                 Available = false;
             }

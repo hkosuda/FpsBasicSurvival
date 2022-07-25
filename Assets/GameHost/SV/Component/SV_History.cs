@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,19 +8,19 @@ namespace MyGame
 {
     public class SV_History : HostComponent
     {
+        static public EventHandler<bool> HistoryUpdated { get; set; }
+
         public enum Condition
         {
-            timeout, dead, clear
+            timeup, dead, clear
         }
 
         public enum HistoryValue
         {
-            movingDistance, takenDamage, shotAmmo,
+            movingDistance, takenDamage, givenDamage, destroyed, shotAmmo, gotMoney
         }
         
         static public Condition CurrentCondition { get; private set; }
-
-        static public History CurrentHistory { get; private set; }
         static public List<History> HistoryList { get; private set; }
 
         static GameObject _historyView;
@@ -27,30 +28,25 @@ namespace MyGame
         public override void Initialize()
         {
             _historyView = Resources.Load<GameObject>("UI/SvHistory");
-
             HistoryList = new List<History>();
-            CurrentHistory = new History();
 
             SetEvent(1);
         }
 
         public override void Shutdown()
         {
-            HistoryList = null;
-            CurrentHistory = null;
-
+            HistoryList = new List<History>();
             SetEvent(-1);
         }
 
         public override void Begin()
         {
-            CurrentHistory = new History();
-            HistoryList.Add(CurrentHistory);
+            HistoryList.Add(new History());
         }
 
         public override void Stop()
         {
-            CurrentHistory = null;
+            
         }
 
         static void SetEvent(int indicator)
@@ -58,23 +54,31 @@ namespace MyGame
             if (indicator > 0)
             {
                 Player.Moved += UpdateMovingDistance;
-                SV_Status.PlayerDamageTaken += UpdateDamage;
+                SV_Status.PlayerDamageTaken += UpdateTakeDamage;
+                SV_Status.PlayerGotMoney += UpdateGotMoney;
 
                 WeaponController.Shot += UpdateShotAmmo;
 
                 SV_Status.PlayerDead += ShowHistroyOnDead;
-                SV_Time.TimeOut += ShowHistoryOnTimeout;
+                SV_Time.TimeUp += ShowHistoryOnTimeup;
+
+                EnemyMain.EnemyDestroyed += UpdateDestroyed;
+                EnemyMain.EnemyDamageTaken += UpdateGivenDamage;
             }
 
             else
             {
                 Player.Moved -= UpdateMovingDistance;
-                SV_Status.PlayerDamageTaken -= UpdateDamage;
+                SV_Status.PlayerDamageTaken -= UpdateTakeDamage;
+                SV_Status.PlayerGotMoney += UpdateGotMoney;
 
                 WeaponController.Shot -= UpdateShotAmmo;
 
                 SV_Status.PlayerDead -= ShowHistroyOnDead;
-                SV_Time.TimeOut -= ShowHistoryOnTimeout;
+                SV_Time.TimeUp -= ShowHistoryOnTimeup;
+
+                EnemyMain.EnemyDestroyed -= UpdateDestroyed;
+                EnemyMain.EnemyDamageTaken -= UpdateGivenDamage;
             }
         }
 
@@ -83,17 +87,56 @@ namespace MyGame
 
         static void UpdateMovingDistance(object obj, float delta)
         {
-            CurrentHistory.valueList[HistoryValue.movingDistance] += delta;
+            if (SV_Round.RoundNumber == 0) { return; }
+            HistoryList.Last().valueList[HistoryValue.movingDistance] += delta;
         }
 
-        static void UpdateDamage(object obj, int damage)
+        static void UpdateTakeDamage(object obj, int damage)
         {
-            CurrentHistory.valueList[HistoryValue.takenDamage] += damage;
+            if (SV_Round.RoundNumber == 0) { return; }
+            HistoryList.Last().valueList[HistoryValue.takenDamage] += damage;
+
+            HistoryUpdated?.Invoke(null, false);
+        }
+
+        static void UpdateGivenDamage(object obj, float damage)
+        {
+            if (SV_Round.RoundNumber == 0) { return; }
+            HistoryList.Last().valueList[HistoryValue.givenDamage] += damage;
+
+            HistoryUpdated?.Invoke(null, false);
+        }
+
+        static void UpdateGotMoney(object obj, int money)
+        {
+            if (SV_Round.RoundNumber == 0) { return; }
+            HistoryList.Last().valueList[HistoryValue.gotMoney] += money;
+
+            HistoryUpdated?.Invoke(null, false);
         }
 
         static void UpdateShotAmmo(object obj, Vector3 direction)
         {
-            CurrentHistory.valueList[HistoryValue.shotAmmo]++;
+            if (SV_Round.RoundNumber == 0) { return; }
+            HistoryList.Last().valueList[HistoryValue.shotAmmo]++;
+
+            HistoryUpdated?.Invoke(null, false);
+        }
+
+        static void UpdateDestroyed(object obj, EnemyMain main)
+        {
+            if (SV_Round.RoundNumber == 0) { return; }
+            HistoryList.Last().valueList[HistoryValue.destroyed]++;
+
+            HistoryUpdated?.Invoke(null, false);
+        }
+
+        static public void UpdateBuyList(Dictionary<ShopItem, int> buyList)
+        {
+            if (SV_Round.RoundNumber == 0) { return; }
+            HistoryList.Last().buyList = new Dictionary<ShopItem, int>(buyList);
+
+            HistoryUpdated?.Invoke(null, false);
         }
 
         //
@@ -105,9 +148,15 @@ namespace MyGame
             ShowHistory();
         }
 
-        static void ShowHistoryOnTimeout(object obj, bool mute)
+        static void ShowHistoryOnTimeup(object obj, bool mute)
         {
-            CurrentCondition = Condition.timeout;
+            CurrentCondition = Condition.timeup;
+            ShowHistory();
+        }
+
+        static public void ShowHistoryOnClear()
+        {
+            CurrentCondition = Condition.clear;
             ShowHistory();
         }
 

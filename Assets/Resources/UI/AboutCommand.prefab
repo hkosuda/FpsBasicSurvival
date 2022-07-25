@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4555556491582691147}
   - component: {fileID: 7277039887404957094}
   - component: {fileID: 2031855911175399717}
+  - component: {fileID: 2433220392419001957}
   m_Layer: 0
   m_Name: VScrollbar
   m_TagString: Untagged
@@ -121,11 +122,23 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2927526085448266434}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9994686
+  m_Size: 0.9999966
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2433220392419001957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436513479147335188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02af35978b5a85f4fa56b2d95b7af718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &599728257815976341
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000004620763}
+  m_AnchoredPosition: {x: 0, y: 0.00043585547}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2966322250389792140
@@ -887,7 +900,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!114 &3812935872653026640
 MonoBehaviour:
@@ -1369,6 +1382,7 @@ GameObject:
   - component: {fileID: 555186415303487667}
   - component: {fileID: 2120828589721082832}
   - component: {fileID: 4288346379641122053}
+  - component: {fileID: 7453362994885978514}
   m_Layer: 0
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1502,6 +1516,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b0fc3891010174fb94cd4471af250c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7453362994885978514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8324041755801792102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3255dab17300d994398f0404cd2c07ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8387183161174766784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1614,7 @@ GameObject:
   - component: {fileID: 4947491081010428151}
   m_Layer: 0
   m_Name: AboutCommand
-  m_TagString: Untagged
+  m_TagString: Window
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

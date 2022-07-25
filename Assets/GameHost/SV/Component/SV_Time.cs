@@ -7,7 +7,7 @@ namespace MyGame
 {
     public class SV_Time : HostComponent
     {
-        static public EventHandler<bool> TimeOut { get; set; }
+        static public EventHandler<bool> TimeUp { get; set; }
         static public float TimeRemain { get; private set; }
 
         public override void Initialize()
@@ -83,7 +83,7 @@ namespace MyGame
                     var text = TxtUtil.C(TxtUtil.SecMSec(0.0f), Clr.red);
                     SVUI_Time.UpdateText(text);
 
-                    TimeOut?.Invoke(null, false);
+                    TimeUp?.Invoke(null, false);
                 }
             }
         }

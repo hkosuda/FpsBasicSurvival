@@ -24,7 +24,7 @@ namespace MyGame
             ValueUpdated?.Invoke(null, value);
         }
 
-        static void RequestCommand()
+        static public void RequestCommand()
         {
             var value = inputField.text;
             if (value.Trim() == "") { return; }

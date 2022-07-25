@@ -7,12 +7,22 @@ namespace MyGame
 {
     public class SV_Seed : HostComponent
     {
-        static public int BaseSeed { get; private set; } = 3000;
+        static public int FixedSeedValue { get; private set; } = 3000;
+
+        static public bool FixedSeed { get; private set; }
         static public int Seed { get; private set; }
 
         public override void Initialize()
         {
-            Seed = BaseSeed;
+            if (FixedSeed)
+            {
+                Seed = FixedSeedValue;
+            }
+
+            else
+            {
+                Seed = DateTime.Now.Millisecond;
+            }
         }
 
         public override void Shutdown()
@@ -22,30 +32,30 @@ namespace MyGame
 
         public override void Begin()
         {
-            Seed = BaseSeed + SV_Round.RoundNumber;
-        }
-
-        static public void Init(int seed = 0)
-        {
-            if (Seed > 0)
+            if (FixedSeed)
             {
-                UnityEngine.Random.InitState(Seed + seed);
+                Seed = FixedSeedValue + SV_Round.RoundNumber;
             }
 
             else
             {
-                var now = DateTime.Now.Millisecond;
-
-                if (seed > 0)
-                {
-                    UnityEngine.Random.InitState(now + seed);
-                }
-
-                else
-                {
-                    UnityEngine.Random.InitState(now);
-                }
+                Seed = DateTime.Now.Millisecond + SV_Round.RoundNumber;
             }
+        }
+
+        static public void SwitchSeedMode(bool status)
+        {
+            FixedSeed = status;
+        }
+
+        static public void SetFixedSeedValue(int seed)
+        {
+            FixedSeedValue = seed;
+        }
+
+        static public void Init(int add = 0)
+        {
+            UnityEngine.Random.InitState(Seed + add);
         }
     }
 }

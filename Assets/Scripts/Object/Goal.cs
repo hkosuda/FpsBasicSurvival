@@ -18,10 +18,35 @@ namespace MyGame
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.layer != Const.playerLayer) { return; }
-            if (SV_Round.RoundNumber > 0 && SV_Round.CurrentKey < SvParams.GetInt(SvParam.require_keys)) { return; }
 
-            TimerSystem.Pause();
-            SV_ShopItem.BeginShopping();
+            if (SV_Round.RoundNumber == 0)
+            {
+                TimerSystem.Pause();
+                SV_ShopItem.BeginShopping();
+            }
+
+            else
+            {
+                if (SV_Round.CurrentKey < SvParams.GetInt(SvParam.require_keys))
+                {
+                    SVUI_Message.ShowAlert("キーの数が不十分です");
+                }
+
+                else
+                {
+                    if (SV_Round.RoundNumber == SvParams.GetInt(SvParam.clear_round))
+                    {
+                        TimerSystem.Pause();
+                        SV_History.ShowHistoryOnClear();
+                    }
+
+                    else
+                    {
+                        TimerSystem.Pause();
+                        SV_ShopItem.BeginShopping();
+                    }
+                }
+            }
         }
     }
 }
