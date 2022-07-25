@@ -226,7 +226,7 @@ namespace MyGame
             }
         }
 
-        static Dictionary<SvParam, float> eazyParamList = new Dictionary<SvParam, float>()
+        static readonly Dictionary<SvParam, float> eazyParamList = new Dictionary<SvParam, float>()
         {
             //
             // shop items

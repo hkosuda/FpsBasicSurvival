@@ -40,7 +40,7 @@ namespace MyGame
 
         static void PlayItemSound(object obj, MineMain mine)
         {
-            audioSource.volume = 0.5f;
+            audioSource.volume = 0.4f;
             audioSource.PlayOneShot(clip);
         }
     }

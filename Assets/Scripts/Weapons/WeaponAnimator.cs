@@ -40,6 +40,7 @@ namespace MyGame
                 WeaponController.Shot += BeginShotAnimation;
 
                 AK_Reload.ReloadingBegin += BeginReloadingAnimation;
+                M9_Availability.InspectBegin += BeginInspectAnimation;
             }
 
             else
@@ -50,6 +51,7 @@ namespace MyGame
                 WeaponController.Shot -= BeginShotAnimation;
 
                 AK_Reload.ReloadingBegin -= BeginReloadingAnimation;
+                M9_Availability.InspectBegin -= BeginInspectAnimation;
             }
         }
         
@@ -129,6 +131,15 @@ namespace MyGame
         {
             animator.speed = SV_Status.WeaponSpeed();
             animator.SetTrigger("ReloadAk");
+        }
+
+        static void BeginInspectAnimation(object obj, bool mute)
+        {
+            Debug.Log("Begin");
+            if (CurrentWeapon == AnimationWeapon.bar) { return; }
+
+            animator.speed = 1.0f;
+            animator.SetTrigger("InspectM9");
         }
     }
 }
