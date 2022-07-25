@@ -19,6 +19,12 @@ namespace MyGame
         static public readonly int playerLayer = 9;
 
         //
+        // ak
+
+        static public readonly int ak_defaultMaxAmmoInMag = 30;
+        static public readonly int ak_defaultMaxAmmoInBag = 150;
+
+        //
         // params
 
         static public readonly float ak_firing_interval = 0.095f;

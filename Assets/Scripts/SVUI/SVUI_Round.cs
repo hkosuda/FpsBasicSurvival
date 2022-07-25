@@ -8,7 +8,9 @@ namespace MyGame
     public class SVUI_Round : MonoBehaviour
     {
         static TextMeshProUGUI roundText;
+
         static int currentRound;
+        static int currentMaxRound;
 
         private void Awake()
         {
@@ -22,16 +24,18 @@ namespace MyGame
 
         void Update()
         {
-            if (currentRound != SV_Round.RoundNumber)
+            if (currentRound != SV_Round.RoundNumber || currentMaxRound != SvParams.GetInt(SvParam.clear_round))
             {
                 currentRound = SV_Round.RoundNumber;
+                currentMaxRound = SvParams.GetInt(SvParam.clear_round);
+
                 UpdateRoundText();
             }
         }
 
         static void UpdateRoundText()
         {
-            roundText.text = "Round " + SV_Round.RoundNumber.ToString() + " / " + SvParams.GetInt(SvParam.clear_round).ToString();
+            roundText.text = "Round " + SV_Round.RoundNumber.ToString() + " / " + currentMaxRound.ToString();
         }
     }
 }

@@ -33,6 +33,9 @@ namespace MyGame
         {
             if (SV_Round.RoundNumber == 0)
             {
+                AK_Availability.MaxAmmoInMag = Const.ak_defaultMaxAmmoInMag;
+                AK_Availability.MaxAmmoInBag = Const.ak_defaultMaxAmmoInBag;
+
                 AK_Availability.AmmoInBag = AK_Availability.MaxAmmoInBag;
                 DE_Availability.AmmoInMag = DE_Availability.MaxAmmoInMag;
             }

@@ -13,11 +13,11 @@ namespace MyGame
         static public float ShootingIntervalRemain { get; private set; }
         static public float PreparingTimeRemain { get; private set; }
 
-        static public int AmmoInMag { get; set; } = 30;
-        static public int AmmoInBag { get; set; } = 150;
+        static public int AmmoInMag { get; set; } = Const.ak_defaultMaxAmmoInMag;
+        static public int AmmoInBag { get; set; } = Const.ak_defaultMaxAmmoInBag;
 
-        static public int MaxAmmoInMag { get; set; } = 30;
-        static public int MaxAmmoInBag { get; set; } = 150;
+        static public int MaxAmmoInMag { get; set; } = Const.ak_defaultMaxAmmoInMag;
+        static public int MaxAmmoInBag { get; set; } = Const.ak_defaultMaxAmmoInBag;
 
         public override void Initialize()
         {

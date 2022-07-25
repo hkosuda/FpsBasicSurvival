@@ -41,15 +41,16 @@ namespace MyGame
         {
             if (InputSystem.CheckInput(Keyconfig.KeybindList[KeyAction.information], false))
             {
+                var prev = Active;
+
+                Active = true;
                 canvas.SetActive(true);
 
                 // must be after of 'set_active true' for waiting 'awake' of tab_info_content_manager
-                if (Active == false)
+                if (prev == false)
                 {
                     TabInfoContent.UpdateContent(null, false);
                 }
-
-                Active = true;
             }
 
             else

@@ -9,7 +9,7 @@ namespace MyGame
     {
         static public int FixedSeedValue { get; private set; } = 3000;
 
-        static public bool FixedSeed { get; private set; }
+        static public bool FixedSeed { get; private set; } = true;
         static public int Seed { get; private set; }
 
         public override void Initialize()
@@ -41,6 +41,8 @@ namespace MyGame
             {
                 Seed = DateTime.Now.Millisecond + SV_Round.RoundNumber;
             }
+
+            Debug.Log("Current Seed : " + Seed.ToString());
         }
 
         static public void SwitchSeedMode(bool status)

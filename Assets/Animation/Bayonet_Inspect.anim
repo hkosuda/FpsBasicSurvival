@@ -10175,7 +10175,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: r_hand/Origin_Arm
+    path: r_hand/Origin_Arm/Origin_Body/Origin_Weapon_Knife
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -10185,7 +10185,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: r_hand/Origin_Arm
+    path: r_hand/Origin_Arm/Origin_Body/Origin_Weapon_Knife
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -10195,7 +10195,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: r_hand/Origin_Arm
+    path: r_hand/Origin_Arm/Origin_Body/Origin_Weapon_Knife
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -10565,7 +10565,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: r_hand/Origin_Arm/Origin_Body/Origin_Weapon_Knife
+    path: r_hand/Origin_Arm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -10575,7 +10575,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: r_hand/Origin_Arm/Origin_Body/Origin_Weapon_Knife
+    path: r_hand/Origin_Arm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -10585,7 +10585,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: r_hand/Origin_Arm/Origin_Body/Origin_Weapon_Knife
+    path: r_hand/Origin_Arm
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
