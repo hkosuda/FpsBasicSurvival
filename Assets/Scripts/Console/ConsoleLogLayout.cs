@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace MyGame
 {
     public class ConsoleLogLayout : MonoBehaviour
     {
+        static public EventHandler<bool> LayoutEnd { get; set; }
+
         static readonly int vLayoutFrameBuffer = 2;
         static readonly int sizeFilterFrameBuffer = 2;
 
@@ -73,6 +76,8 @@ namespace MyGame
                 vLayout.SetLayoutVertical();
 
                 sizeFilterFrameBufferRemain = sizeFilterFrameBuffer;
+
+                LayoutEnd?.Invoke(null, false);
             }
         }
 

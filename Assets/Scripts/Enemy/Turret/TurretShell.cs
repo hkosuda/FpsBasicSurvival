@@ -60,34 +60,25 @@ namespace MyGame
 
         private void OnTriggerStay(Collider other)
         {
-            string tag = other.gameObject.tag;
+            var tag = other.gameObject.tag;
 
-            if (tag == "Turret")
-            {
-                return;
-            }
-
-            if (tag == "Player")
+            if (other.gameObject.layer == Const.playerLayer)
             {
                 DamageProcessing();
             }
 
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {
-            var tag = collision.gameObject.tag;
-
-            if (tag == "Turret")
+            if (tag == "Enemy")
             {
                 return;
             }
 
-            Destroy(gameObject);
+            else
+            {
+                if (pastTime > 0.05f)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
 
         void DamageProcessing()
@@ -97,7 +88,7 @@ namespace MyGame
 
             var damage = defaultDamage * (1.0f + rate * SV_Round.RoundNumber);
 
-           EnemyMain.EnemyGivenDamage?.Invoke(null, damage);
+            EnemyMain.EnemyGivenDamage?.Invoke(null, damage);
             Destroy(gameObject);
         }
 

@@ -11,7 +11,12 @@ namespace MyGame
             componentList = new List<HostComponent>()
             {
                 new BHop_Command(),
+                new BHop_Back(),
+
                 new Square_Map(),
+
+                new SV_Round(),
+                new SV_Weapon(),
             };
         }
     }

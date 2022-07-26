@@ -15,6 +15,8 @@ namespace MyGame
         static AudioClip ak_lever;
 
         static AudioClip de_shooting;
+        static AudioClip de_takeout;
+
         static AudioClip m9_takeout;
 
         static AudioClip empty;
@@ -29,6 +31,9 @@ namespace MyGame
             ak_lever = GetClip("ak_lever");
 
             de_shooting = GetClip("de_shooting");
+            de_takeout = GetClip("de_takeout");
+
+            m9_takeout = GetClip("m9_takeout");
 
             empty = GetClip("empty");
 
@@ -104,6 +109,17 @@ namespace MyGame
         {
             audioSource.volume = Params.volume_shooting;
             audioSource.PlayOneShot(ak_lever);
+        }
+
+        void PlayDeTakeoutSound()
+        {
+            // no sound effect
+        }
+
+        void PlayM9TakeoutSound()
+        {
+            audioSource.volume = 0.7f;
+            audioSource.PlayOneShot(m9_takeout);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace MyGame
     {
         public BackCommand(string commandName) : base(commandName)
         {
-            commandName = "back";
             description = "最後に到達したチェックポイントまで戻ります．値を指定すると，その値に対応するチェックポイントまで戻ります．";
             detail = "単に'back'として実行すると，最後に到達したチェックポイントまで戻ります．\n" +
                 "'back 1'など，値を指定して実行するとその値に対応するチェックポイントまで戻ります．チェックポイントの番号は，" +

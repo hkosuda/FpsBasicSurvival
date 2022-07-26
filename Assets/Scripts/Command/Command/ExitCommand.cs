@@ -8,7 +8,7 @@ namespace MyGame
     {
         public ExitCommand(string name) : base(name)
         {
-
+            description = "ƒRƒ“ƒ\[ƒ‹‚ğ•Â‚¶‚Ü‚·";
         }
 
         public override List<string> AvailableValues(List<string> values)

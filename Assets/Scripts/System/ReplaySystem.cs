@@ -13,6 +13,8 @@ namespace MyGame
         static public float PastTime { get; private set; }
         static public float[] InterpolatedData { get; private set; }
 
+        static public float Speed { get; private set; }
+
         static public float EndTime { get; private set; }
 
         static List<float[]> dataList;
@@ -54,7 +56,7 @@ namespace MyGame
         {
             if (dataList == null) { Debug.Log("NULL"); return; }
 
-            PastTime += dt;
+            PastTime += dt * Speed;
             if (PastTime > EndTime) { PastTime = EndTime; }
 
             SetPosition();
@@ -83,18 +85,17 @@ namespace MyGame
                 controller = Instantiate(_controller);
             }
 
-            Debug.Log(cachedData.dataList.Count);
-
             dataList = cachedData.dataList;
             playerStatus = new PlayerStatus();
 
             PastTime = 0.0f;
             EndTime = dataList.Last()[0];
-            Debug.Log(EndTime);
             dataList = cachedData.dataList;
 
             SetPosition();
             ReplayBegin?.Invoke(null, true);
+
+            Speed = 1.0f;
 
             return true;
         }
@@ -154,6 +155,12 @@ namespace MyGame
             SetPosition();
         }
 
+        static public void SetSpeed(float speed)
+        {
+            speed = Calcf.Clip(0.1f, 5.0f, speed);
+            Speed = speed;
+        }
+
         static void SetPosition()
         {
             if (dataList == null) { return; }
@@ -193,7 +200,8 @@ namespace MyGame
 
         public void RollBack()
         {
-
+            Player.SetPosition(position, eulerAngle);
+            Player.Rb.velocity = velocity;
         }
     }
 }

@@ -14,7 +14,9 @@ namespace MyGame
 
         public BeginCommand(string commandName) : base(commandName)
         {
-
+            description = "任意のゲームモードに変更します．";
+            detail = "利用可能なゲームモードは，'survival', 'ez_tower', 'ez_stream', 'ez_square' があります．" +
+                "survivalはこのゲームのメインモードとなるサバイバルゲームです．その他のモードは，BHopやサーフで遊ぶためのマップとなります．";
         }
 
         public override List<string> AvailableValues(List<string> values)

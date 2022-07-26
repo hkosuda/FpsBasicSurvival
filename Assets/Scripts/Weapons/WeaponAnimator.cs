@@ -135,7 +135,6 @@ namespace MyGame
 
         static void BeginInspectAnimation(object obj, bool mute)
         {
-            Debug.Log("Begin");
             if (CurrentWeapon == AnimationWeapon.bar) { return; }
 
             animator.speed = 1.0f;

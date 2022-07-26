@@ -64,6 +64,7 @@ namespace MyGame
             }
 
             inputField.selectionAnchorPosition = inputField.selectionFocusPosition;
+            inputField.ActivateInputField();
         }
 
         static void UpdateInputFieldOnUnknownCommand(object obj, string sentence)

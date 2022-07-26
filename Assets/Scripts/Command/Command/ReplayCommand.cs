@@ -8,7 +8,8 @@ namespace MyGame
     {
         public ReplayCommand(string commandName) : base(commandName)
         {
-
+            description = "記録したプレイヤーの動きを再生します．";
+            detail = "replayコマンドを利用するには，'recorder'を使用して事前にデータを記録しておく必要があります．";
         }
 
         public override List<string> AvailableValues(List<string> values)

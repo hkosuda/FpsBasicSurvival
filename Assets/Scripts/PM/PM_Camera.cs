@@ -6,6 +6,8 @@ namespace MyGame
 {
     public class PM_Camera : Controller
     {
+        static readonly float omegaThreshold = 1260.0f;
+
         static Transform tr;
 
         static public float addRotX;
@@ -13,6 +15,9 @@ namespace MyGame
 
         static float degRotX;
         static float degRotY;
+
+        static float dxPrev;
+        static float dyPrev;
 
         public override void Initialize()
         {
@@ -25,6 +30,9 @@ namespace MyGame
             var dx = Input.GetAxis("Mouse Y") * Params.mouse_sens;
             var dy = Input.GetAxis("Mouse X") * Params.mouse_sens;
 
+            if (Mathf.Abs(dx) / dt > omegaThreshold) { dx = dxPrev; }
+            if (Mathf.Abs(dy) / dt > omegaThreshold) { dy = dyPrev; }
+
             degRotX -= dx;
             degRotY += dy;
 
@@ -34,6 +42,9 @@ namespace MyGame
             if (rotX < -90.0f) { degRotX = -90.0f - addRotX; rotX = -90.0f; }
 
             tr.eulerAngles = new Vector3(rotX, degRotY, 0.0f);
+
+            dxPrev = dx;
+            dyPrev = dy;
         }
 
         static public Vector3 EulerAngle()

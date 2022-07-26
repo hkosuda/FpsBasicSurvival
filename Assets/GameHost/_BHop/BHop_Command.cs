@@ -24,9 +24,10 @@ namespace MyGame
             {
                 CommandReceiver.AddCommand(command);
             }
-
-            CommandReceiver.RequestCommand("bind z \"back\"", null);
-            CommandReceiver.RequestCommand("toggle r \"recorder start\" \"recorder end\"", null);
+#if UNITY_EDITOR
+            CommandReceiver.RequestCommand("bind z \"back -f\" -e", null);
+            CommandReceiver.RequestCommand("toggle e \"recorder start -f\" \"recorder end -f\" -e", null);
+#endif
         }
 
         public override void Shutdown()

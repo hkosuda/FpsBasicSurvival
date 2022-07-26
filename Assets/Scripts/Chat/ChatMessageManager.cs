@@ -64,7 +64,7 @@ namespace MyGame
         {
             if (chatMessageList == null) { chatMessageList = new List<ChatMessage>(); }
             if (_chatMessage == null) { _chatMessage = Resources.Load<GameObject>("UiComponent/ChatMessage"); }
-            //if (tracer.option == Tracer.Option.none || tracer.option == Tracer.Option.mute) { return; }
+            if (tracer.option == Tracer.Option.none || tracer.option == Tracer.Option.mute) { return; }
 
             SendChatMessage(tracer.FullText());
         }

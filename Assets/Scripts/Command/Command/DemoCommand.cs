@@ -14,10 +14,9 @@ namespace MyGame
         public DemoCommand(string commandName) : base(commandName)
         {
             commandName = "demo";
-            description = "デモを再生する機能を提供します．\n";
+            description = "デモを再生する機能を提供します．";
             detail = "デモとは，あらかじめ用意されたデータのことです．主にそのマップの攻略方法を確認する際に活用します．\n" +
-                "'replay'と同様に，データのマップ情報が現在のマップと異なる場合，実行時にマップが切り替わってしまうので注意してください．\n" +
-                "なお，デモの再生と同時にゴーストも起動します．";
+                "'replay'と同様に，データのマップ情報が現在のマップと異なる場合，実行時にマップが切り替わってしまうので注意してください．";
 
 #if UNITY_EDITOR
             foreach (var value in availableValues)

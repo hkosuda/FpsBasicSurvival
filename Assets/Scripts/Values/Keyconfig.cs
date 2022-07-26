@@ -34,9 +34,9 @@ namespace MyGame
             { KeyAction.menu, new Key(KeyCode.M) },
             { KeyAction.console, new Key(KeyCode.K) },
             { KeyAction.information, new Key(KeyCode.Tab) },
-            { KeyAction.ak, new Key(KeyCode.None, 1) },
-            { KeyAction.de, new Key(KeyCode.None, -1) },
-            { KeyAction.m9, new Key(KeyCode.Q) },
+            { KeyAction.ak, new Key(KeyCode.Alpha1) },
+            { KeyAction.de, new Key(KeyCode.Alpha2) },
+            { KeyAction.m9, new Key(KeyCode.Alpha3) },
         };
 
         static public Dictionary<KeyAction, Key> KeybindList { get; private set; } = new Dictionary<KeyAction, Key>(defaultKeybindList);

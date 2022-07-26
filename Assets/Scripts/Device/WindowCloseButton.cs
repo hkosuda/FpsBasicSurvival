@@ -9,7 +9,7 @@ namespace MyGame
     {
         void Start()
         {
-            var button = gameObject.GetComponent<Button>();
+            var button = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject. GetComponent<Button>();
             button.onClick.AddListener(DestroyMyself);
         }
 

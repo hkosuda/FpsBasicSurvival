@@ -119,7 +119,7 @@ namespace MyGame
             code = Grouping(code);
             code = CorrectSentence(code);
 
-            var tracer = new Tracer(_tracer, Tracer.Option.none);
+            var tracer = new Tracer(_tracer, MakeOption(options));
             tracer.AddMessage("> " + code, Tracer.Level.normal, 0);
 
             if (CommandList == null || CommandList.Count == 0) { NotAvailable(tracer); RequestEnd?.Invoke(null, tracer); return tracer; }
@@ -161,6 +161,23 @@ namespace MyGame
                 }
 
                 return null;
+            }
+
+            // - inner function
+            static Tracer.Option MakeOption(List<string> options)
+            {
+                if (options == null || options.Count == 0) { return Tracer.Option.none; }
+
+                for(var n = options.Count - 1; n > -1; n--)
+                {
+                    var option = options[n].ToLower();
+
+                    if (option == "-m" || option == "-mute") { return Tracer.Option.mute; }
+                    if (option == "-e" || option == "-echo") { return Tracer.Option.echo; }
+                    if (option == "-f" || option == "-flash") { return Tracer.Option.flash; }
+                }
+
+                return Tracer.Option.none;
             }
         }
 
