@@ -15,6 +15,12 @@ namespace MyGame
 
     public abstract class GameHost
     {
+        static public EventHandler<bool> HostInitialized { get; set; }
+        static public EventHandler<bool> HostShutdown { get; set; }
+        static public EventHandler<bool> HostBegan { get; set; }
+        static public EventHandler<bool> HostStopped { get; set; }
+
+
         static readonly string worldName = "World";
 
         public HostName HostName { get; protected set; }
@@ -48,6 +54,7 @@ namespace MyGame
             }
 
             host.Initialize();
+            HostInitialized?.Invoke(null, false);
         }
 
         static public void ShutdownHost(GameHost host)
@@ -62,6 +69,7 @@ namespace MyGame
             }
 
             host.Shutdown();
+            HostShutdown?.Invoke(null, false);
         }
 
         static public void BeginHost(GameHost host)
@@ -76,6 +84,7 @@ namespace MyGame
             }
 
             host.Begin();
+            HostBegan?.Invoke(null, false);
         }
 
         static public void StopHost(GameHost host)
@@ -90,6 +99,7 @@ namespace MyGame
             }
 
             host.Stop();
+            HostStopped?.Invoke(null, false);
         }
 
         // utility

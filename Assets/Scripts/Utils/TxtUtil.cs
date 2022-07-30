@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace MyGame
@@ -74,6 +75,19 @@ namespace MyGame
             var splitted = sentence.Split(new char[] { ' ', 'Å@' }, System.StringSplitOptions.RemoveEmptyEntries);
 
             return new List<string>(splitted);
+        }
+
+        static public string Upper(string str)
+        {
+            if (str == null || str.Length == 0) { return ""; }
+
+            return Regex.Replace(str, @"\A.", Large);
+
+            // - inner function
+            static string Large(Match match)
+            {
+                return match.Value.ToUpper();
+            }
         }
 
         static public string PaddingZero2(int n)

@@ -19,20 +19,20 @@ namespace MyGame
 
         static void SetEvent(int indicator)
         {
-            if (indicator > 0)
-            {
-                SV_Status.PlayerDamageTaken += ShowPlayerDamage;
-                EnemyMain.EnemyDamageTaken += ShowDamageInfo;
-            }
+            //if (indicator > 0)
+            //{
+            //    SV_Status.PlayerDamageTaken += ShowPlayerDamage;
+            //    EnemyMain.EnemyDamageTaken += ShowDamageInfo;
+            //}
 
-            else
-            {
-                SV_Status.PlayerDamageTaken -= ShowPlayerDamage;
-                EnemyMain.EnemyDamageTaken -= ShowDamageInfo;
-            }
+            //else
+            //{
+            //    SV_Status.PlayerDamageTaken -= ShowPlayerDamage;
+            //    EnemyMain.EnemyDamageTaken -= ShowDamageInfo;
+            //}
         }
 
-        static void ShowPlayerDamage(object obj, int damage)
+        static void ShowPlayerDamage(object obj, int[] damage)
         {
             var message = "Player got damage : " + damage;
             ChatMessageManager.SendChatMessage(message);

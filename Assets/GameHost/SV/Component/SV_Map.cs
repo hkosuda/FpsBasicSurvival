@@ -8,7 +8,7 @@ namespace MyGame
     {
         static public readonly float wall_width = 6.0f;
         static public readonly float wall_depth = 2.0f;
-        static public readonly float wall_height = 5.0f;
+        static public readonly float wall_height = 4.0f;
 
         static public GameObject MazeRoot { get; private set; }
 

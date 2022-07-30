@@ -8,6 +8,8 @@ namespace MyGame
     [RequireComponent(typeof(BoxCollider))]
     public class Goal : MonoBehaviour
     {
+        static public EventHandler<bool> GameClear { get; set; }
+
         static public EventHandler<bool> InsufficientKeys { get; set; }
 
         private void Start()
@@ -36,6 +38,8 @@ namespace MyGame
                 {
                     if (SV_Round.RoundNumber == SvParams.GetInt(SvParam.clear_round))
                     {
+                        GameClear?.Invoke(null, false);
+
                         TimerSystem.Pause();
                         SV_History.ShowHistoryOnClear();
                     }

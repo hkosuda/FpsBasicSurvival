@@ -24,6 +24,14 @@ namespace MyGame
         static public readonly int ak_defaultMaxAmmoInMag = 30;
         static public readonly int ak_defaultMaxAmmoInBag = 150;
 
+        static public readonly float ak_non_reduction_distance = 15.0f;
+        static public readonly float ak_reduction_rate = 0.12f;
+        static public readonly float ak_min_reduction_rate = 0.6f;
+
+        static public readonly float de_non_reduction_distance = 25.0f;
+        static public readonly float de_reduction_rate = 0.08f;
+        static public readonly float de_min_reduction_rate = 0.8f;
+
         //
         // params
 

@@ -118,9 +118,9 @@ namespace MyGame
             }
         }
 
-        static string DeadName(EnemyMain enemyMain)
+        static public string DeadName(EnemyMain enemyMain)
         {
-            return enemyMain.EnemyType.ToString() + "_" + TxtUtil.PaddingZero3(enemyMain.brain.ID);
+            return TxtUtil.Upper(enemyMain.EnemyType.ToString()) + "_" + TxtUtil.PaddingZero3(enemyMain.brain.ID);
         }
     }
 }

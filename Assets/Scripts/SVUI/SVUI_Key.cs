@@ -31,6 +31,8 @@ namespace MyGame
 
                     UpdateText();
                 }
+
+                return;
             }
 
             if (currentKey != SV_Round.CurrentKey || currentRequireKey != SvParams.GetInt(SvParam.require_keys))

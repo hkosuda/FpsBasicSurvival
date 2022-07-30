@@ -41,8 +41,6 @@ namespace MyGame
             {
                 Seed = DateTime.Now.Millisecond + SV_Round.RoundNumber;
             }
-
-            Debug.Log("Current Seed : " + Seed.ToString());
         }
 
         static public void SwitchSeedMode(bool status)

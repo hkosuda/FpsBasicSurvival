@@ -56,7 +56,7 @@ namespace MyGame
             {
                 var goalPosition = ShareSystem.Point2Position(SV_GoalStart.GoalPoint, 0.0f);
 
-                var path = AStar.GetPath(ShareSystem.Passable, startPosition, goalPosition);
+                var path = AStar.GetPath(ShareSystem.Passable, startPosition, goalPosition, ShareSystem.Point2Position, ShareSystem.Position2Point);
 
                 if (path.Count < 2) { return; }
 

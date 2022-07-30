@@ -4033,7 +4033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6355210617594875766}
-  - component: {fileID: 7276921946090037615}
+  - component: {fileID: 3820696451337667054}
   m_Layer: 0
   m_Name: DemoButton
   m_TagString: Untagged
@@ -4057,7 +4057,7 @@ Transform:
   m_Father: {fileID: 3754223154886947470}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &7276921946090037615
+--- !u!114 &3820696451337667054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4066,10 +4066,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6355210617594875767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 205d764d9457a1f48ac49bd575a1480f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4318ff1b8e83d0c4a87a969967016d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: ez_stream_demo
 --- !u!1 &6355210617674331032
 GameObject:
   m_ObjectHideFlags: 0

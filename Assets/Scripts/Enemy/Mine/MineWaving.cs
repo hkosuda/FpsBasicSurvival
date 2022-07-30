@@ -28,9 +28,19 @@ namespace MyGame
             // - inner function
             void SetPhase()
             {
-                var id = gameObject.GetComponent<MineBrain>().ID;
-                SV_Seed.Init(id);
-                theta = UnityEngine.Random.Range(0.0f, Mathf.PI);
+                var brain = gameObject.GetComponent<MineBrain>();
+
+                if (brain == null)
+                {
+                    theta = 0.0f;
+                }
+
+                else
+                {
+                    var id = brain.ID;
+                    SV_Seed.Init(id);
+                    theta = UnityEngine.Random.Range(0.0f, Mathf.PI);
+                }
             }
         }
 

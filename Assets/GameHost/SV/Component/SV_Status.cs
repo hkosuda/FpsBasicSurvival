@@ -22,7 +22,7 @@ namespace MyGame
         static public readonly int defaultWeaponSpeedRate = 100;
         static public readonly int defaultFiringSpeedRate = 100;
 
-        static public EventHandler<int> PlayerDamageTaken { get; set; }
+        static public EventHandler<int[]> PlayerDamageTaken { get; set; }
         static public EventHandler<bool> PlayerDead { get; set; }
         static public EventHandler<int> PlayerGotMoney { get; set; }
 
@@ -122,7 +122,7 @@ namespace MyGame
 
             // hp damage
             CurrentHP -= hpDamage;
-            PlayerDamageTaken?.Invoke(null, hpDamage);
+            PlayerDamageTaken?.Invoke(null, new int[2] { hpDamage, armorDamage });
 
             // is dead or not
             if (CurrentHP <= 0)

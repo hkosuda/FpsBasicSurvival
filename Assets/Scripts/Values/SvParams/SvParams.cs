@@ -7,7 +7,7 @@ namespace MyGame
 {
     public enum Difficulty
     {
-        eazy = 0, normal = 1, hard = 2, inferno = 3,
+        ez = 0, normal = 1, hard = 2, inferno = 3,
     }
 
     public enum SvParam
@@ -162,7 +162,7 @@ namespace MyGame
 
     static public class SvParams
     {
-        static public Difficulty CurrentDifficulty { get; private set; } = Difficulty.eazy;
+        static public Difficulty CurrentDifficulty { get; private set; } = Difficulty.ez;
 
         static Dictionary<SvParam, float> currentList;
         static bool initialized;
@@ -203,7 +203,7 @@ namespace MyGame
         {
             CheckParams();
 
-            if (CurrentDifficulty == Difficulty.eazy)
+            if (CurrentDifficulty == Difficulty.ez)
             {
                 currentList = SvParamsEazy.eazyParamList;
             }
@@ -223,9 +223,9 @@ namespace MyGame
 
         static public void SwitchDifficulty(Difficulty difficulty)
         {
-            if (difficulty == Difficulty.eazy)
+            if (difficulty == Difficulty.ez)
             {
-                CurrentDifficulty = Difficulty.eazy;
+                CurrentDifficulty = Difficulty.ez;
                 currentList = SvParamsEazy.eazyParamList;
             }
 

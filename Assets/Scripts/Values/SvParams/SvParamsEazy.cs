@@ -138,13 +138,16 @@ namespace MyGame
             // system
             
             { SvParam.initial_money, 35000 },
-            { SvParam.clear_round, 5 },
+            { SvParam.clear_round, 5 },     // production
+            //{ SvParam.clear_round, 1 },   // debug
 
             //
             // field size
 
-            { SvParam.maze_row, 11 },
-            { SvParam.maze_col, 11 },
+            { SvParam.maze_row, 11 },   // production
+            { SvParam.maze_col, 11 },   // production
+            //{ SvParam.maze_row, 7 },  // debug
+            //{ SvParam.maze_col, 7 },  // debug
             
             //
             // key, compass
@@ -153,7 +156,8 @@ namespace MyGame
             { SvParam.drop_compass, 3 },
             { SvParam.drop_items, 20 },
 
-            { SvParam.require_keys, 3 },
+            { SvParam.require_keys, 3 },    //production
+            //{ SvParam.require_keys, 0 },  // debug
         };
     }
 }

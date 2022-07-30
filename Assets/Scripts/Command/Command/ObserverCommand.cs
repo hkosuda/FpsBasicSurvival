@@ -53,7 +53,7 @@ namespace MyGame
 
         public override void Initialize()
         {
-            _virtualPlayer = Resources.Load<GameObject>("Object/VirtualPlayer"); Debug.Log(_virtualPlayer);
+            _virtualPlayer = Resources.Load<GameObject>("Object/VirtualPlayer");
         }
 
         public override void Shutdown()

@@ -10,7 +10,7 @@ namespace MyGame
     {
         static readonly Dictionary<Difficulty, Color> buttonColor = new Dictionary<Difficulty, Color>()
         {
-            { Difficulty.eazy, new Color(0.1f, 0.4f, 0.1f, 1.0f) },
+            { Difficulty.ez, new Color(0.1f, 0.4f, 0.1f, 1.0f) },
             { Difficulty.normal, new Color(0.4f, 0.4f, 0.1f, 1.0f) },
             { Difficulty.hard, new Color(0.4f, 0.25f, 0.1f, 1.0f) },
             { Difficulty.inferno, new Color(0.4f, 0.1f, 0.1f, 1.0f) },

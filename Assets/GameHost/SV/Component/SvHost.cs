@@ -22,6 +22,8 @@ namespace MyGame
                 new SV_ShopItem(),
                 new SV_History(),
                 new SV_Weapon(),
+                new SV_Notification(),
+                new SV_RoundText(),
 
 #if UNITY_EDITOR
                 //new SV_ItemDebug(),

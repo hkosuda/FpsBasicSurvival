@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 namespace MyGame
@@ -20,12 +21,16 @@ namespace MyGame
 
         static GameObject scrollContent;
 
+        static Scrollbar scrollBar;
+
         static public bool Opened { get; private set; }
 
         private void Awake()
         {
             scroll = gameObject.transform.GetChild(0).gameObject;
             simple = gameObject.transform.GetChild(1).gameObject;
+
+            scrollBar = gameObject.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Scrollbar>();
 
             scrollContent = scroll.transform.GetChild(0).GetChild(0).gameObject;
             Close(null, false);
@@ -49,6 +54,8 @@ namespace MyGame
 
                 TimerSystem.TimerPaused += Open;
                 TimerSystem.TimerResumed += Close;
+
+                ChatMessageLayout.LayoutEnd += SetBottom;
             }
 
             else
@@ -57,7 +64,14 @@ namespace MyGame
 
                 TimerSystem.TimerPaused -= Open;
                 TimerSystem.TimerResumed -= Close;
+
+                ChatMessageLayout.LayoutEnd -= SetBottom;
             }
+        }
+
+        static void SetBottom(object obj, bool mute)
+        {
+            scrollBar.value = 0.0f;
         }
 
         static void Echo(object obj, Tracer tracer)
@@ -101,6 +115,7 @@ namespace MyGame
             }
 
             ChatUpdated?.Invoke(null, false);
+            scrollBar.value = 0.0f;
         }
 
         private void Update()
@@ -123,6 +138,7 @@ namespace MyGame
         static public void Open(object obj, bool mute)
         {
             Opened = true;
+            scrollBar.value = 0.0f;
 
             scroll.SetActive(true);
             simple.SetActive(false);
@@ -165,7 +181,7 @@ namespace MyGame
 
         class ChatMessage
         {
-            static public readonly float pastTimeLimit = 3.0f;
+            static public readonly float pastTimeLimit = 4.0f;
 
             public GameObject gameObject;
             public float pastTime;

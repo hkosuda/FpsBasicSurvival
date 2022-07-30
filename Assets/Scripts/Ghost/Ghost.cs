@@ -63,7 +63,7 @@ namespace MyGame
             if (dataList == null || dataList.Count == 0) { SetVisibility(false); return; }
             if (mapName != MapSystem.CurrentMap.MapName) { SetVisibility(false); return; }
 
-            pastTime += dt; Debug.Log(pastTime);
+            pastTime += dt;
             if (pastTime > dataList.Last()[0]) { Repeat(); return; }
 
             InterpolatedData = ReplayUtil.Interpolate(pastTime, dataList);

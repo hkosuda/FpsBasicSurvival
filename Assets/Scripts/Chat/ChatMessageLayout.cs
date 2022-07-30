@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,9 @@ namespace MyGame
 {
     public class ChatMessageLayout : MonoBehaviour
     {
-        static readonly int frameBuffer = 4;
+        static public EventHandler<bool> LayoutEnd { get; set; }
+
+        static readonly int frameBuffer = 6;
 
         int frameBufferRemain;
 
@@ -72,21 +75,26 @@ namespace MyGame
         void Update()
         {
             frameBufferRemain--;
-            if (frameBufferRemain < 0) { frameBufferRemain = 0; }
+            if (frameBufferRemain < 0) { frameBufferRemain = -1; }
 
-            if (frameBufferRemain == 0)
+            if (frameBufferRemain == 2)
             {
                 sizeFilter.SetLayoutHorizontal();
                 sizeFilter.SetLayoutVertical();
             }
 
-            if (frameBufferRemain == 2)
+            if (frameBufferRemain == 4)
             {
                 vLayout.CalculateLayoutInputHorizontal();
                 vLayout.CalculateLayoutInputVertical();
 
                 vLayout.SetLayoutHorizontal();
                 vLayout.SetLayoutVertical();
+            }
+
+            if (frameBufferRemain == 0)
+            {
+                LayoutEnd?.Invoke(null, false);
             }
         }
     }

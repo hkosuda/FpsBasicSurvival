@@ -27,7 +27,7 @@ namespace MyGame
 
         public EnemyType EnemyType { get; protected set; }
         public float HP { get; protected set; }
-        
+        public List<float> DamageHistory { get; protected set; }
 
         public EnemyBrain brain;
 
@@ -55,11 +55,15 @@ namespace MyGame
             interactive.SetOnShotReaction(onShot);
 
             brain = gameObject.GetComponent<EnemyBrain>();
+            DamageHistory = new List<float>();
         }
 
         protected virtual void OnShot()
         {
-            var damage = GetDamage();
+            var distance = (Player.Myself.transform.position - gameObject.transform.position).magnitude;
+            var damage = GetDamage(distance);
+
+            DamageHistory.Add(damage);
 
             if (damage < HP)
             {
@@ -80,21 +84,36 @@ namespace MyGame
             ForceDetection();
         }
 
-        static protected float GetDamage()
+        static protected float GetDamage(float distance)
         {
             var weapon = WeaponSystem.CurrentWeapon.Weapon;
 
             if (weapon == Weapon.ak)
             {
-                return SV_Status.CurrentAkDamage();
+                var reduction = DistanceReduction(distance, Const.ak_non_reduction_distance, Const.ak_reduction_rate, Const.ak_min_reduction_rate);
+                return SV_Status.CurrentAkDamage() * reduction;
             }
 
             if (weapon == Weapon.de)
             {
+                var reduction = DistanceReduction(distance, Const.de_non_reduction_distance, Const.de_reduction_rate, Const.de_min_reduction_rate);
                 return SV_Status.CurrentDeDamage();
             }
 
             return 0.0f;
+
+            // - inner function
+            static float DistanceReduction(float distance, float nonReductionDistance, float reductionRate, float minReductionRate)
+            {
+                if (distance < nonReductionDistance) { return 1.0f; }
+
+                var offset = distance - nonReductionDistance;
+
+                var rate = 1.0f - (reductionRate * 0.1f) * offset;
+                rate = Calcf.Clip(minReductionRate, 1.0f, rate);
+
+                return rate;
+            }
         }
 
         void ForceDetection()

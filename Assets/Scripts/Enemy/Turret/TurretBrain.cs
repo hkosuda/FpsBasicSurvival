@@ -41,7 +41,10 @@ namespace MyGame
 
                 if (SearchStrikerInRoamingMode(Const.enemy_detect_range))
                 {
-                    BeginTracking();
+                    Detected?.Invoke(null, this);
+                    PlayerDetected?.Invoke(null, this);
+
+                    BeginShooting();
                 }
 
                 else
@@ -64,7 +67,7 @@ namespace MyGame
 
                 else
                 {
-                    mode = Mode.tracking;
+                    BeginTracking();
                 }
             }
 
@@ -74,12 +77,7 @@ namespace MyGame
 
                 if (SearchStrikerInTrackingMode())
                 {
-                    missingTime = 0.0f;
-                    mode = Mode.shooting;
-
-                    shootingSystem.ResetCooldownTime();
-
-                    Face2Target();
+                    BeginShooting();
                 }
 
                 else
@@ -127,20 +125,53 @@ namespace MyGame
             return hit.collider.gameObject.layer == Const.playerLayer;
         }
 
-        public void BeginTracking()
+        void BeginTracking()
         {
-            mode = Mode.shooting;
+            if (!IsTracking)
+            {
+                Detected?.Invoke(null, this);
+                PlayerDetected?.Invoke(null, this);
+            }
+
+            mode = Mode.tracking;
+            IsTracking = true;
+
             missingTime = 0.0f;
             movingSystem.SetPath(new List<Vector3>());
 
             shootingSystem.ResetCooldownTime();
+            Face2Target();
 
+            
+        }
+
+        void BeginShooting()
+        {
+            if (!IsTracking)
+            {
+                Detected?.Invoke(null, this);
+                PlayerDetected?.Invoke(null, this);
+            }
+
+            mode = Mode.shooting;
             IsTracking = true;
 
-            Detected?.Invoke(null, this);
-            PlayerDetected?.Invoke(null, this);
+            missingTime = 0.0f;
+            movingSystem.SetPath(new List<Vector3>());
 
+            shootingSystem.ResetCooldownTime();
             Face2Target();
+        }
+
+        public void TurnOnTrackingMode()
+        {
+            if (!IsTracking)
+            {
+                Detected?.Invoke(null, this);
+                PlayerDetected?.Invoke(null, this);
+            }
+
+            BeginTracking();
         }
 
         public override void ForceDetection()

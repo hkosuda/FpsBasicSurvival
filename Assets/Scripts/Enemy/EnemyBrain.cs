@@ -8,7 +8,7 @@ namespace MyGame
     public abstract class EnemyBrain : MonoBehaviour
     {
         static protected readonly int updateCycle = 6;
-        static protected readonly float yOffset = 1.0f;
+        static protected readonly float yOffset = 0.3f;
 
         static public EventHandler<EnemyBrain> PlayerDetected { get; set; }
 
@@ -132,7 +132,7 @@ namespace MyGame
                 SetSeed();
 
                 var field = ShareSystem.Passable;
-                movingSystem.SetPath(AStar.GetPath(field, startPosition, goalPosition));
+                movingSystem.SetPath(AStar.GetPath(field, startPosition, goalPosition, ShareSystem.Point2Position, ShareSystem.Position2Point));
             }
 
             movingSystem.MoveOn(dt, RoamingSpeed);

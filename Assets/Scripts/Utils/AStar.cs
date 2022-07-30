@@ -9,13 +9,14 @@ namespace MyGame
         static readonly int[,] crossPoints = new int[4, 2] { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
         static int[,] boxPoints = new int[8, 2] { { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 
-        static public List<Vector3> GetPath(bool[,] field, Vector3 startPosition, Vector3 goalPosition, bool diagMoving = false, float height = 0.0f)
+        static public List<Vector3> GetPath(bool[,] field, Vector3 startPosition, Vector3 goalPosition, 
+            PointToPosition point2Position, PositionToPoint position2Point, bool diagMoving = false, float height = 0.0f)
         {
             startPosition = new Vector3(startPosition.x, height, startPosition.z);
             goalPosition = new Vector3(goalPosition.x, height, goalPosition.z);
 
-            var start = ShareSystem.Position2Point(startPosition);
-            var goal = ShareSystem.Position2Point(goalPosition);
+            var start = position2Point(startPosition);
+            var goal = position2Point(goalPosition);
 
             int row = field.GetLength(0);
             int col = field.GetLength(1);
@@ -90,7 +91,7 @@ namespace MyGame
 
             var pointPath = NodeUnpack(node, start);
 
-            return CorrectToPosition(pointPath, startPosition, goalPosition, height);
+            return CorrectToPosition(pointPath, startPosition, goalPosition, height, point2Position);
 
             //
             // functions
@@ -114,7 +115,7 @@ namespace MyGame
                 return path;
             }
 
-            static List<Vector3> CorrectToPosition(List<int[]> pointPath, Vector3 startPosition, Vector3 goalPosition, float height)
+            static List<Vector3> CorrectToPosition(List<int[]> pointPath, Vector3 startPosition, Vector3 goalPosition, float height, PointToPosition point2Position)
             {
                 if (pointPath.Count == 0) { return new List<Vector3>() { startPosition }; }
                 pointPath.RemoveAt(0);
@@ -128,7 +129,7 @@ namespace MyGame
 
                 foreach (var p in pointPath)
                 {
-                    positionPath.Add(ShareSystem.Point2Position(p, height));
+                    positionPath.Add(point2Position(p, height));
                 }
 
                 positionPath.Add(goalPosition);

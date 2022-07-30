@@ -91,10 +91,10 @@ namespace MyGame
             HistoryList.Last().valueList[HistoryValue.movingDistance] += delta;
         }
 
-        static void UpdateTakeDamage(object obj, int damage)
+        static void UpdateTakeDamage(object obj, int[] damage)
         {
             if (SV_Round.RoundNumber == 0) { return; }
-            HistoryList.Last().valueList[HistoryValue.takenDamage] += damage;
+            HistoryList.Last().valueList[HistoryValue.takenDamage] += damage[0];
 
             HistoryUpdated?.Invoke(null, false);
         }
@@ -133,9 +133,7 @@ namespace MyGame
 
         static public void UpdateBuyList(Dictionary<ShopItem, int> buyList)
         {
-            if (SV_Round.RoundNumber == 0) { return; }
             HistoryList.Last().buyList = new Dictionary<ShopItem, int>(buyList);
-
             HistoryUpdated?.Invoke(null, false);
         }
 

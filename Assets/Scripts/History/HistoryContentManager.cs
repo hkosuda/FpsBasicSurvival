@@ -149,7 +149,7 @@ namespace MyGame
                 {
                     if (buy.Value > 0)
                     {
-                        buyInfo += ShopItemButton.itemNames[buy.Key] + "\t : " + buy.Value.ToString() + "\n";
+                        buyInfo += ShopItemButton.itemNames[buy.Key] + " : " + buy.Value.ToString() + "\n";
                     }
                 }
 

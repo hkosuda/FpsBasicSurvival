@@ -54,7 +54,7 @@ namespace MyGame
 
         static void UpdateMethod(object obj, float dt)
         {
-            if (dataList == null) { Debug.Log("NULL"); return; }
+            if (dataList == null) { return; }
 
             PastTime += dt * Speed;
             if (PastTime > EndTime) { PastTime = EndTime; }

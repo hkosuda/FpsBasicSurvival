@@ -9,6 +9,9 @@ namespace MyGame
     public class SVUI_Alert : MonoBehaviour
     {
         static readonly float alphaOffset = 0.05f;
+        static readonly int widthOffset = 10;
+
+        static readonly int maxWidth = 100;
 
         static GameObject myself;
         static GameObject _alert;
@@ -92,6 +95,8 @@ namespace MyGame
                 return;
             }
 
+            // rotation
+
             var dx = target.transform.position.x - Player.Myself.transform.position.x;
             var dz = target.transform.position.z - Player.Myself.transform.position.z;
 
@@ -102,7 +107,17 @@ namespace MyGame
 
             rootRect.rotation = Quaternion.Euler(0, 0, -dt);
 
+            // width
+
             var distance = new Vector2(dx, dz).magnitude;
+            var level = -(maxWidth - widthOffset) / Const.enemy_detect_range;
+
+            var width = level * distance + maxWidth;
+
+            rootRect.sizeDelta = new Vector2(width, 100.0f);
+
+            // alpha
+
             var alpha = GetAlpha(distance);
             var c = image.color;
 

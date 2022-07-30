@@ -46,9 +46,9 @@ namespace MyGame
             }
         }
 
-        static void BeginEffect(object obj, int damage)
+        static void BeginEffect(object obj, int[] damage)
         {
-            var damageRate = Calcf.Clip(0.0f, 1.0f, Calcf.SafetyDiv(damage, MineDamage(), 1.0f));
+            var damageRate = Calcf.Clip(0.0f, 1.0f, Calcf.SafetyDiv(damage[0], MineDamage(), 1.0f));
             damageRate = Mathf.Pow(damageRate, 0.5f);
 
             effectTime = maxTime * damageRate;

@@ -15,10 +15,10 @@ namespace MyGame
         }
 
         static readonly string end = "end";
-        static readonly string accuracy = "f5";
+        static readonly string accuracy = "f3";
 
         static public readonly string folderName = "Record";
-        static public readonly string extension = ".record.txt";
+        static public readonly string extension = ".txt";
 
         static public bool TryLoad(string fileName, out CachedData cachedData, Tracer tracer)
         {
