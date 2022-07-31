@@ -35,8 +35,11 @@ namespace MyGame
             tracer.AddMessage("ver 01.00", Tracer.Level.emphasis);
             tracer.AddMessage(v0100, Tracer.Level.normal, 2);
 
-            tracer.AddMessage("ver 01.01 (latest)", Tracer.Level.emphasis);
+            tracer.AddMessage("ver 01.01", Tracer.Level.emphasis);
             tracer.AddMessage(v0101, Tracer.Level.normal, 2);
+
+            tracer.AddMessage("ver 01.02 (latest)", Tracer.Level.emphasis);
+            tracer.AddMessage(v0102, Tracer.Level.normal, 2);
         }
 
         static readonly string v0100 = "'FPS_Basic サバイバル'をリリース";
@@ -51,6 +54,9 @@ namespace MyGame
             "・サバイバルモードの，最初のラウンドのデザインを一部変更．\n" +
             "・コンソールの説明欄のフォントをより小さいサイズに変更．\n" +
             "・サバイバルモードの壁の色を変更．";
+        static readonly string v0102 = "" +
+            "・サバイバルモードの最初のラウンドのデザインを大幅に変更し，surfマップやbhopマップにアクセスしやすくしました．\n" +
+            "・「遊び方」についての説明を修正しました．";
 
     }
 }
