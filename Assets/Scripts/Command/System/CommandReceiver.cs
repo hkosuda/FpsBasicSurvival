@@ -9,7 +9,7 @@ namespace MyGame
 {
     public enum CommandName
     {
-        Invoke, Bind, Toggle, Exit, Back, Next, Local, Quit, Begin, Save, Load, Info, Recorder, Replay, Demo, Observer, Ghost,
+        Invoke, Bind, Toggle, Exit, Back, Next, Local, Quit, Begin, Save, Load, Info, Recorder, Replay, Demo, Observer, Ghost, History, Clear,
     }
 
     public class CommandReceiver : MonoBehaviour
@@ -25,6 +25,9 @@ namespace MyGame
 
             new BeginCommand(TxtUtil.L(CommandName.Begin)),
             new DemoCommand(TxtUtil.L(CommandName.Demo)),
+
+            new HistoryCommand(TxtUtil.L(CommandName.History)),
+            new ClearCommand(TxtUtil.L(CommandName.Clear)),
 
 #if UNITY_EDITOR
             new DSaveCommand("dsave"),

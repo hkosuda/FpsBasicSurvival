@@ -27,9 +27,14 @@ namespace MyGame
             var nCart = SV_ShopItem.CartList[Item];
             nextValue = currentValue + nCart * increase;
 
-            if (nextValue > ShItemMaxHP.NextMaxHP)
+            var max = ShItemMaxHP.NextMaxHP;
+
+            if (nextValue > max)
             {
-                nextValue = ShItemMaxHP.NextMaxHP;
+                nextValue = max;
+
+                var nlim = NCartLimit(nCart, max);
+                if (nCart > nlim) { SV_ShopItem.CartList[Item] = nlim; }
             }
 
             return nextValue.ToString();
