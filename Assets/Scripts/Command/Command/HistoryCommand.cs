@@ -38,8 +38,11 @@ namespace MyGame
             tracer.AddMessage("ver 01.01", Tracer.Level.emphasis);
             tracer.AddMessage(v0101, Tracer.Level.normal, 2);
 
-            tracer.AddMessage("ver 01.02 (latest)", Tracer.Level.emphasis);
+            tracer.AddMessage("ver 01.02", Tracer.Level.emphasis);
             tracer.AddMessage(v0102, Tracer.Level.normal, 2);
+
+            tracer.AddMessage("ver 01.03 (latest)", Tracer.Level.emphasis);
+            tracer.AddMessage(v0103, Tracer.Level.normal, 2);
         }
 
         static readonly string v0100 = "'FPS_Basic サバイバル'をリリース";
@@ -57,6 +60,9 @@ namespace MyGame
         static readonly string v0102 = "" +
             "・サバイバルモードの最初のラウンドのデザインを大幅に変更し，surfマップやbhopマップにアクセスしやすくしました．\n" +
             "・「遊び方」についての説明を修正しました．";
+        static readonly string v0103 = "" +
+            "・前進，後退，右に移動，左に移動のキーを変更できない問題を修正．\n" +
+            "・．";
 
     }
 }

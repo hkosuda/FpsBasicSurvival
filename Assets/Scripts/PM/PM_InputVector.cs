@@ -14,17 +14,11 @@ namespace MyGame
             var vm = 0.0f;
             var vl = 0.0f;
 
-            //if (Keyconfig.CheckInput(Keyconfig.KeyAction.forward, false)) { vm += 1.0f; }
-            //if (Keyconfig.CheckInput(Keyconfig.KeyAction.backward, false)) { vm += -1.0f; }
+            if (Keyconfig.CheckInput(KeyAction.forward, false)) { vm += 1.0f; }
+            if (Keyconfig.CheckInput(KeyAction.backward, false)) { vm += -1.0f; }
 
-            //if (Keyconfig.CheckInput(Keyconfig.KeyAction.right, false)) { vl += 1.0f; }
-            //if (Keyconfig.CheckInput(Keyconfig.KeyAction.left, false)) { vl += -1.0f; }
-
-            if (Input.GetKey(KeyCode.W)) { vm += 1.0f; }
-            if (Input.GetKey(KeyCode.S)) { vm -= 1.0f; }
-
-            if (Input.GetKey(KeyCode.D)) { vl += 1.0f; }
-            if (Input.GetKey(KeyCode.A)) { vl -= 1.0f; }
+            if (Keyconfig.CheckInput(KeyAction.right, false)) { vl += 1.0f; }
+            if (Keyconfig.CheckInput(KeyAction.left, false)) { vl += -1.0f; }
 
             ML_InputVector = new Vector2(vm, vl).normalized;
 
