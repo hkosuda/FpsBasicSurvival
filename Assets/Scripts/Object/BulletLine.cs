@@ -7,7 +7,7 @@ namespace MyGame
 {
     public class BulletLine : MonoBehaviour
     {
-        static readonly float bulletSpeed = 100.0f;
+        static readonly float bulletSpeed = 350.0f;
         static readonly float bulletMaxExistTime = 3.0f;
 
         float pastTime;
@@ -121,7 +121,7 @@ namespace MyGame
             var direction = _direction.normalized;
             var origin = muzzle.transform.position;
 
-            var initialPos = origin + _direction * 0.5f;
+            var initialPos = origin + _direction * UnityEngine.Random.Range(0.5f, 2.0f);
             var bulletLine = GameHost.Instantiate(_bullet, initialPos, Quaternion.identity);
 
             bullet = bulletLine.GetComponent<BulletLine>();
