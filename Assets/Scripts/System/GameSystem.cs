@@ -17,7 +17,7 @@ namespace MyGame
         {
             { HostName.survival, new SvHost(HostName.survival) },
             { HostName.ez_tower, new TowerHost(HostName.ez_tower) },
-            { HostName.ez_stream, new StreamHost(HostName.ez_stream) },
+            { HostName.ez_surf_stream, new StreamHost(HostName.ez_surf_stream) },
             { HostName.ez_square, new SquareHost(HostName.ez_square) },
         };
 

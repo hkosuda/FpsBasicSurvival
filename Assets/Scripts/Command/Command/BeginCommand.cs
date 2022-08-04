@@ -9,13 +9,13 @@ namespace MyGame
     {
         static readonly List<string> availables = new List<string>()
         {
-            TxtUtil.L(HostName.survival), TxtUtil.L(HostName.ez_tower), TxtUtil.L(HostName.ez_stream), TxtUtil.L(HostName.ez_square),
+            TxtUtil.L(HostName.survival), TxtUtil.L(HostName.ez_tower), TxtUtil.L(HostName.ez_surf_stream), TxtUtil.L(HostName.ez_square),
         };
 
         public BeginCommand(string commandName) : base(commandName)
         {
             description = "任意のゲームモードに変更します．";
-            detail = "利用可能なゲームモードは，'survival', 'ez_tower', 'ez_stream', 'ez_square' があります．" +
+            detail = "利用可能なゲームモードは，'survival', 'ez_tower', 'ez_surf_stream', 'ez_square' があります．" +
                 "survivalはこのゲームのメインモードとなるサバイバルゲームです．その他のモードは，BHopやサーフで遊ぶためのマップとなります．";
         }
 

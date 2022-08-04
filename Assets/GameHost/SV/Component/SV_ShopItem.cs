@@ -112,6 +112,17 @@ namespace MyGame
 
         static void UpdateCart()
         {
+            // 1st : check money
+            MoneyRemain = SV_Status.CurrentMoney;
+
+            foreach(var item in itemList)
+            {
+                MoneyRemain -= item.Value.TotalCost();
+            }
+
+            UpdateContent();
+            
+            // 2nd : check over-shopping (HP, Armor)
             MoneyRemain = SV_Status.CurrentMoney;
 
             foreach(var item in itemList)

@@ -20,7 +20,7 @@ namespace MyGame
 
         static public void Initialize()
         {
-            AddMessage(TxtUtil.C("- FPS_Basic_Survival Ver.01.00 -", Clr.lime));
+            AddMessage(TxtUtil.C("- FPS_Basic_Survival - ver 01.03", Clr.lime));
             SetEvent(1);
         }
 
@@ -80,6 +80,20 @@ namespace MyGame
             }
 
             Updated?.Invoke(null, false);
+        }
+
+        static public void ClearLog()
+        {
+            if (logList != null)
+            {
+                for (var n = logList.Count - 1; n > -1; n--)
+                {
+                    Destroy(logList[n]);
+                }
+            }
+
+            logList = new List<GameObject>();
+            cachedLogList = new List<Log>();
         }
 
         static void InstantiateLog(string message, int indent)

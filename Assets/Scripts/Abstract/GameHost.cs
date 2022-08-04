@@ -9,8 +9,8 @@ namespace MyGame
     {
         survival,
         ez_tower,
-        ez_stream,
         ez_square,
+        ez_surf_stream,
     }
 
     public abstract class GameHost

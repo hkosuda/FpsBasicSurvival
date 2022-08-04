@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace MyGame
 {
     public class KeySettingItem : MonoBehaviour
     {
-        static readonly Dictionary<KeyAction, string> keyText = new Dictionary<KeyAction, string>()
+        static public readonly Dictionary<KeyAction, string> keyText = new Dictionary<KeyAction, string>()
         {
             { KeyAction.jump, "ジャンプ" },
             { KeyAction.autoJump, "オートジャンプ" },
@@ -96,7 +97,7 @@ namespace MyGame
             var key = Keyconfig.KeybindList[keyAction];
 
             titleText.text = keyText[keyAction];
-            buttonText.text = key.GetKeyString();
+            buttonText.text = CorrectKeyString(key.GetKeyString());
         }
 
         public void Initialize(KeyAction keyAction)
@@ -104,6 +105,26 @@ namespace MyGame
             this.keyAction = keyAction;
 
             UpdateContent();
+        }
+
+        static public string CorrectKeyString(string keyString)
+        {
+            if (keyString == "mouse0") { return "mouse left"; }
+            if (keyString == "mouse1") { return "mouse right"; }
+            if (keyString == "mouse3") { return "mouse side"; }
+
+            if (keyString == "leftshift") { return "left-shift"; }
+            if (keyString == "leftcontrol") { return "left-ctrl"; }
+
+            var reg = new Regex(@"\Aalpha[0-9]\z");
+            return reg.Replace(keyString, TrimAlpha);
+
+            // - inner function
+            static string TrimAlpha(Match match)
+            {
+                var len = match.Value.Length;
+                return match.Value[len - 1].ToString();
+            }
         }
     }
 }

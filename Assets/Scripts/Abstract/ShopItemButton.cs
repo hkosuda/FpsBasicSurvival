@@ -26,9 +26,9 @@ namespace MyGame
 
         // ui components
         protected TextMeshProUGUI nameText;
+        protected TextMeshProUGUI addText;
         protected TextMeshProUGUI currentValueText;
         protected TextMeshProUGUI nextValueText;
-        protected TextMeshProUGUI addText;
         protected TextMeshProUGUI currentCostText;
         protected TextMeshProUGUI numberText;
         protected TextMeshProUGUI totalCostText;
@@ -57,15 +57,15 @@ namespace MyGame
             mainButton.onClick.AddListener(UpdateDesctiption);
 
             nameText = GetText(0);
-            currentValueText = GetText(1);
-            nextValueText = GetText(2);
-            addText = GetText(3);
-            currentCostText = GetText(4);
-            // spacer (5)
-            addButton = GetButton(6);
-            // spacer (7)
-            subButton = GetButton(8);
-            // spacer (9)
+            addText = GetText(1);
+            currentValueText = GetText(2);
+            nextValueText = GetText(3);
+            // spacer (4)
+            addButton = GetButton(5);
+            // spacer (6)
+            subButton = GetButton(7);
+            // spacer (8)
+            currentCostText = GetText(9);
             numberText = GetText(10);
             totalCostText = GetText(11);
 
@@ -117,19 +117,22 @@ namespace MyGame
 
         public virtual void UpdateContent()
         {
-            var currentCost = CurrentCost();
-            var totalCost = TotalCost();
-
             nameText.text = itemNames[Item];
             addText.text = "+" + increase.ToString("#,0");
             currentValueText.text = CalcCurrentValue();
             nextValueText.text = CalcNextValue();
             numberText.text = "x " + SV_ShopItem.CartList[Item].ToString("#,0");
+
+            var currentCost = CurrentCost();
+            var totalCost = TotalCost();
+
             currentCostText.text = currentCost.ToString("#,0");
             totalCostText.text = totalCost.ToString("#,0");
 
             UpdateAddButton();
             UpdateSubButton();
+
+            UpdateColor(SV_ShopItem.CartList[Item]);
 
             // - inner function
             void UpdateSubButton()
@@ -140,6 +143,44 @@ namespace MyGame
             void UpdateAddButton()
             {
                 addButton.interactable = CheckAddToCart();
+            }
+
+            void UpdateColor(int nCart)
+            {
+                if (nCart == 0)
+                {
+                    White(nameText);
+                    White(addText);
+                    White(currentValueText);
+                    White(nextValueText);
+                    White(currentCostText);
+                    White(numberText);
+                    White(totalCostText);
+                }
+
+                else
+                {
+                    Lime(nameText);
+                    Lime(addText);
+                    Lime(currentValueText);
+                    Lime(nextValueText);
+                    Lime(currentCostText);
+                    Lime(numberText);
+                    Lime(totalCostText);
+
+                }
+
+                // - - inner function
+                static void Lime(TextMeshProUGUI text)
+                {
+                    text.text = TxtUtil.C(text.text, Clr.lime);
+                }
+
+                // - - inner function
+                static void White(TextMeshProUGUI text)
+                {
+                    text.text = TxtUtil.C(text.text, Clr.white);
+                }
             }
         }
 
@@ -168,8 +209,19 @@ namespace MyGame
             Shop_Description.ShowDescription(itemNames[Item], Description());
         }
 
-        protected abstract string CalcCurrentValue();
+        protected int NCartLimit(int nCart, int max)
+        {
+            for(var n = nCart; n > -1; n--)
+            {
+                var next = currentValue + increase * n;
+                if (next < max) { return n + 1; }
+            }
+
+            return 0;
+        }
+
         protected abstract string CalcNextValue();
+        protected abstract string CalcCurrentValue();
         protected abstract string Description();
         protected abstract void Apply();
     }

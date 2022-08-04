@@ -27,12 +27,19 @@ namespace MyGame
             var nCart = SV_ShopItem.CartList[Item];
             nextValue = currentValue + nCart * increase;
 
-            if (nextValue > ShItemMaxArmor.NextMaxArmor)
+            var max = ShItemMaxArmor.NextMaxArmor;
+
+            if (nextValue > max)
             {
-                nextValue = ShItemMaxArmor.NextMaxArmor;
+                nextValue = max;
+
+                var nlim = NCartLimit(nCart, max);
+                if (nCart > nlim) { SV_ShopItem.CartList[Item] = nlim; }
             }
 
             return nextValue.ToString();
+
+            
         }
 
         protected override bool CheckAddToCart()
