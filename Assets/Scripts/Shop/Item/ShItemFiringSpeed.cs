@@ -34,7 +34,8 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "ËŒ‚ŠÔŠu‚ğ’Zk‚³‚¹‚Ü‚·D";
+            return "ËŒ‚ŠÔŠu‚ğ’Zk‚³‚¹‚Ü‚·D\n" +
+                "ËŒ‚ŠÔŠu‚ğ’Zk‚³‚¹‚é‚±‚Æ‚ÅC“G‚ğŒ‚”j‚·‚é‚Ü‚Å‚ÌŠÔ‚ğ’Zk‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·D‚µ‚©‚µCÁ”ï’e”‚ª‘‰Á‚µ‚ª‚¿‚É‚È‚é‚½‚ßCŒg‘Ñ’e”‚â‘•’e”‚É‹C‚ğ•t‚¯‚Ü‚µ‚å‚¤D";
         }
 
         protected override void Apply()

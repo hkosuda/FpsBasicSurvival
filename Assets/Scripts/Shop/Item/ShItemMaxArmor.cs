@@ -35,7 +35,9 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "体力の最大値を増加させます．";
+            return "アーマーの最大値を増加させます．\n" +
+                "アーマーがない状態では，敵の攻撃を受けた時に非常に大きなダメージを受けてしまいます．" +
+                "積極的にアップグレードを行いましょう．";
         }
 
         protected override void Apply()

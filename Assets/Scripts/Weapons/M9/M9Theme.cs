@@ -7,17 +7,20 @@ namespace MyGame
 {
     public class M9Theme : MonoBehaviour
     {
-        static public int nTheme = 4;
+        static public int nTheme = 6;
 
         public enum Theme
         {
-            ruby = 0, sapphire = 1, emerald = 2, violet = 3
+            ruby = 0, sapphire = 1, emerald = 2, violet = 3, steel = 4, black = 5,
         }
 
         [SerializeField] Material rubyMaterial;
         [SerializeField] Material sapphireMaterial;
         [SerializeField] Material emeraldMaterial;
         [SerializeField] Material violetMaterial;
+        [SerializeField] Material steelMaterial;
+        [SerializeField] Material blackMaterial;
+
 
         static public Theme CurrentTheme { get; private set; }
 
@@ -37,6 +40,8 @@ namespace MyGame
                 { Theme.sapphire, sapphireMaterial },
                 { Theme.emerald, emeraldMaterial },
                 { Theme.violet, violetMaterial },
+                { Theme.steel, steelMaterial },
+                { Theme.black, blackMaterial },
             };
         }
 

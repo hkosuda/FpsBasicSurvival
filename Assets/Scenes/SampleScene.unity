@@ -22970,6 +22970,8 @@ MonoBehaviour:
   sapphireMaterial: {fileID: 2100000, guid: 198656a6ff4cd6741902c9874fbc8bde, type: 2}
   emeraldMaterial: {fileID: 2100000, guid: 3c4934dc9d9d5c34097754f6ee79b839, type: 2}
   violetMaterial: {fileID: 2100000, guid: 7c567215470b47f429cea74befb6b847, type: 2}
+  steelMaterial: {fileID: 2100000, guid: 1880e03121f649d4a8e564ae79a52e93, type: 2}
+  blackMaterial: {fileID: 2100000, guid: 89c13403d4b13b04dbc9e9a4438d13a7, type: 2}
 --- !u!23 &623867750733138978
 MeshRenderer:
   m_ObjectHideFlags: 0

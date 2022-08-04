@@ -56,7 +56,8 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "体力を回復します．";
+            return "体力を回復します．\n" +
+                "体力がなくなればゲームオーバーです．減っているときは，必ず回復を行いましょう．";
         }
 
         protected override void Apply()

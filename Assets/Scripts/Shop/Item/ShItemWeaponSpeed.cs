@@ -34,7 +34,8 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "武器の持ち替えや，リロードのスピードを上昇させます．";
+            return "武器の持ち替えや，リロードのスピードを上昇させます．\n" +
+                "武器の持ち替え時やリロード時は非常に危険です．そうした危険な時間を短縮できるため，積極的に検討しましょう．";
         }
 
         protected override void Apply()

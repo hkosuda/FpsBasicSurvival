@@ -34,7 +34,9 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "与ダメージ率を増加させます．";
+            return "" +
+                "与ダメージ率を増加させます．\n" +
+                "与ダメージ率を増加させることは，敵を撃破するまでの時間を短縮するだけでなく弾の節約にもつながります．非常に強力なアップグレードですが，コストは高めです．";
         }
 
         protected override void Apply()

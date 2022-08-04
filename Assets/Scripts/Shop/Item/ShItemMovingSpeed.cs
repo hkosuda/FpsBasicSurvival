@@ -34,7 +34,8 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "移動スピードを上昇させます．";
+            return "移動スピードを上昇させます．\n" +
+                "移動スピードを上昇させることは，敵と距離を置くときに役立つだけでなく，探索にかかる時間を短縮させることができます．";
         }
 
         protected override void Apply()

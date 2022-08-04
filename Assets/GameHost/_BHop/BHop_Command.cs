@@ -16,6 +16,8 @@ namespace MyGame
 
             new ObserverCommand(TxtUtil.L(CommandName.Observer)),
             new GhostCommand(TxtUtil.L(CommandName.Ghost)),
+
+            new PmMaxSpeedInAirCommand(TxtUtil.L(CommandName.Pm_Max_Speed_In_Air)),
         };
 
         public override void Initialize()

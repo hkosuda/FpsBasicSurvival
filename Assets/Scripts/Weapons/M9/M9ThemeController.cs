@@ -13,6 +13,8 @@ namespace MyGame
         [SerializeField] Material sapphireMaterial;
         [SerializeField] Material emeraldMaterial;
         [SerializeField] Material violetMaterial;
+        [SerializeField] Material steelMaterial;
+        [SerializeField] Material blackMaterial;
 
         static Dictionary<M9Theme.Theme, Material> matList;
 
@@ -38,6 +40,8 @@ namespace MyGame
                 { M9Theme.Theme.sapphire, sapphireMaterial },
                 { M9Theme.Theme.emerald, emeraldMaterial },
                 { M9Theme.Theme.violet, violetMaterial },
+                { M9Theme.Theme.steel, steelMaterial },
+                { M9Theme.Theme.black, blackMaterial },
             };
 
             // - inner function

@@ -34,7 +34,8 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "獲得するマネーの量を増加させます．";
+            return "獲得するマネーの量を増加させます．\n" +
+                "アップグレードの価格は上昇しつづけます．そのため，マネー獲得率を上昇させてアップグレードを継続的に購入できるようにしましょう．";
         }
 
         protected override void Apply()

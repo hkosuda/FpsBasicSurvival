@@ -35,7 +35,9 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "体力の最大値を増加させます．";
+            return "体力の最大値を増加させます．\n" +
+                "ラウンドが進むごとに敵の1撃がますます大きくなっていきます．" +
+                "体力が初期値のままだとすぐにゲームオーバーとなってしまうため，アップグレートを積極的に行いましょう．";
         }
 
         protected override void Apply()

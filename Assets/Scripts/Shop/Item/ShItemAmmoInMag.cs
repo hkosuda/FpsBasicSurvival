@@ -32,7 +32,10 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "装弾数を増加させます．";
+            return "" +
+                "装弾数を増加させます．\n" +
+                "装弾数を増加させることは，リロードの回数を減らすことにもつながります．" +
+                "リロード時は無防備となるため，その回数を減らすことは危険を減らすことにもつながるでしょう．";
         }
 
         protected override void Apply()

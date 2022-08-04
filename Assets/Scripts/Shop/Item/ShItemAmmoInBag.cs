@@ -32,7 +32,10 @@ namespace MyGame
 
         protected override string Description()
         {
-            return "携帯弾数を増加させます．";
+            return "" +
+                "携帯弾数を増加させます．\n" +
+                "このゲームにおいて，弾切れは致命的です．携帯弾数のアップグレードにより弾数を増やすか，" +
+                "与ダメージ率を向上させて消費弾数の節約を行いましょう．";
         }
 
         protected override void Apply()

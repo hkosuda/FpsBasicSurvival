@@ -20,7 +20,7 @@ namespace MyGame
 
         static public void Initialize()
         {
-            AddMessage(TxtUtil.C("- FPS_Basic_Survival - ver 01.03", Clr.lime));
+            AddMessage(TxtUtil.C("- FPS_Basic_Survival - ver 01.04", Clr.lime));
             SetEvent(1);
         }
 

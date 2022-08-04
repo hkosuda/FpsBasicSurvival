@@ -6,10 +6,12 @@ namespace MyGame
 {
     static public class Params
     {
+        static public readonly float default_pm_max_speed_in_air = 1.4f;
+
         //
         // player movement
         static public float pm_max_speed_on_ground = 7.7f;
-        static public float pm_max_speed_in_air = 1.4f;
+        static public float pm_max_speed_in_air = default_pm_max_speed_in_air;
         static public float pm_accel_on_ground = 65.0f;
         static public float pm_accel_in_air = 5000.0f;
         static public float pm_dragging_accel = 45.0f;
