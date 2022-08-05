@@ -46,7 +46,7 @@ namespace MyGame
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.H))
+            if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.H))
             {
                 active = !active;
                 UpdateText(null, KeyAction.shot);
@@ -69,7 +69,7 @@ namespace MyGame
                 }
 
                 keyActionInfo += TxtUtil.C("ƒwƒ‹ƒv‚Ì”ñ•\Ž¦", Clr.cyan);
-                keyStringInfo += TxtUtil.C("left-ctrl + h", Clr.cyan);
+                keyStringInfo += TxtUtil.C("left-alt + h", Clr.cyan);
 
                 keyActionText.text = keyActionInfo;
                 keyStringText.text = keyStringInfo;
