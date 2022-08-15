@@ -25,7 +25,6 @@ namespace MyGame
             new QuitCommand(TxtUtil.L(CommandName.Quit)),
 
             new BeginCommand(TxtUtil.L(CommandName.Begin)),
-            new DemoCommand(TxtUtil.L(CommandName.Demo)),
 
             new HistoryCommand(TxtUtil.L(CommandName.History)),
             new ClearCommand(TxtUtil.L(CommandName.Clear)),
