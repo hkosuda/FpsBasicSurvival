@@ -198,7 +198,7 @@ namespace MyGame
         static public bool TrySave(string fileName, CachedData cachedData, Tracer tracer)
         {
             CreateDirectory();
-            var filePath = WriteFilePath(fileName);
+            var filePath = WriteFilePath(fileName); Debug.Log(filePath);
 
             try
             {

@@ -76,7 +76,7 @@ namespace MyGame
 
             if (pastTime > RecorderCommand.recorderLimitTime)
             {
-                //ChatMessages.SendChat(limitTime.ToString() + "秒が経過したため，レコーダーを停止します．", ChatMessages.Sender.system);
+                ChatMessageManager.SendChatMessage(RecorderCommand.recorderLimitTime.ToString() + "秒が経過したため，レコーダーを停止します．");
                 FinishRecorder(true);
             }
 

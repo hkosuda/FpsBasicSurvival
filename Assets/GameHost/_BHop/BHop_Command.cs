@@ -19,6 +19,9 @@ namespace MyGame
 
             new PmMaxSpeedInAirCommand(TxtUtil.L(CommandName.Pm_Max_Speed_In_Air)),
             new DemoCommand(TxtUtil.L(CommandName.Demo)),
+
+            new ChainCommand(TxtUtil.L(CommandName.Chain)),
+            new BhopSettingsCommand("bhop_settings"),
         };
 
         public override void Initialize()
@@ -27,9 +30,14 @@ namespace MyGame
             {
                 CommandReceiver.AddCommand(command);
             }
+
 #if UNITY_EDITOR
-            CommandReceiver.RequestCommand("bind z \"back -f\" -e", null);
-            CommandReceiver.RequestCommand("toggle e \"recorder start -f\" \"recorder end -f\" -e", null);
+            //CommandReceiver.RequestCommand("bind z \"back 0 -f\"", null);
+            //CommandReceiver.RequestCommand("bind mouse0 \"chain save -f\"", null);
+            //CommandReceiver.RequestCommand("bind q \"chain back -f\"", null);
+            //CommandReceiver.RequestCommand("bind f \"chain start -f\"", null);
+            //CommandReceiver.RequestCommand("bind b \"chain rollback -f\"", null);
+            CommandReceiver.RequestCommand("bind o \"chain output -f\"", null);
 #endif
         }
 

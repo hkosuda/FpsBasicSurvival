@@ -10,7 +10,7 @@ namespace MyGame
     public enum CommandName
     {
         Invoke, Bind, Toggle, Exit, Back, Next, Local, Quit, Begin, Save, Load, Info, Recorder, Replay, Demo, Observer, Ghost, History, Clear,
-        Pm_Max_Speed_In_Air,
+        Pm_Max_Speed_In_Air, Chain,
     }
 
     public class CommandReceiver : MonoBehaviour
@@ -31,6 +31,7 @@ namespace MyGame
 
 #if UNITY_EDITOR
             new DSaveCommand("dsave"),
+            
 #endif
         };
 

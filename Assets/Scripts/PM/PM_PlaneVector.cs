@@ -42,6 +42,11 @@ namespace MyGame
                 return new Vector2(v.x, v.z);
             }
         }
+
+        static public void SetPlaneVector(Vector2 vector)
+        {
+            PlaneVector = vector;
+        }
     }
 }
 

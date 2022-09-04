@@ -47,8 +47,11 @@ namespace MyGame
             tracer.AddMessage("ver 01.04", Tracer.Level.emphasis);
             tracer.AddMessage(v0104, Tracer.Level.normal, 2);
 
-            tracer.AddMessage("ver 01.05 (latest)", Tracer.Level.emphasis);
+            tracer.AddMessage("ver 01.05", Tracer.Level.emphasis);
             tracer.AddMessage(v0105, Tracer.Level.normal, 2);
+
+            tracer.AddMessage("ver 01.06 (latest)", Tracer.Level.emphasis);
+            tracer.AddMessage(v0106, Tracer.Level.normal, 2);
         }
 
         static readonly string v0100 = "" +
@@ -87,6 +90,11 @@ namespace MyGame
             "・ヘルプの表示，非表示を切り替えるキーを\"Ctrl+H\"から\"Alt+H\"に変更\n" +
             "（\"Ctrl+H\"はChromeの場合，履歴を開くショートカットに指定されていました．確認不足で申し訳ございません）．" +
             "・デフォルトで使えるコマンドから，Demoコマンドを削除しました．";
+        static readonly string v0106 = "" +
+            "(2022/9/4)\n" +
+            "・chainコマンドを追加．比較的長めのマップでも途中セーブとロードが可能になります．\n" +
+            "・ez_towerにデモ再生用のボタンを配置．\n" +
+            "・bhop_settingsコマンドを追加．bhop用のおすすめ設定を即座に適用することができます．";
     }
 }
 
